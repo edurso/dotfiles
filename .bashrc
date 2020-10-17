@@ -91,8 +91,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -a -l'
 alias l='ls -CF'
-#alias eclipse='~/eclipse/java-2020-06/eclipse/eclipse'
-alias eclipse='~/util/eclipse/eclipse &'
+alias eclipse='~/.app/eclipse/java-2020-06/eclipse/eclipse&'
 alias python=python3
 alias pip=pip3
 alias ee='cd /mnt/c/Users/edurso'
@@ -135,7 +134,7 @@ np() {
     notepad.exe "$1"
 }
 
-QT='/~/qt/qt-everywhere-src-5.15.0/~/qt/qt515static'
+QT='/~/.app/qt/qt-everywhere-src-5.15.0/~/qt/qt515static'
 PATH=$QT/bin:$PATH
 export PATH
 
@@ -156,6 +155,7 @@ export PYSPARK_DRIVER_PYTHON="jupyter"
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 export PYSPARK_PYTHON=python3
 #export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin ###_________USE THIS FOR SPARK APPS_________###
+export PATH="$PATH:$HOME/.app/raspbian10/bin"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -187,7 +187,6 @@ eval "$(starship init bash)"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-export PATH="$PATH:$HOME/install/raspbian10/bin"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/edurso/.sdkman"
