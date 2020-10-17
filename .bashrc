@@ -102,6 +102,8 @@ alias ec='eclipse&'
 alias qt='qtcreator&'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias df='dotfile'
+alias vim='nvim'
+alias vi='nvim'
 
 declare -a arr=("hell no" "no" "id rather not" "ahhhhhhhhhhhhhhhhhhh" "you moron" "idiot")
 be() {
@@ -132,6 +134,10 @@ py() {
 
 np() {
     notepad.exe "$1"
+}
+
+putty() {
+    putty.exe "$1"
 }
 
 QT='/~/.app/qt/qt-everywhere-src-5.15.0/~/qt/qt515static'
