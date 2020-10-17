@@ -91,9 +91,71 @@ fi
 alias ll='ls -alF'
 alias la='ls -a -l'
 alias l='ls -CF'
-
+#alias eclipse='~/eclipse/java-2020-06/eclipse/eclipse'
+alias eclipse='~/util/eclipse/eclipse &'
 alias python=python3
 alias pip=pip3
+alias ee='cd /mnt/c/Users/edurso'
+alias cls='clear'
+alias la='ls -a -l'
+alias as='android-studio'
+alias ec='eclipse&'
+alias qt='qtcreator&'
+alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias df='dotfile'
+
+declare -a arr=("hell no" "no" "id rather not" "ahhhhhhhhhhhhhhhhhhh" "you moron" "idiot")
+be() {
+    for i in "${arr[@]}"
+    do
+        echo "$i"
+        sleep 1s
+    done
+}
+
+scream() {
+    for i in {1..100}; do
+        echo "ahhhhhhhhhhhhhhhhhh"
+        sleep 1s
+    done
+}
+
+frc() {
+    /mnt/c/Users/Public/wpilib/2020/vscode/Code.exe "$1"
+}
+
+start() {
+    explorer.exe "$1"
+}
+py() {
+    /usr/bin/python3.8 "$1"
+}
+
+np() {
+    notepad.exe "$1"
+}
+
+QT='/~/qt/qt-everywhere-src-5.15.0/~/qt/qt515static'
+PATH=$QT/bin:$PATH
+export PATH
+
+# remove for FRC!!!
+JAVA_HOME='/usr/lib/jvm/java-11-openjdk-amd64'
+#JAVA_HOME='/usr/lib/jvm/jdk-13.0.2+8' #?
+#JRE_HOME='/usr/lib/jvm/jdk-13.0.2+8-jre' #?
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+#PATH=$PATH:$HOME/bin:$JRE_HOME/bin #?
+export JAVA_HOME
+export JRE_HOME
+export PATH
+
+#export JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64' ###_________USE THIS FOR SPARK APPS_________###
+export SPARK_HOME='/home/edurso/.app/spark-2.4.5-bin-hadoop2.7'
+export PYTHONPATH=$SPARK_HOME/python:$PYTHONPATH
+export PYSPARK_DRIVER_PYTHON="jupyter"
+export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+export PYSPARK_PYTHON=python3
+#export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin ###_________USE THIS FOR SPARK APPS_________###
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -122,8 +184,6 @@ fi
 export DISPLAY=:0
 
 eval "$(starship init bash)"
-
-alias eclipse='~/eclipse/java-2020-06/eclipse/eclipse'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
