@@ -4,6 +4,5 @@ import os
 
 print("Starting Android Studio . . .")
 
-os.system("/home/edurso/install/android-studio/bin/studio.sh &")
+os.system("/home/edurso/.app/android-studio/bin/studio.sh &")
 
-#exec(open("/home/edurso/install/android-studio/bin/studio.sh").read())
