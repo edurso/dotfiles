@@ -1,0 +1,13 @@
+vim {filename} => open {filename} with vim
+cat {filename} => display {filename} in shell
+head/tail {filename} => display first/last 10 lines of {filename}
+mkdir {dirname} => make directory {dirname}
+rm {something} => delete something
+mv {filename} {targetdir} => move {filename} to {targetdir} should work w/ directorys too
+sudo {command} => runs {command} as an admin
+sudo apt-get install {debname} => installs {debname}
+sudo apt-get update => updates things
+[ctrl]c => cancel current task
+grep {pattern} {files} => searches for {pattern} in {files} 
+ps -eaf => display running jobs
+kill {num} => stop job {num}
