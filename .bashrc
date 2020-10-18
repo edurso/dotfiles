@@ -104,6 +104,8 @@ alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias df='dotfile'
 alias vim='nvim'
 alias vi='nvim'
+alias jlab='jupyter lab'
+alias jpnb='jupyter lab'
 
 declare -a arr=("hell no" "no" "id rather not" "ahhhhhhhhhhhhhhhhhhh" "you moron" "idiot")
 be() {
