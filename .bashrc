@@ -90,7 +90,7 @@ fi
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -a -l'
-alias l='ls -CF'
+alias l='ls -l'
 alias eclipse='~/.app/eclipse/java-2020-06/eclipse/eclipse&'
 alias python=python3
 alias pip=pip3
