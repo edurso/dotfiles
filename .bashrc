@@ -140,7 +140,11 @@ np() {
 }
 
 putty() {
-    putty.exe "$1"
+    putty.exe "$1" & 
+}
+
+ping() {
+    ping.exe "$1" 
 }
 
 QT='/~/.app/qt/qt-everywhere-src-5.15.0/~/qt/qt515static'
