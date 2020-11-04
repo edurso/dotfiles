@@ -144,8 +144,8 @@ source $HOME/.config/antigen.zsh
 
 
 # select and apply zsh plugins
-antigen-use oh-my-zsh
-antigen-bundle git
-antigen-bundle desyncr/auto-ls
-antigen-apply
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle desyncr/auto-ls
+antigen apply
 
