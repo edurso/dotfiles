@@ -45,6 +45,9 @@ symbol = "java "
 symbol = "+"
 style = "bold yellow"
 
+[nodejs]
+symbol = "js "
+
 [ruby]
 symbol = "rb "
 
