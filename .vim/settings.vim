@@ -3,7 +3,6 @@
 
 syntax enable
 set autoindent
-" set smartindent " this indents too much sometimes :(
 filetype indent plugin on
 set nostartofline
 set confirm

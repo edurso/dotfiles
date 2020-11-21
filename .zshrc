@@ -6,7 +6,7 @@
 eval "$(starship init zsh)"
 
 
-# bash config
+# config bash settings
 case $- in
     *i*) ;;
       *) return;;
@@ -20,7 +20,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 
-# bash colors
+# use bash colors
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
@@ -125,7 +125,7 @@ export PYTHONPATH=$SPARK_HOME/python:$PYTHONPATH
 export PYSPARK_DRIVER_PYTHON="jupyter"
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 export PYSPARK_PYTHON=python3
-export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin #?
+export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin 
 
 # add raspbian 10 to path
 export PATH="$PATH:$HOME/.app/raspbian10/bin"
