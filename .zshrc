@@ -82,6 +82,7 @@ alias df='dotfile'
 alias jlab='jupyter lab&'
 alias jpnb='jupyter lab&'
 alias jl='jupyter lab&'
+alias ghu='gh-update'
 
 
 # additional parameterized shortcuts
