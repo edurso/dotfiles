@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
-
 # Author: @edurso
 # Python Script to Automatically Update the GitHub CLI on Linux
 
+print('Setting Up Install . . .')
+
+# Directory to Temporaraly Place Some Files
+INSTALL_DIR = '/home/edurso/install/'
+
 # Imports
+import getpass
 import shutil
 import json
 import wget
 import os
 
-# Define Constants
-GH_URL       = 'https://api.github.com/repos/cli/cli/releases/latest'
-INSTALL_DIR  = '/home/edurso/install/'
-FNAME        = 'latest'
-VERSION_TAG  = 'tag_name'
+# Get User's Password for Later
+pwd = str(getpass.getpass(prompt='Please Enter Your Password To Proceed:')).strip()
+
+print('Finding Latest Version . . .')
 
 # Function to Find Values by JSON ID
 def find_values(id, json_repr):
@@ -28,34 +32,41 @@ def find_values(id, json_repr):
     return results
 
 # Retrieve Latest Release Information
-wget.download(GH_URL, INSTALL_DIR)
+wget.download('https://api.github.com/repos/cli/cli/releases/latest', INSTALL_DIR)
 
 # Extract Latest Version From Latest Release Information
-version = None
-with open(INSTALL_DIR + FNAME, 'r') as file:
+version_name = None
+with open(INSTALL_DIR + 'latest', 'r') as file:
     data = file.read().replace('\n', '')
-    version = find_values(VERSION_TAG, data).pop()
+    version_name = find_values('tag_name', data).pop()
+    version = version_name[1:]
 
 # Now We Know What Version We Are Installing . . . 
-print('\nInstalling', version, 'of the GitHub CLI')
+print('\nInstalling', version_name, 'of the GitHub CLI')
 
 # Use Version Information to get the Latest Package (as a .tar.gz)
-compressed_file_url = 'https://github.com/cli/cli/releases/download/' + version + '/gh_' + version[1:] + '_linux_amd64.tar.gz'
+compressed_file_url = 'https://github.com/cli/cli/releases/download/' + version_name + '/gh_' + version + '_linux_amd64.tar.gz'
 
 # Download the Latest Package
 wget.download(compressed_file_url, INSTALL_DIR)
 
 # Extract the Latest Package
-os.system('tar -xvf ' + INSTALL_DIR + 'gh_' + version[1:] + '_linux_amd64.tar.gz -C ' + INSTALL_DIR)
+print('Extracting . . .')
+os.system('tar -xvf ' + INSTALL_DIR + 'gh_' + version + '_linux_amd64.tar.gz -C ' + INSTALL_DIR)
 
-# Cpoy The Binaries
-os.system('sudo cp ' + INSTALL_DIR + 'gh_' + version[1:] + '_linux_amd64/bin/gh /usr/local/bin/')
+# Copy The Binaries
+print('Installing Binaries . . .')
+os.system('echo ' + pwd + ' | sudo -S cp ' + INSTALL_DIR + 'gh_' + version + '_linux_amd64/bin/gh /usr/local/bin/')
 
 # Copy the Manual
-os.system('sudo cp -r ' + INSTALL_DIR + 'gh_' + version[1:] + '_linux_amd64/share/man/man1/* /usr/share/man/man1/')
+print('Updating Manual . . .')
+os.system('echo ' + pwd + ' | sudo -S cp -r ' + INSTALL_DIR + 'gh_' + version + '_linux_amd64/share/man/man1/* /usr/share/man/man1/')
 
 # Clean Up From Install
-os.remove(INSTALL_DIR + FNAME)
-os.remove(INSTALL_DIR + 'gh_' + version[1:] + '_linux_amd64.tar.gz')
-shutil.rmtree(INSTALL_DIR + 'gh_' + version[1:] + '_linux_amd64')
+print('Cleaning Tree . . .')
+os.remove(INSTALL_DIR + 'latest')
+os.remove(INSTALL_DIR + 'gh_' + version + '_linux_amd64.tar.gz')
+shutil.rmtree(INSTALL_DIR + 'gh_' + version + '_linux_amd64')
 
+# Install Finished
+print('GitHub CLI Sucessfully Updated to', version_name)
