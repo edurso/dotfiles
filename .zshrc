@@ -98,6 +98,15 @@ ping() { ping.exe "$1" }
 # util
 py() { /usr/bin/python3.8 "$1" }
 
+# lazygit
+lg() {
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+    lazygit "$@"
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+        cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+        rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
 
 # config x-server display
 export DISPLAY=:0
