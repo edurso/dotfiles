@@ -75,7 +75,7 @@ alias ee='cd /mnt/c/Users/edurso'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 # shortcuts
-alias as='android-studio'
+alias as='run-as'
 alias ec='eclipse'
 alias qt='qtcreator&'
 alias df='dotfile'
