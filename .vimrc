@@ -13,5 +13,3 @@ source $HOME/.vim/git.vim
 " Build Statusline
 source $HOME/.vim/statusline.vim
 
-" Change Title
-source $HOME/.vim/title.vim
