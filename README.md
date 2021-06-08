@@ -19,3 +19,4 @@ dotfile push
 ```
 
 Note that in `.zshrc`, the `dotfile` alias is also aliased as `df`.
+

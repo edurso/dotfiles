@@ -158,3 +158,5 @@ antigen bundle git
 antigen bundle desyncr/auto-ls
 antigen apply
 
+cd ~
+
