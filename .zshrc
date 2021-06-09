@@ -109,7 +109,7 @@ lg() {
 }
 
 # config x-server display
-export DISPLAY=:0
+#export DISPLAY="$(awk '/nameserver/ { prnt $2 }' < /etc/resolv.conf)":0
 
 
 # add qt to path
@@ -157,6 +157,17 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle desyncr/auto-ls
 antigen apply
+
+# dbus
+dbus_status=$(service dbus status)
+if [[ $dbus_status = *"is not running"* ]]; then
+  sudo service dbus --full-restart
+fi
+[ -z "$PS1" ] && return
+
+# set display for X server
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export LIBGL_ALWAYS_INDIRECT=1
 
 cd ~
 
