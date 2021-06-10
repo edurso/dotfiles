@@ -74,7 +74,7 @@ alias vi='nvim'
 alias ee='cd /mnt/c/Users/edurso'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
-# shortcuts
+# application shortcuts
 alias as='run-as'
 alias ec='eclipse'
 alias qt='qtcreator&'
@@ -107,9 +107,6 @@ lg() {
         rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
     fi
 }
-
-# config x-server display
-#export DISPLAY="$(awk '/nameserver/ { prnt $2 }' < /etc/resolv.conf)":0
 
 
 # add qt to path
@@ -158,12 +155,6 @@ antigen bundle git
 antigen bundle desyncr/auto-ls
 antigen apply
 
-# dbus
-dbus_status=$(service dbus status)
-if [[ $dbus_status = *"is not running"* ]]; then
-  sudo service dbus --full-restart
-fi
-[ -z "$PS1" ] && return
 
 # set display for X server
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
