@@ -1,12 +1,11 @@
+# ~/.config/starship.toml
+# Author: @edurso
+
 add_newline = false
 
 [character]
-symbol = ">"
-error_symbol = "x"
-use_symbol_for_status = true
-style_success = "bold green"
-style_failure = "bold red"
-vicmd_symbol = "<"
+success_symbol = "[❯](bold green)"
+error_symbol = "[X](bold red)"
 
 [cmd_duration]
 disabled = true
@@ -28,15 +27,15 @@ disabled = true
 
 [git_status]
 conflicted = "conflicts"
-ahead = "^"
-behind = "v"
-diverged = "diverged"
-deleted = "rm"
-renamed = "#"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+deleted = "✘"
+renamed = "»"
 
 [hostname]
 ssh_only = false
-prefix = "@"
+format = "@[$hostname]($style) in "
 
 [java]
 symbol = "java "
@@ -62,4 +61,5 @@ pyenv_version_name = false
 show_always = true
 style_root = "bold yellow"
 style_user = "bold yellow"
+format = "[$user]($style)"
 
