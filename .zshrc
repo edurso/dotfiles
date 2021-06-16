@@ -101,6 +101,10 @@ QT='/~/.app/qt/qt-everywhere-src-5.15.0/~/qt/qt515static'
 export PATH=$QT/bin:$PATH
 
 
+# add go to path
+export PATH=$PATH:/usr/local/go/bin
+
+
 # add java to path
 
 # java paths

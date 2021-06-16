@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 # Author: @edurso
 # Python Script to Automatically Update the GitHub CLI on Linux
 
@@ -70,3 +71,4 @@ shutil.rmtree(INSTALL_DIR + 'gh_' + version + '_linux_amd64')
 
 # Install Finished
 print('GitHub CLI Sucessfully Updated to', version_name)
+
