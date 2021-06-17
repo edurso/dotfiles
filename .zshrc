@@ -135,6 +135,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export SDKMAN_DIR="/home/edurso/.sdkman"
 [[ -s "/home/edurso/.sdkman/bin/sdkman-init.sh" ]] && source "/home/edurso/.sdkman/bin/sdkman-init.sh"
 
+# add neovim to path
+export PATH="$PATH:$HOME/nvim-linux64/bin"
+
 
 # source antigen plugin manager for zsh
 source $HOME/.config/antigen.zsh

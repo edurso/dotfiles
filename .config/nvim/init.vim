@@ -1,9 +1,21 @@
 " Author: @edurso
-" nvim init
-" points to normal vim config in user path
+" Configures Neovim Settings
 
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
+" Use Vim Settings Configuration
+source $HOME/.config/nvim/settings.vim
 
-let &packpath = &runtimepath
+" Use Vim Colors Configuration
+source $HOME/.config/nvim/colors.vim
 
-source ~/.vimrc
+" Use Vim Git Functionality
+source $HOME/.config/nvim/git.vim
+
+" Build Statusline
+source $HOME/.config/nvim/statusline.vim
+
+" Source Plugins
+source $HOME/.config/nvim/plugins.vim
+
+" Configure Keybindings
+source $HOME/.config/nvim/keys.vim
+
