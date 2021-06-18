@@ -12,8 +12,9 @@ Plugin 'VundleVim/Vundle.vim'
 " my plugins here
 " ===================
 
-Plugin 'dracula/vim'
+" Plugin 'dracula/vim'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'jcherven/jummidark.vim'
 
 " ===================
 " end of plugins
