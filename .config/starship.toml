@@ -44,22 +44,8 @@ symbol = "java "
 symbol = "+"
 style = "bold yellow"
 
-[nodejs]
-symbol = "js "
-
-[ruby]
-symbol = "rb "
-
-[package]
-symbol = "pkg"
-
-[python]
-symbol = "py "
-pyenv_version_name = false
-
 [username]
 show_always = true
 style_root = "bold yellow"
 style_user = "bold yellow"
 format = "[$user]($style)"
-
