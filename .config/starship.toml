@@ -15,9 +15,6 @@ truncate_to_repo = true
 style = "bold purple"
 truncation_length = 8
 
-[battery]
-disabled = true
-
 [git_branch]
 symbol = "-b "
 style = "bold blue"
@@ -36,9 +33,6 @@ renamed = "»"
 [hostname]
 ssh_only = false
 format = "@[$hostname]($style) in "
-
-[java]
-symbol = "java "
 
 [jobs]
 symbol = "+"
