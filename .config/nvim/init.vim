@@ -13,11 +13,12 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'itchyny/vim-gitbranch'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'kdheepak/lazygit.nvim'
+Plugin 'jaredgorski/spacecamp'
 
 call vundle#end()
 filetype plugin indent on
 
-colorscheme material
+colorscheme spacecamp_lite " material
 
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * silent NERDTreeMirror
@@ -42,7 +43,7 @@ set stl+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ \ ':''} " editor mode
 set stl+=%#Cursor#%{(mode()=='r')?'\ \ REPLACE\ \ ':''} " editor mode
 set stl+=%#DiffDelete#%{(mode()=='v')?'\ \ VISUAL\ \ ':''} " editor mode
 set stl+=%#CursorLineNR# " visual mode background
-set stl+=\ %(%{gitbranch#name()}%)\  " print git branch 
+set stl+=%(%{gitbranch#name()}%) " print git branch 
 set stl+=%#LineNr#
 set stl+=\ Tab\ %n\  " buffer number
 set stl+=%#Visual# " visual mode background
