@@ -14,9 +14,15 @@ Plugin 'itchyny/vim-gitbranch'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'kdheepak/lazygit.nvim'
 Plugin 'jaredgorski/spacecamp'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
+Plugin 'google/vim-glaive'
 
 call vundle#end()
 filetype plugin indent on
+
+call glaive#Install()
 
 colorscheme spacecamp_lite " material
 
@@ -44,8 +50,6 @@ set stl+=%#Cursor#%{(mode()=='r')?'\ \ REPLACE\ \ ':''} " editor mode
 set stl+=%#DiffDelete#%{(mode()=='v')?'\ \ VISUAL\ \ ':''} " editor mode
 set stl+=%#CursorLineNR# " visual mode background
 set stl+=%(\ %{gitbranch#name()}\ %) " print git branch 
-set stl+=%#LineNr#
-set stl+=\ Tab\ %n\  " buffer number
 set stl+=%#Visual# " visual mode background
 set stl+=%{&paste?'\ PASTE\ ':''}
 set stl+=%{&spell?'\ SPELL\ ':''} 
@@ -71,8 +75,11 @@ set nostartofline
 set confirm
 set mouse=a
 set hidden
-set tabstop=4
+set tabstop=8
 set softtabstop=0
+set shiftwidth=4
+set smartindent
+set cindent
 set expandtab
 set relativenumber
 set title
@@ -109,3 +116,19 @@ nnoremap <F5> :!./gradlew deploy<CR>
 nnoremap gb :!./gradlew build<CR>
 nnoremap gl :LazyGit<CR>
 
+" Autoformatting
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  autocmd FileType rust AutoFormatBuffer rustfmt
+  autocmd FileType vue AutoFormatBuffer prettier
+augroup END
+
+Glaive codefmt google_java_executable="java -jar $HOME/bin/google-java-format-1.10.0-all-deps.jar
