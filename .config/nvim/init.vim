@@ -18,6 +18,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
+Plugin 'dense-analysis/ale'
 
 call vundle#end()
 filetype plugin indent on
@@ -131,4 +132,4 @@ augroup autoformat_settings
   autocmd FileType vue AutoFormatBuffer prettier
 augroup END
 
-Glaive codefmt google_java_executable="java -jar $HOME/bin/google-java-format-1.10.0-all-deps.jar
+"Glaive codefmt google_java_executable="java -jar $HOME/bin/google-java-format-1.10.0-all-deps.jar
