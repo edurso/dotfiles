@@ -84,6 +84,7 @@ ping() { ping.exe "$1" }
 
 # util
 py() { /usr/bin/python3.8 "$1" }
+fmt() { java -jar $HOME/.config/nvim/fmt/google-java-format-1.10.0-all-deps.jar "$1" }
 
 # lazygit
 lg() {

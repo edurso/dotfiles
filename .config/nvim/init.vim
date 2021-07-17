@@ -4,6 +4,7 @@
 set nocompatible
 filetype off
 
+" Install plugins
 set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -15,15 +16,19 @@ Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'kdheepak/lazygit.nvim'
 Plugin 'jaredgorski/spacecamp'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'dense-analysis/ale'
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
-Plugin 'dense-analysis/ale'
-
 call vundle#end()
-filetype plugin indent on
 
+" Set up code formatting
 call glaive#Install()
+Glaive codefmt plugin[mappings]
+Glaive codefmt google_java_executable="java -jar $HOME/.config/nvim/fmt/google-java-format-1.10.0-all-deps.jar"
+
+filetype plugin indent on
 
 colorscheme spacecamp_lite " material
 
@@ -119,17 +124,16 @@ nnoremap gl :LazyGit<CR>
 
 " Autoformatting
 augroup autoformat_settings
-  autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
-  autocmd FileType dart AutoFormatBuffer dartfmt
-  autocmd FileType go AutoFormatBuffer gofmt
-  autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-  autocmd FileType java AutoFormatBuffer google-java-format
-  autocmd FileType python AutoFormatBuffer yapf
+  "autocmd FileType bzl AutoFormatBuffer buildifier
+  "autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  "autocmd FileType dart AutoFormatBuffer dartfmt
+  "autocmd FileType go AutoFormatBuffer gofmt
+  "autocmd FileType gn AutoFormatBuffer gn
+  "autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  "autocmd FileType java AutoFormatBuffer google-java-format
+  "autocmd FileType python AutoFormatBuffer yapf
   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-  autocmd FileType rust AutoFormatBuffer rustfmt
-  autocmd FileType vue AutoFormatBuffer prettier
+  "autocmd FileType rust AutoFormatBuffer rustfmt
+  "autocmd FileType vue AutoFormatBuffer prettier
 augroup END
 
-"Glaive codefmt google_java_executable="java -jar $HOME/bin/google-java-format-1.10.0-all-deps.jar
