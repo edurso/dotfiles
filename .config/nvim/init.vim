@@ -120,6 +120,7 @@ let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not inst
 " Key Maps
 " Some of these are FRC-specific (e.g. <F5> to run a gradle deploy to a robot)
 nnoremap <F5> :!./gradlew deploy<CR>
+nnoremap gd :!./gradlew deploy<CR>
 nnoremap gb :!./gradlew build<CR>
 nnoremap gl :LazyGit<CR>
 
