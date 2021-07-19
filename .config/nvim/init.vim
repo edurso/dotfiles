@@ -15,6 +15,7 @@ Plugin 'itchyny/vim-gitbranch'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'kdheepak/lazygit.nvim'
 Plugin 'jaredgorski/spacecamp'
+Plugin 'tpope/vim-fugitive'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'dense-analysis/ale'
@@ -26,7 +27,7 @@ call vundle#end()
 " Set up code formatting
 call glaive#Install()
 Glaive codefmt plugin[mappings]
-Glaive codefmt google_java_executable="java -jar $HOME/.config/nvim/fmt/google-java-format-1.10.0-all-deps.jar"
+Glaive codefmt google_java_executable="java -jar $HOME/.config/nvim/fmt/google-java-format-1.8-all-deps.jar"
 
 filetype plugin indent on
 
