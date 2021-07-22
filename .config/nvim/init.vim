@@ -4,6 +4,8 @@
 set nocompatible
 filetype off
 
+let g:python3_host_prog="/usr/bin/python3"
+
 " Install plugins
 set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
@@ -19,15 +21,16 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'dense-analysis/ale'
-Plugin 'google/vim-maktaba'
-Plugin 'google/vim-codefmt'
-Plugin 'google/vim-glaive'
+Plugin 'Chiel92/vim-autoformat'
+"Plugin 'google/vim-maktaba'
+"Plugin 'google/vim-codefmt'
+"Plugin 'google/vim-glaive'
 call vundle#end()
 
 " Set up code formatting
-call glaive#Install()
-Glaive codefmt plugin[mappings]
-Glaive codefmt google_java_executable="java -jar $HOME/.config/nvim/fmt/google-java-format-1.8-all-deps.jar"
+"call glaive#Install()
+"Glaive codefmt plugin[mappings]
+"Glaive codefmt google_java_executable="java -jar $HOME/.config/nvim/fmt/google-java-format-1.8-all-deps.jar"
 
 filetype plugin indent on
 

@@ -115,7 +115,7 @@ JDK13='/usr/lib/jvm/jdk-13.0.2+8'
 JRE13='/usr/lib/jvm/jdk-13.0.2+8-jre'
 
 # add java to path
-export JAVA_HOME=$JAVA11
+export JAVA_HOME=$JAVA11 # current java version
 export PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
 
 # add apache spark to path
