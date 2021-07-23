@@ -1,12 +1,14 @@
-" Author: @edurso
 " Neovim Configuration File
+" Author: @edurso
 
+" Configurations for Vundle
+" https://github.com/VundleVim/Vundle.vim
 set nocompatible
 filetype off
 
-let g:python3_host_prog="/usr/bin/python3"
-
 " Install plugins
+" Note that most (all?) plugins have
+" GitHub repos with the same name
 set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -22,19 +24,13 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'dense-analysis/ale'
 Plugin 'Chiel92/vim-autoformat'
-"Plugin 'google/vim-maktaba'
-"Plugin 'google/vim-codefmt'
-"Plugin 'google/vim-glaive'
 call vundle#end()
 
-" Set up code formatting
-"call glaive#Install()
-"Glaive codefmt plugin[mappings]
-"Glaive codefmt google_java_executable="java -jar $HOME/.config/nvim/fmt/google-java-format-1.8-all-deps.jar"
-
+" Indent based on filetype
 filetype plugin indent on
 
-colorscheme spacecamp_lite " material
+" Set colorscheme (spacecamp also has std dark)
+colorscheme spacecamp_lite
 
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * silent NERDTreeMirror
@@ -44,7 +40,7 @@ autocmd VimEnter * NERDTree | wincmd p
 
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
+            \ quit | endif
 
 " Mirror the NERDTree before showing it. This makes it the same on all tabs.
 nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
@@ -59,10 +55,10 @@ set stl+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ \ ':''} " editor mode
 set stl+=%#Cursor#%{(mode()=='r')?'\ \ REPLACE\ \ ':''} " editor mode
 set stl+=%#DiffDelete#%{(mode()=='v')?'\ \ VISUAL\ \ ':''} " editor mode
 set stl+=%#CursorLineNR# " visual mode background
-set stl+=%(\ %{gitbranch#name()}\ %) " print git branch 
+set stl+=%(\ %{gitbranch#name()}\ %) " print git branch
 set stl+=%#Visual# " visual mode background
 set stl+=%{&paste?'\ PASTE\ ':''}
-set stl+=%{&spell?'\ SPELL\ ':''} 
+set stl+=%{&spell?'\ SPELL\ ':''}
 set stl+=%#DiffChange#%R " readonly flag
 set stl+=%#DiffDelete#%{&mod?'\ UNSAVED\ ':''} " add "UNSAVED" if file has changed
 set stl+=%#Cursor#
@@ -104,41 +100,36 @@ set is
 
 " Use tab key for coc.nvim intellisense
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" LazyGit plugin vars
 let g:lazygit_floating_window_winblend = 0 " transparency of floating window
 let g:lazygit_floating_window_scaling_factor = 0.9 " scaling factor for floating window
 let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
 let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
 let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
 
+" Location of python3 installation for vim-autoformat
+let g:python3_host_prog="/usr/bin/python3"
+
+" Path to directory where formatters are installed for vim-autoformat
+let g:formatterpath= ['$HOME/.config/nvim/fmt']
+
 " Key Maps
 " Some of these are FRC-specific (e.g. <F5> to run a gradle deploy to a robot)
 nnoremap <F5> :!./gradlew deploy<CR>
 nnoremap gd :!./gradlew deploy<CR>
 nnoremap gb :!./gradlew build<CR>
-nnoremap gl :LazyGit<CR>
 
-" Autoformatting
-augroup autoformat_settings
-  "autocmd FileType bzl AutoFormatBuffer buildifier
-  "autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
-  "autocmd FileType dart AutoFormatBuffer dartfmt
-  "autocmd FileType go AutoFormatBuffer gofmt
-  "autocmd FileType gn AutoFormatBuffer gn
-  "autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-  "autocmd FileType java AutoFormatBuffer google-java-format
-  "autocmd FileType python AutoFormatBuffer yapf
-  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-  "autocmd FileType rust AutoFormatBuffer rustfmt
-  "autocmd FileType vue AutoFormatBuffer prettier
-augroup END
+" Autoformatting with vim-autoformat
+nnoremap <F3> :Autoformat<CR>
+au BufWrite * :Autoformat
 

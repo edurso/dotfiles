@@ -1,4 +1,5 @@
-# .zshrc
+# Z-Shell Configuration File
+# Uses starship (see starship.rs) and oh-my-zsh
 # Author: @edurso
 
 
@@ -9,7 +10,7 @@ eval "$(starship init zsh)"
 # config bash settings
 case $- in
     *i*) ;;
-      *) return;;
+    *) return;;
 esac
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
@@ -27,9 +28,9 @@ esac
 force_color_prompt=yes
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	color_prompt=yes
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 if [ -x /usr/bin/dircolors ]; then
@@ -84,7 +85,6 @@ ping() { ping.exe "$1" }
 
 # util
 py() { /usr/bin/python3.8 "$1" }
-fmt() { java -jar $HOME/.config/nvim/fmt/google-java-format-1.10.0-all-deps.jar "$1" }
 
 # lazygit
 lg() {
@@ -124,7 +124,7 @@ export PYTHONPATH=$SPARK_HOME/python:$PYTHONPATH
 export PYSPARK_DRIVER_PYTHON="jupyter"
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 export PYSPARK_PYTHON=python3
-export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin 
+export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin
 
 # add raspbian 10 to path
 export PATH="$PATH:$HOME/.app/raspbian10/bin"
