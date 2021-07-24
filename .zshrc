@@ -116,7 +116,7 @@ JRE13='/usr/lib/jvm/jdk-13.0.2+8-jre'
 
 # add java to path
 export JAVA_HOME=$JAVA11 # current java version
-export PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+export PATH=$PATH:$HOME/bin:$JAVA_HOME/bin # add $JAVA_HOME to $PATH
 
 # add apache spark to path
 export SPARK_HOME='/home/edurso/.app/spark-2.4.5-bin-hadoop2.7' # note that spark requires java8
@@ -148,6 +148,9 @@ source $HOME/.config/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
 antigen bundle desyncr/auto-ls
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
 
