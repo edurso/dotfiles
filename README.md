@@ -1,22 +1,17 @@
 # edurso's dotfiles
 
-## First Time Set-Up
+## Overview
 
-```
-mkdir $HOME/dotfiles 
-git init --bare $HOME/dotfiles
-echo "alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'" >> ~/.bashrc
-dotfile config --local status.showUntrackedFiles no
-dotfile pull
-```
+_OS_: WSL Ubuntu 18.04
 
-## Adding New dotfiles
+- [Zsh](https://www.zsh.org/)
+  - Antigen to manage plugins
+- [Starship](https://starship.rs/)
+- [NeoVim](https://neovim.io/)
+- [GitHub CLI](https://cli.github.com/)
+- [LazyGit](https://github.com/jesseduffield/lazygit)
 
-```
-dotfile add /path/of/file
-dotfile commit -m "added new file"
-dotfile push
-```
+Project also contains `$HOME/bin` with a few handy scripts.
 
-Note that in `.zshrc`, the `dotfile` alias is also aliased as `df`.
-
+- `gh-update` updates the [GitHub CLI](https://cli.github.com/)
+- `clean-script` removes <CR> character endings in files
