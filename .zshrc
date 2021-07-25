@@ -151,6 +151,9 @@ antigen bundle desyncr/auto-ls
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle xorkevin/code-review-zsh
+antigen bundle voronkovich/gitignore.plugin.zsh
+antigen bundle zpm-zsh/ls
 antigen apply
 
 
