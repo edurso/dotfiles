@@ -1,5 +1,5 @@
 # Z-Shell Configuration File
-# Uses starship (see starship.rs) and oh-my-zsh
+# Uses starship (see starship.rs) and antigen to manage plugins
 # Author: @edurso
 
 
