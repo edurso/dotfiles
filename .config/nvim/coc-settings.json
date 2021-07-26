@@ -1,0 +1,7 @@
+{
+    "diagnostic.errorSign": "✘",
+    "diagnostic.warningSign": "",
+    "diagnostic.infoSign": "",
+    "diagnostic.hintSign": "•",
+    "diagnostic.displayByAle": true
+}
