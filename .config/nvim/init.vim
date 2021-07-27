@@ -1,8 +1,18 @@
 " Neovim Configuration File
 " Author: @edurso
 
-" Config for ale
-let g:ale_disable_lsp = 1
+
+" ALE Config
+
+let g:ale_disable_lsp=1
+let g:ale_sign_column_always=1
+let g:ale_sign_error='✘'
+let g:ale_sign_warning=''
+
+" ALE END
+
+
+" PLUGINS Config (Managed w/ Vundle)
 
 " Configurations for Vundle
 " https://github.com/VundleVim/Vundle.vim
@@ -23,20 +33,11 @@ Plugin 'kaicataldo/material.vim', { 'branch': 'main' }
 Plugin 'jaredgorski/spacecamp'
 Plugin 'dracula/vim', { 'as': 'dracula' }
 Plugin 'bryanmylee/vim-colorscheme-icons'
-Plugin 'mhinz/vim-startify'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
-Plugin 'junegunn/seoul256.vim'
-Plugin 'junegunn/vim-journal'
-Plugin 'junegunn/rainbow_parentheses.vim'
-Plugin 'nightsense/forgotten'
-Plugin 'zaki/zazen'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'nightsense/nemo'
-Plugin 'yuttie/hydrangea-vim'
 Plugin 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plugin 'rhysd/vim-color-spring-night'
+Plugin 'ryanoasis/vim-devicons'
 
 " Utilities
 Plugin 'preservim/nerdtree'
@@ -46,44 +47,39 @@ Plugin 'dense-analysis/ale'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
 Plugin 'itchyny/vim-gitbranch'
-Plugin 'kdheepak/lazygit.nvim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-surround'
 Plugin 'majutsushi/tagbar'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'alvan/vim-closetag'
-Plugin 'tpope/vim-abolish'
-Plugin 'Yggdroot/indentLine'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'chrisbra/Colorizer'
-Plugin 'KabbAmine/vCoolor.vim'
-Plugin 'heavenshell/vim-pydocstring', { 'do': 'make install' }
-Plugin 'metakirby5/codi.vim'
-Plugin 'dkarter/bullets.vim'
 Plugin 'antoinemadec/FixCursorHold.nvim'
 Plugin 'wellle/context.vim'
 Plugin 'dansomething/vim-hackernews'
 
-" End Plugins
+" Let Vundle know it is done
 call vundle#end()
 
 " Indent based on filetype
 filetype plugin indent on
 filetype plugin on
 
-" Set colorscheme
+" PLUGINS END
+
+
+" COLORSCHEME Config
+
 syntax on
 colorscheme spacecamp_lite
 set termguicolors
 
-" NERDTree vars
+" COLORSCHEME END
+
+
+" NERDTREE Config
+
 let NERDTreeShowHidden=1
+
 autocmd BufWinEnter * silent NERDTreeMirror " Open the existing NERDTree on each new tab.
+
 autocmd VimEnter * NERDTree | wincmd p " Open NERDTree when Vim is opened
 
 " Exit Vim if NERDTree is the only window left.
@@ -93,19 +89,19 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Mirror the NERDTree before showing it. This makes it the same on all tabs.
 nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
-" Easy Align
-xmap ga <Plugin>(EasyAlign)
-nmap ga <Plugin>(EasyAlign)
+" NERDTREE END
 
-" coc.nvim
+
+" COC.NVIM Config
+
 set updatetime=300
 set shortmess+=c
-nmap <slient> gd <Plugin>(coc-definition)
-nmap <slient> gy <Plugin>(coc-type-definition)
-nmap <slient> gi <Plugin>(coc-implementation)
-nmap <slient> gr <Plugin>(coc-references)
-nmap <slient> [g <Plugin>(coc-diagnostic-prev)
-nmap <slient> ]g <Plugin>(coc-diagnostic-next)
+nmap <slient> gd <Plug>(coc-definition)
+nmap <slient> gy <Plug>(coc-type-definition)
+nmap <slient> gi <Plug>(coc-implementation)
+nmap <slient> gr <Plug>(coc-references)
+nmap <slient> [g <Plug>(coc-diagnostic-prev)
+nmap <slient> ]g <Plug>(coc-diagnostic-next)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -124,11 +120,11 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plugin>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plugin>(coc-format-selected)
-nmap <leader>f  <Plugin>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 " Use tab key for coc.nvim intellisense
 inoremap <silent><expr> <TAB>
@@ -142,19 +138,40 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" vim-signify
-let g:signify_sign_add = '│'
-let g:signify_sign_delete = '│'
-let g:signify_sign_change = '│'
-hi DiffDelete guifg=#ff5555 guibg=none
+" COC.NVIM END
 
-" FixCursorHold for better performance
+
+" AUTOFORMAT Config
+
+" Location of python3 installation for vim-autoformat
+let g:python3_host_prog="/usr/bin/python3"
+
+" Path to directory where formatters are installed for vim-autoformat
+let g:formatterpath= ['$HOME/.config/nvim/fmt']
+
+" Autoformatting with vim-autoformat
+nnoremap <F3> :Autoformat<CR>
+au BufWrite * :Autoformat
+
+" AUTOFORMAT END
+
+
+" FIXCURSORHOLD Config
+
 let g:cursorhold_updatetime=100
 
-" context.vim
+" FIXCURSORHOLD END
+
+
+" CONTEXT.VIM Config
+
 let g:context_nvim_no_redraw=1
 
-" Set Up Statusline
+" CONTEXT.VIM END
+
+
+" STATUSLINE Config
+
 set laststatus=2 " make statusline visible
 set stl= " initialize
 set stl+=%#CursorIM#
@@ -183,7 +200,11 @@ set stl+=\[%{&fileformat}]\ \  " file formt
 set stl+=\|\ %3l:%-2c\  " linenum:columnum
 set stl+= " end
 
-" Set Some Settings
+" STATUSLINE END
+
+
+" SETTINGS Config
+
 set autoindent
 set nostartofline
 set confirm
@@ -206,45 +227,49 @@ set hls
 set ic
 set is
 
-" LazyGit plugin vars
-let g:lazygit_floating_window_winblend = 0 " transparency of floating window
-let g:lazygit_floating_window_scaling_factor = 0.9 " scaling factor for floating window
-let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
-let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
-let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
+" SETTINGS END
 
-" Location of python3 installation for vim-autoformat
-let g:python3_host_prog="/usr/bin/python3"
 
-" Path to directory where formatters are installed for vim-autoformat
-let g:formatterpath= ['$HOME/.config/nvim/fmt']
+" KEYMAPS Config
 
-" Gradle Key Maps
-" Some of these are FRC-specific (e.g. <F5> to run a gradle deploy to a robot)
-nnoremap <F5> :!./gradlew deploy<CR>
-nnoremap gb :!./gradlew build<CR>
+let mapleader="," " set <leader>
 
-" Autoformatting with vim-autoformat
-nnoremap <F3> :Autoformat<CR>
-au BufWrite * :Autoformat
+" Toggle NERDTree Visible
+nmap <leader>f :NERDTreeToggle<CR>
+nmap \\ <leader>f
 
-" Other misc. mappings (for plugins, etc.)
-let mapleader=","
-nmap <leader>q :NERDTreeToggle<CR>
-nmap \\ <leader>q
-nmap <leader>w :TagbarToggle<CR>
-nmap tt <leader>w
-nmap <leader>ee :Colors<CR>
-nmap cs <leader>ee
+" Toggle Tagbar Visible
+nmap <leader>t :TagbarToggle<CR>
+nmap tt <leader>t
+
+" List Colorschemes
+nmap <leader>c :Colors<CR>
+nmap cs <leader>c
+
+" List Files
+nmap <leader>f :Files<CR>
+nmap f <leader>f
+
+" List Git Commit History
+nmap <leader>gc :Commits<CR>
+nmap gc <leader>gc
+
+" List Open Buffers
+nmap <leader>b :Buffers<CR>
+
+" Comment toggle
+nmap cc <Plug>NERDCommenterToggle
+vmap cc <Plug>NERDCommenterToggle<CR>gv
+
+" Refresh nvim (run init script again)
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
+
+" Show hackernews
 nmap hn <C-w>v<C-w>l:HackerNews best<CR>J
-xmap <leader>a gaip*
-nmap <leader>a gaip*
-nmap <leader>s :Rg<CR>
-nmap <leader>d :Files<CR>
-nmap <leader>f :BLines<CR>
-nmap <leader>h :RainbowParentheses!!<CR>
-nmap <leader>k :ColorToggle<CR>
-nmap <leader>l :Limelight!!<CR>
-xmap <leader>l :Limelight!!<CR>
+
+" Gradle key maps
+nnoremap <F5> :!./gradlew deploy<CR>
+nnoremap gb :!./gradlew build<CR>ht!!<CR>
+
+" KEYMAPS END
 
