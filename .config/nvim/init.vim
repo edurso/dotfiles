@@ -54,6 +54,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'antoinemadec/FixCursorHold.nvim'
 Plugin 'wellle/context.vim'
 Plugin 'dansomething/vim-hackernews'
+Plugin 'kevinoid/vim-jsonc'
 
 " Let Vundle know it is done
 call vundle#end()
@@ -74,6 +75,13 @@ set termguicolors
 " COLORSCHEME END
 
 
+" ALE Config
+
+"autocmd CursorHold * silent call ALEHover()
+nmap <slient> gd :ALEGoToDefinition
+
+" ALE END
+
 " NERDTREE Config
 
 let NERDTreeShowHidden=1
@@ -91,12 +99,18 @@ nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
 " NERDTREE END
 
+" JSONC Config
+
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" JSONC END
+
 
 " COC.NVIM Config
 
 set updatetime=300
 set shortmess+=c
-nmap <slient> gd <Plug>(coc-definition)
+"nmap <slient> gd <Plug>(coc-definition)
 nmap <slient> gy <Plug>(coc-type-definition)
 nmap <slient> gi <Plug>(coc-implementation)
 nmap <slient> gr <Plug>(coc-references)
@@ -116,13 +130,14 @@ function! s:show_documentation()
     endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
+" Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
+" Symbol renaming
 nmap <leader>rn <Plug>(coc-rename)
+nmap cr <Plug>(coc-rename)
 
-" Formatting selected code.
+" Formatting selected code
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
@@ -137,6 +152,9 @@ function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Use co to open coc config
+nmap co :CocConfig<CR>
 
 " COC.NVIM END
 
