@@ -72,6 +72,11 @@ alias jpnb='jupyter lab&'
 alias jl='jupyter lab&'
 alias ghu='gh-update'
 
+# docker aliases
+alias dk='docker'
+alias dkst='docker-start'
+alias dksp='docker-stop'
+
 
 # additional parameterized shortcuts
 
