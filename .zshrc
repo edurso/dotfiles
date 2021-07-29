@@ -81,6 +81,7 @@ alias dki='docker image'
 alias dkis='docker images'
 alias dkr='docker run'
 alias dkps='docker ps -a'
+alias dkrma='docker rm $(docker ps -a -q -f status=exited)'
 
 
 # additional parameterized shortcuts
