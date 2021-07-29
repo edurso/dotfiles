@@ -76,6 +76,11 @@ alias ghu='gh-update'
 alias dk='docker'
 alias dkst='docker-start'
 alias dksp='docker-stop'
+alias dkp='docker pull'
+alias dki='docker image'
+alias dkis='docker images'
+alias dkr='docker run'
+alias dkps='docker ps -a'
 
 
 # additional parameterized shortcuts
