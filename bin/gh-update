@@ -6,7 +6,7 @@
 print('Setting Up Install . . .')
 
 # Directory to Temporaraly Place Some Files
-INSTALL_DIR = '$HOME'
+INSTALL_DIR = '/home/edurso/'
 
 # Imports
 import getpass
