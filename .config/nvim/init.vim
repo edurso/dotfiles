@@ -323,14 +323,6 @@ vnoremap d "_d
 vnoremap p "_dP
 nnoremap x "_x
 
-" toggle NERDTree visible
-"nmap <leader>f :NERDTreeToggle<CR>
-"nmap \\ <leader>f
-
-" toggle tagbar visible
-"nmap <leader>t :TagbarToggle<CR>
-"nmap tt <leader>t
-
 " list colorschemes
 nmap <leader>c :Colors<CR>
 nmap cs <leader>c
@@ -364,7 +356,7 @@ nmap <leader>h hn
 
 " gradle key maps
 nnoremap <F5> :!./gradlew deploy<CR>
-nnoremap gb :!./gradlew build<CR>ht!!<CR>
+nnoremap gb :!./gradlew build<CR>
 
 " formatter
 nnoremap <F3> :Autoformat<CR>
