@@ -2,16 +2,16 @@
 
 ## Overview
 
-_OS_: WSL Ubuntu 18.04
+*OS*: WSL Ubuntu 18.04
 
-- [Zsh](https://www.zsh.org/)
-  - Antigen to manage plugins
-- [Starship](https://starship.rs/)
-- [NeoVim](https://neovim.io/)
-- [GitHub CLI](https://cli.github.com/)
-- [LazyGit](https://github.com/jesseduffield/lazygit)
+*   [Zsh](https://www.zsh.org/)
+    *   Antigen to manage plugins
+*   [Starship](https://starship.rs/)
+*   [NeoVim](https://neovim.io/)
+*   [GitHub CLI](https://cli.github.com/)
+*   [LazyGit](https://github.com/jesseduffield/lazygit)
 
 Project also contains `$HOME/bin` with a few handy scripts.
 
-- `gh-update` updates the [GitHub CLI](https://cli.github.com/)
-- `clean-script` removes <CR> character endings in files
+*   `gh-update` updates the [GitHub CLI](https://cli.github.com/)
+*   `clean-script` removes `<CR>` character endings in files

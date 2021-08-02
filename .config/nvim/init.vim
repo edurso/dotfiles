@@ -77,6 +77,8 @@ let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build
 
 " nerdtree
 let NERDTreeShowHidden=1
+let g:NERDTreeChDirMode=2
+let g:NERDTreeMapOpenSplit='$'
 
 " autoformat
 let g:python3_host_prog="/usr/bin/python3" " Location of python3 installation for vim-autoformat
@@ -128,8 +130,6 @@ Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy search
 Plugin 'junegunn/fzf.vim' " fuzzy vim integration
 Plugin 'itchyny/vim-gitbranch' " git branch name
 Plugin 'tpope/vim-fugitive' " git integration
-"Plugin 'majutsushi/tagbar' " sidebar integration
-"Plugin 'mg979/vim-xtabline' " tabline customization
 Plugin 'scrooloose/nerdcommenter' " comment shortcuts
 Plugin 'wellle/context.vim' " show context of buffer
 Plugin 'dansomething/vim-hackernews' " why not
@@ -270,6 +270,9 @@ autocmd VimEnter * NERDTree | wincmd p " Open NERDTree when Vim is opened
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
             \ quit | endif
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+            \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
 " jsonc
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -293,7 +296,6 @@ command! -bang -nargs=? -complete=dir Files
 " general
 noremap q :wq<CR>
 noremap q! :q!<CR>
-noremap w :w<CR>
 noremap qa :qa<CR>
 
 " switch between splits using ctrl + {h,j,k,l}
@@ -368,7 +370,7 @@ nnoremap gb :!./gradlew build<CR>ht!!<CR>
 nnoremap <F3> :Autoformat<CR>
 
 " nerdtree
-nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
+"nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
 " vundle
 noremap <leader>pi :PluginInstall<CR>
