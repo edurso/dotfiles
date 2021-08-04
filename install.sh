@@ -26,7 +26,7 @@ fi
 if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
     git init --bare $HOME/dotfiles
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME remote add origin git@github.com:edurso/dotfiles.git
+    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME remote add origin https://github.com/edurso/dotfiles.git
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME fetch
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME pull
 fi
