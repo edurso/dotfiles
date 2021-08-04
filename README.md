@@ -15,3 +15,9 @@ Project also contains `$HOME/bin` with a few handy scripts.
 
 *   `gh-update` updates the [GitHub CLI](https://cli.github.com/)
 *   `clean-script` removes `<CR>` character endings in files
+
+## Installation
+
+```bash
+bash <(curl -s https://github.com/edurso/dotfiles/blob/master/install.sh)
+```
