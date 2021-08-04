@@ -10,7 +10,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githu
 sudo apt-get update
 
 # Install dep packages
-declare -a packages=("git" "ripgrep" "neovim" "lazygit" "curl" "gh")
+declare -a packages=("git" "ripgrep" "neovim" "lazygit" "curl" "gh" "zsh")
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
         echo "$package is installed"
@@ -22,6 +22,11 @@ done
 # Install/update starship
 sh - "$(curl -fsSL https://starship.rs/install.sh)"
 
+# If zsh is not the current shell, change it
+if [[ $SHELL != "/usr/bin/zsh" ]]; then
+    chsh -s /usr/bin/zsh root
+fi
+
 # Make directory for git repository if it doesn't exist
 if [[ ! -d "$HOME/dotfiles" ]]; then
     mkdir -p $HOME/dotfiles
@@ -32,7 +37,7 @@ if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
     git init --bare $HOME/dotfiles
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME remote add origin https://github.com/edurso/dotfiles.git
-    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME fetch
-    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME pull origin master
+    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME fetch origin master
+    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME reset --hard FETCH_HEAD
 fi
 
