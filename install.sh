@@ -33,6 +33,10 @@ if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME reset --hard FETCH_HEAD
 fi
 
+# Set Up NeoVim (VundleVim plugins, etc.)
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+nvim +PluginInstall +qall
+
 # Install/update starship
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
