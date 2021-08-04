@@ -19,14 +19,6 @@ for package in ${packages[@]}; do
     }
 done
 
-# Install/update starship
-sh - "$(curl -fsSL https://starship.rs/install.sh)"
-
-# If zsh is not the current shell, change it
-if [[ $SHELL != "/usr/bin/zsh" ]]; then
-    chsh -s /usr/bin/zsh root
-fi
-
 # Make directory for git repository if it doesn't exist
 if [[ ! -d "$HOME/dotfiles" ]]; then
     mkdir -p $HOME/dotfiles
@@ -40,4 +32,13 @@ if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME fetch origin master
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME reset --hard FETCH_HEAD
 fi
+
+# Install/update starship
+sh - "$(curl -fsSL https://starship.rs/install.sh)"
+
+# Set user shell to zsh (just installed)
+chsh -s /usr/bin/zsh $USER
+
+# Restart shell
+zsh
 
