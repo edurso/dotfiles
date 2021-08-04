@@ -35,11 +35,27 @@ if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
 fi
 
 # Set Up NeoVim (VundleVim plugins, etc.)
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+if [[ ! -d "$HOME/.config/nvim/bundle/Vundle.vim" ]]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+fi
 nvim +PluginInstall +qall
 
 # Install/update starship
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+
+# Get rid of old profiles if they exist
+if [[ -e "$HOME/.bashrc" ]]; then
+    rm -rf $HOME/.bashrc
+fi
+if [[ -e "$HOME/.profile" ]]; then
+    rm -rf $HOME/.profile
+fi
+if [[ -e "$HOME/.bash_history" ]]; then
+    rm -rf $HOME/.bash_history
+fi
+if [[ -e "$HOME/.bash_logout" ]]; then
+    rm -rf $HOME/.bash_logout
+fi
 
 # Set user shell to zsh (just installed)
 chsh -s /usr/bin/zsh $USER
