@@ -19,5 +19,5 @@ Project also contains `$HOME/bin` with a few handy scripts.
 ## Installation
 
 ```bash
-bash <(wget -qO- https://github.com/edurso/dotfiles/blob/master/install.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/edurso/dotfiles/master/install.sh)
 ```
