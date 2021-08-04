@@ -126,8 +126,7 @@ Plugin 'jiangmiao/auto-pairs' " automatically close all open parenthesis/bracket
 " utilities
 Plugin 'preservim/nerdtree' " file tree explorer
 Plugin 'Xuyuanp/nerdtree-git-plugin' " git status by file in nerdtree
-"Plugin 'neoclide/coc.nvim', {'branch': 'release'} " LSP, etc.
-Plugin 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
+Plugin 'neoclide/coc.nvim', {'branch': 'release'} " LSP, etc.
 Plugin 'dense-analysis/ale' " linting
 Plugin 'mhinz/vim-startify' " cool start up screen
 Plugin 'Chiel92/vim-autoformat' " auto format
