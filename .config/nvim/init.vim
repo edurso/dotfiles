@@ -35,13 +35,16 @@ let g:coc_global_extensions = [
             \ 'coc-json',
             \ 'coc-java',
             \ 'coc-clangd',
+            \ 'coc-yank',
+            \ 'coc-prettier',
+            \ 'coc-snippets',
             \ ]
 
 " startify
-let g:startify_padding_left = 10
-let g:startify_session_persistence = 1
-let g:startify_enable_special = 0
-let g:startify_change_to_vcs_root = 1
+let g:startify_padding_left=10
+let g:startify_session_persistence=1
+let g:startify_enable_special=0
+let g:startify_change_to_vcs_root=1
 let g:startify_lists = [
             \ {'type': 'dir'},
             \ {'type': 'files'},
@@ -108,6 +111,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " themes, graphics, etc.
 Plugin 'kaicataldo/material.vim', { 'branch': 'main' } " colorscheme
+Plugin 'haishanh/night-owl.vim'
 Plugin 'jaredgorski/spacecamp' " colorscheme
 Plugin 'dracula/vim', { 'as': 'dracula' } " colorscheme
 Plugin 'chriskempson/tomorrow-theme', { 'rtp': 'vim' } " colorscheme
@@ -270,9 +274,6 @@ autocmd VimEnter * NERDTree | wincmd p " Open NERDTree when Vim is opened
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
             \ quit | endif
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-            \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
 " jsonc
 autocmd FileType json syntax match Comment +\/\/.\+$+
