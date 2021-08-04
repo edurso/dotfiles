@@ -19,6 +19,7 @@ for package in ${packages[@]}; do
         sudo apt-get install $package
     }
 done
+curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
 
 # Make directory for git repository if it doesn't exist
 if [[ ! -d "$HOME/dotfiles" ]]; then
