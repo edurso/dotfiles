@@ -34,7 +34,7 @@ if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
 fi
 
 # Install/update starship
-sh - "$(curl -fsSL https://starship.rs/install.sh)"
+sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
 # Set user shell to zsh (just installed)
 chsh -s /usr/bin/zsh $USER
