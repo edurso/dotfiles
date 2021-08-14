@@ -16,7 +16,6 @@ style = "bold purple"
 truncation_length = 8
 
 [git_branch]
-symbol = "-b "
 style = "bold blue"
 
 [git_commit]
