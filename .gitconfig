@@ -1,16 +1,16 @@
 [user]
-	name = edurso
-	email = eric@casadurso.com
+    name = edurso
+    email = eric@casadurso.com
 [filesystem "Ubuntu|11.0.7|rootfs"]
-	timestampResolution = 26000 nanoseconds
-	minRacyThreshold = 4333 microseconds
+    timestampResolution = 26000 nanoseconds
+    minRacyThreshold = 4333 microseconds
 [diff]
-	submodule = log
+    submodule = log
 [status]
-	submoduleSummary = true
+    submoduleSummary = true
 [push]
-	recurseSubmodules = on-demand
+    recurseSubmodules = on-demand
 [submodule]
-	recurse = true
+    recurse = true
 [core]
-	editor = vim
+    editor = nvim
