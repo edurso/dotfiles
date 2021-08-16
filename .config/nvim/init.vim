@@ -126,7 +126,7 @@ Plugin 'jiangmiao/auto-pairs' " automatically close all open parenthesis/bracket
 " utilities
 Plugin 'preservim/nerdtree' " file tree explorer
 Plugin 'Xuyuanp/nerdtree-git-plugin' " git status by file in nerdtree
-Plugin 'neoclide/coc.nvim', {'branch': 'release'} " LSP, etc.
+"Plugin 'neoclide/coc.nvim', {'branch': 'release'} " LSP, etc.
 Plugin 'dense-analysis/ale' " linting
 Plugin 'mhinz/vim-startify' " cool start up screen
 Plugin 'Chiel92/vim-autoformat' " auto format
@@ -279,8 +279,8 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " coc
-autocmd CursorHold * silent call CocActionAsync('highlight') " highlight the symbol and its references when holding the cursor
-command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+"autocmd CursorHold * silent call CocActionAsync('highlight') " highlight the symbol and its references when holding the cursor
+"command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " autoformat
 au BufWrite * :Autoformat " autoformat on write
