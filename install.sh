@@ -44,6 +44,7 @@ fi
 mkdir -p $HOME/.local/share/nvim/site/pack/coc/start
 cd $HOME/.local/share/nvim/site/pack/coc/start
 curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzfv -
+npm run build
 
 # Set Up NeoVim (VundleVim plugins, etc.)
 if [[ ! -d "$HOME/.config/nvim/bundle/Vundle.vim" ]]; then
