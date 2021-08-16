@@ -3,6 +3,12 @@
 # Installs edurso's Dotfiles on Debian or Ubuntu
 # Author: @edurso
 
+# error when reference undefined vars
+set -o nounset
+
+# exit when a command fails
+set -o errexit
+
 # Set up apt-get repositories
 sudo add-apt-repository ppa:lazygit-team/release
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -10,8 +16,14 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githu
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get update
 
+# Install nodejs
+if [ ! -x "$(command -v node)" ]; then
+    curl --fail -LSs https://install-node.now.sh/latest | sh
+    export PATH="/usr/local/bin/:$PATH"
+fi
+
 # Install dep packages
-declare -a packages=("git" "ripgrep" "neovim" "lazygit" "curl" "gh" "zsh" "-y nodejs")
+declare -a packages=("git" "ripgrep" "neovim" "lazygit" "curl" "gh" "zsh")
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
         echo "$package is installed"
@@ -34,11 +46,52 @@ if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME reset --hard FETCH_HEAD
 fi
 
+# Install coc.nvim
+mkdir -p $HOME/.local/share/nvim/site/pack/coc/start
+cd $HOME/.local/share/nvim/site/pack/coc/start
+curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzfv -
+
 # Set Up NeoVim (VundleVim plugins, etc.)
 if [[ ! -d "$HOME/.config/nvim/bundle/Vundle.vim" ]]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
 fi
 nvim +PluginInstall +qall
+
+# Install extensions
+mkdir -p $HOME/.config/coc/extensions
+cd $HOME/.config/coc/extensions
+if [ ! -f package.json ]; then
+    echo '{"dependencies":{}}'> package.json
+fi
+
+# Install coc.nvim extensions
+npm install \
+    coc-snippets \
+    coc-html \
+    coc-highlight \
+    coc-dot-complete \
+    coc-dash-complete \
+    coc-calc \
+    coc-yaml \
+    coc-xml \
+    coc-sql \
+    coc-sh \
+    coc-python \
+    coc-pyright \
+    coc-omnisharp \
+    coc-markdownlint \
+    coc-syntax \
+    coc-go \
+    coc-json \
+    coc-java \
+    coc-clangd \
+    coc-yank \
+    coc-prettier \
+    --global-style \
+    --ignore-scripts \
+    --no-bin-links \
+    --no-package-lock \
+    --only=prod
 
 # Install/update starship
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
@@ -59,6 +112,9 @@ fi
 
 # Set user shell to zsh (just installed)
 chsh -s /usr/bin/zsh $USER
+
+# Change directory
+cd $HOME
 
 # Restart shell
 zsh
