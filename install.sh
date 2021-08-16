@@ -40,12 +40,6 @@ if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME reset --hard FETCH_HEAD
 fi
 
-# Install coc.nvim
-mkdir -p $HOME/.local/share/nvim/site/pack/coc/start
-cd $HOME/.local/share/nvim/site/pack/coc/start
-curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzfv -
-npm run build
-
 # Set Up NeoVim (VundleVim plugins, etc.)
 if [[ ! -d "$HOME/.config/nvim/bundle/Vundle.vim" ]]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
@@ -87,6 +81,9 @@ npm install \
     --no-bin-links \
     --no-package-lock \
     --only=prod
+
+# Build coc.nvim
+npm run build
 
 # Install/update starship
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
