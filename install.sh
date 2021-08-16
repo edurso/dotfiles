@@ -16,14 +16,8 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githu
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get update
 
-# Install nodejs
-if [ ! -x "$(command -v node)" ]; then
-    curl --fail -LSs https://install-node.now.sh/latest | sh
-    export PATH="/usr/local/bin/:$PATH"
-fi
-
 # Install dep packages
-declare -a packages=("git" "ripgrep" "neovim" "lazygit" "curl" "gh" "zsh")
+declare -a packages=("git" "ripgrep" "neovim" "lazygit" "curl" "gh" "zsh" "nodejs" "gcc" "g++" "make" "yarn")
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
         echo "$package is installed"
