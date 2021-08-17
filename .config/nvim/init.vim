@@ -212,7 +212,7 @@ set stl+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ \ ':''} " editor mode
 set stl+=%#Cursor#%{(mode()=='r')?'\ \ REPLACE\ \ ':''} " editor mode
 set stl+=%#DiffDelete#%{(mode()=='v')?'\ \ VISUAL\ \ ':''} " editor mode
 set stl+=%#CursorLineNR# " visual mode background
-set stl+=%(\ %{gitbranch#name()}\ %) " print git branch
+set stl+=%(\ \ %{gitbranch#name()}\ %) " print git branch
 set stl+=%#Visual# " visual mode background
 set stl+=%{&paste?'\ PASTE\ ':''}
 set stl+=%{&spell?'\ SPELL\ ':''}
