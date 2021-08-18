@@ -55,8 +55,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # applications
 alias eclipse='/home/edurso/.app/eclipse/java-2020-06/eclipse/eclipse&'
-alias python=python3
-alias pip=pip3
+alias python='python3.9'
+alias python3='python3.9'
+alias pip='pip3'
 alias vim='nvim'
 alias vi='nvim'
 alias ee='cd /mnt/c/Users/edurso'
