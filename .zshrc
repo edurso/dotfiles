@@ -84,6 +84,15 @@ alias dkr='docker run'
 alias dkps='docker ps -a'
 alias dkrma='docker rm $(docker ps -a -q -f status=exited)'
 
+# python version management
+PYTHON2='python2.7'
+PYTHON36='python3.6'
+PYTHON37='python3.7'
+PYTHON38='python3.8'
+PYTHON39='python3.9'
+alias python=$PYTHON39
+alias python3=$PYTHON39
+alias pip='pip3'
 
 # additional parameterized shortcuts
 
