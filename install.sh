@@ -49,7 +49,7 @@ mv nvim.appimage $HOME/bin/
 if [[ ! -d "$HOME/.config/nvim/bundle/Vundle.vim" ]]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
 fi
-nvim +PluginInstall +qall
+nvim.appimage +PluginInstall +qall
 
 # Install extensions
 #mkdir -p $HOME/.config/coc/extensions
