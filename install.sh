@@ -49,46 +49,7 @@ mv nvim.appimage $HOME/bin/
 if [[ ! -d "$HOME/.config/nvim/bundle/Vundle.vim" ]]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
 fi
-nvim.appimage +PluginInstall +qall
-
-# Install extensions
-#mkdir -p $HOME/.config/coc/extensions
-#cd $HOME/.config/coc/extensions
-#if [ ! -f package.json ]; then
-#echo '{"dependencies":{}}'> package.json
-#fi
-
-# Install coc.nvim extensions
-#npm install \
-#coc-snippets \
-#coc-html \
-#coc-highlight \
-#coc-dot-complete \
-#coc-dash-complete \
-#coc-calc \
-#coc-yaml \
-#coc-xml \
-#coc-sql \
-#coc-sh \
-#coc-python \
-#coc-pyright \
-#coc-omnisharp \
-#coc-markdownlint \
-#coc-syntax \
-#coc-go \
-#coc-json \
-#coc-java \
-#coc-clangd \
-#coc-yank \
-#coc-prettier \
-#--global-style \
-#--ignore-scripts \
-#--no-bin-links \
-#--no-package-lock \
-#--only=prod
-
-# Build coc.nvim
-#npm run build
+$HOME/bin/nvim.appimage +PluginInstall +qall
 
 # Install/update starship
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
