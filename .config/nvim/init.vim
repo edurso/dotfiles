@@ -14,31 +14,31 @@ let g:ale_sign_error='✘'
 let g:ale_sign_warning=''
 
 " coc
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
-let g:coc_global_extensions = [
-            \ 'coc-html',
-            \ 'coc-highlight',
-            \ 'coc-dot-complete',
-            \ 'coc-dash-complete',
-            \ 'coc-calc',
-            \ 'coc-yaml',
-            \ 'coc-xml',
-            \ 'coc-sql',
-            \ 'coc-sh',
-            \ 'coc-python',
-            \ 'coc-pyright',
-            \ 'coc-omnisharp',
-            \ 'coc-markdownlint',
-            \ 'coc-syntax',
-            \ 'coc-go',
-            \ 'coc-json',
-            \ 'coc-java',
-            \ 'coc-clangd',
-            \ 'coc-yank',
-            \ 'coc-prettier',
-            \ 'coc-snippets',
-            \ ]
+"let g:coc_snippet_next = '<Tab>'
+"let g:coc_snippet_prev = '<S-Tab>'
+"let g:coc_global_extensions = [
+            "\ 'coc-html',
+            "\ 'coc-highlight',
+            "\ 'coc-dot-complete',
+            "\ 'coc-dash-complete',
+            "\ 'coc-calc',
+            "\ 'coc-yaml',
+            "\ 'coc-xml',
+            "\ 'coc-sql',
+            "\ 'coc-sh',
+            "\ 'coc-python',
+            "\ 'coc-pyright',
+            "\ 'coc-omnisharp',
+            "\ 'coc-markdownlint',
+            "\ 'coc-syntax',
+            "\ 'coc-go',
+            "\ 'coc-json',
+            "\ 'coc-java',
+            "\ 'coc-clangd',
+            "\ 'coc-yank',
+            "\ 'coc-prettier',
+            "\ 'coc-snippets',
+            "\ ]
 
 " startify
 let g:startify_padding_left=10
@@ -79,12 +79,12 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
 " nerdtree
-let NERDTreeShowHidden=1
-let g:NERDTreeChDirMode=2
-let g:NERDTreeMapOpenSplit='$'
+"let NERDTreeShowHidden=1
+"let g:NERDTreeChDirMode=2
+"let g:NERDTreeMapOpenSplit='$'
 
 " autoformat
-let g:python3_host_prog="/usr/bin/python3" " Location of python3 installation for vim-autoformat
+let g:python3_host_prog="/usr/bin/python3.9" " Location of python3 installation for vim-autoformat
 let g:formatterpath= ['$HOME/.config/nvim/fmt'] " Path to directory where formatters are installed for vim-autoformat
 
 " context
@@ -122,11 +122,17 @@ Plugin 'luochen1990/rainbow' " highlight parenthesis
 Plugin 'gregsexton/MatchTag' " highlight match html tags
 Plugin 'airblade/vim-gitgutter' " git status in gutter
 Plugin 'jiangmiao/auto-pairs' " automatically close all open parenthesis/brackets
+Plugin 'adelarsq/vim-devicons-emoji' " icons
+Plugin 'kyazdani42/nvim-web-devicons' " more icons
 
 " utilities
-Plugin 'preservim/nerdtree' " file tree explorer
-Plugin 'Xuyuanp/nerdtree-git-plugin' " git status by file in nerdtree
-Plugin 'neoclide/coc.nvim', {'branch': 'release'} " LSP, etc.
+Plugin 'ms-jpq/coq_nvim', {'branch': 'coq'} " autocompletion
+Plugin 'ms-jpq/coq.artifacts', {'branch': 'artifacts'} " autocompletion sources
+Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3.9 -m chadtree deps'}
+
+"Plugin 'preservim/nerdtree' " file tree explorer
+"Plugin 'Xuyuanp/nerdtree-git-plugin' " git status by file in nerdtree
+"Plugin 'neoclide/coc.nvim', {'branch': 'release'} " LSP, etc.
 Plugin 'dense-analysis/ale' " linting
 Plugin 'mhinz/vim-startify' " cool start up screen
 Plugin 'Chiel92/vim-autoformat' " auto format
@@ -243,15 +249,15 @@ function! s:check_back_space() abort
 endfunction
 
 " coc show documentation in window
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    elseif (coc#rpc#ready())
-        call CocActionAsync('doHover')
-    else
-        execute '!' . &keywordprg . " " . expand('<cword>')
-    endif
-endfunction
+"function! s:show_documentation()
+"if (index(['vim','help'], &filetype) >= 0)
+"execute 'h '.expand('<cword>')
+"elseif (coc#rpc#ready())
+"call CocActionAsync('doHover')
+"else
+"execute '!' . &keywordprg . " " . expand('<cword>')
+"endif
+"endfunction
 
 " FUNCTIONS END
 
@@ -269,18 +275,18 @@ autocmd BufReadPost *
             \ endif
 
 " nerdtree
-autocmd BufWinEnter * silent NERDTreeMirror " Open the existing NERDTree on each new tab.
-autocmd VimEnter * NERDTree | wincmd p " Open NERDTree when Vim is opened
+"autocmd BufWinEnter * silent NERDTreeMirror " Open the existing NERDTree on each new tab.
+"autocmd VimEnter * NERDTree | wincmd p " Open NERDTree when Vim is opened
 " Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-            \ quit | endif
+"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+            "\ quit | endif
 
 " jsonc
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " coc
-autocmd CursorHold * silent call CocActionAsync('highlight') " highlight the symbol and its references when holding the cursor
-command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+"autocmd CursorHold * silent call CocActionAsync('highlight') " highlight the symbol and its references when holding the cursor
+"command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " autoformat
 au BufWrite * :Autoformat " autoformat on write
@@ -365,7 +371,7 @@ nnoremap <F3> :Autoformat<CR>
 " nerdtree
 "nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
-" vundle
+" vundle shortcuts
 noremap <leader>pi :PluginInstall<CR>
 noremap <leader>pu :PluginUpdate<CR>
 noremap <leader>pu :PluginUpgrade<CR>
@@ -373,27 +379,27 @@ noremap <leader>ps :PluginStstus<CR>
 noremap <leader>pc :PluginClean<CR>
 
 " coc
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-nmap <silent> <C-a> <Plug>(coc-cursors-word)
-xmap <silent> <C-a> <Plug>(coc-cursors-range)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <leader>rn <Plug>(coc-rename)
-nmap <leader>o :OR <CR>
-nmap <leader>jd <Plug>(coc-definition)
-nmap <leader>jy <Plug>(coc-type-definition)
-nmap <leader>ji <Plug>(coc-implementation)
-nmap <leader>jr <Plug>(coc-references)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-nmap <leader>a <Plug>(coc-codeaction-line)
-xmap <leader>a <Plug>(coc-codeaction-selected)
-nmap co :CocConfig<CR>
-nmap cl :CocList<CR>
+"inoremap <silent><expr> <TAB>
+            "\ pumvisible() ? "\<C-n>" :
+            "\ <SID>check_back_space() ? "\<TAB>" :
+            "\ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+"nmap <silent> <C-a> <Plug>(coc-cursors-word)
+"xmap <silent> <C-a> <Plug>(coc-cursors-range)
+"nmap <silent> [g <Plug>(coc-diagnostic-prev)
+"nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"nmap <leader>rn <Plug>(coc-rename)
+"nmap <leader>o :OR <CR>
+"nmap <leader>jd <Plug>(coc-definition)
+"nmap <leader>jy <Plug>(coc-type-definition)
+"nmap <leader>ji <Plug>(coc-implementation)
+"nmap <leader>jr <Plug>(coc-references)
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
+"nmap <leader>a <Plug>(coc-codeaction-line)
+"xmap <leader>a <Plug>(coc-codeaction-selected)
+"nmap co :CocConfig<CR>
+"nmap cl :CocList<CR>
 
 " KEYMAPS END
 

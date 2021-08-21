@@ -17,7 +17,7 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get update
 
 # Install dep packages
-declare -a packages=("git" "ripgrep" "neovim" "lazygit" "curl" "gh" "zsh" "nodejs" "gcc" "g++" "make" "yarn")
+declare -a packages=("git" "ripgrep" "lazygit" "curl" "gh" "zsh" "nodejs" "gcc" "g++" "make" "yarn")
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
         echo "$package is installed"
@@ -39,6 +39,11 @@ if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME fetch origin master
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME reset --hard FETCH_HEAD
 fi
+
+# Download and Install NeoVim
+wget https://github.com/neovim/neovim/releases/download/v0.5.0/nvim.appimage
+chmod u+x ./nvim.appimage
+mv nvim.appimage $HOME/bin/
 
 # Set Up NeoVim (VundleVim plugins, etc.)
 if [[ ! -d "$HOME/.config/nvim/bundle/Vundle.vim" ]]; then
