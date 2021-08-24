@@ -126,9 +126,9 @@ Plugin 'adelarsq/vim-devicons-emoji' " icons
 Plugin 'kyazdani42/nvim-web-devicons' " more icons
 
 " utilities
-Plugin 'ms-jpq/coq_nvim', {'branch': 'coq'} " autocompletion
-Plugin 'ms-jpq/coq.artifacts', {'branch': 'artifacts'} " autocompletion sources
-Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3.9 -m chadtree deps'}
+"Plugin 'ms-jpq/coq_nvim', {'branch': 'coq'} " autocompletion
+"Plugin 'ms-jpq/coq.artifacts', {'branch': 'artifacts'} " autocompletion sources
+"Plugin 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3.9 -m chadtree deps'}
 
 "Plugin 'preservim/nerdtree' " file tree explorer
 "Plugin 'Xuyuanp/nerdtree-git-plugin' " git status by file in nerdtree

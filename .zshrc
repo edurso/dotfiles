@@ -61,7 +61,8 @@ alias pip='pip3'
 alias nvim='nvim.appimage'
 alias vim='nvim.appimage'
 alias vi='nvim.appimage'
-alias ee='cd /mnt/c/Users/edurso'
+alias ee='cd /mnt/c/Users/eric'
+alias wk='cd /mnt/d/workspace'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 # application shortcuts
