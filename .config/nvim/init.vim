@@ -219,7 +219,6 @@ set stl+=%#Cursor#
 set stl+=\ %t\  " filename
 set stl+=%#CursorLineNR#
 set stl+=%= " allign to right
-"set stl+=%#CursorIM#
 set stl+=\ %{LinterStatus()}\ \| " display linter status
 set stl+=\ %p%% " percent through file
 set stl+=\ \|\ Line%3l\ \| " line number and formatting
