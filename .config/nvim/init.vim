@@ -8,10 +8,12 @@
 let mapleader=","
 
 " ale
-let g:ale_disable_lsp=1
 let g:ale_sign_column_always=1
 let g:ale_sign_error='✘'
 let g:ale_sign_warning=''
+
+" ncm2
+let g:ncm2#match_highlight = 'bold'
 
 " startify
 let g:startify_padding_left=10
@@ -97,6 +99,28 @@ Plugin 'airblade/vim-gitgutter' " git status in gutter
 Plugin 'jiangmiao/auto-pairs' " automatically close all open parenthesis/brackets
 
 " utilities
+Plugin 'ncm2/ncm2' " auto complete
+Plugin 'roxma/nvim-yarp' " auto complete
+Plugin 'ncm2/ncm2-bufword' " auto complete extension
+Plugin 'ncm2/ncm2-path' " auto complete extension
+Plugin 'ncm2/ncm2-github' " auto complete extension
+Plugin 'ncm2/ncm2-syntax' " auto complete extension
+Plugin 'Shougo/neco-syntax' " auto complete extension
+Plugin 'subnut/ncm2-github-emoji' " auto complete extension
+Plugin 'ncm2/ncm2-tmux' " auto complete extension
+Plugin 'ncm2/ncm2-tagprefix' " auto complete extension
+Plugin 'ncm2/ncm2-neoinclude' " auto complete extension
+Plugin 'Shougo/neoinclude.vim' " auto complete extension
+Plugin 'ncm2/ncm2-cssomni' " auto complete extension
+Plugin 'ncm2/ncm2-tern',  {'do': 'npm install'} " auto complete extension
+Plugin 'ncm2/ncm2-jedi' " auto complete extension
+Plugin 'ncm2/ncm2-pyclang' " auto complete extension
+Plugin 'ncm2/ncm2-vim' " auto complete extension
+Plugin 'Shougo/neco-vim' " auto complete extension
+Plugin 'TyberiusPrime/ncm2-bufline' " auto complete extension
+Plugin 'ncm2/ncm2-match-highlight' " auto complete extension
+Plugin 'ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']} " auto complete extension
+Plugin 'artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']} " auto complete extension
 Plugin 'preservim/nerdtree' " file tree explorer
 Plugin 'Xuyuanp/nerdtree-git-plugin' " git status by file in nerdtree
 Plugin 'dense-analysis/ale' " linting
@@ -169,6 +193,7 @@ set cmdheight=1
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
+set completeopt=noinsert,menuone,noselect
 
 " SETTINGS END
 
@@ -251,6 +276,9 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 
 " jsonc
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" ncm2
+autocmd BufEnter * call ncm2#enable_for_buffer()
 
 " autoformat
 au BufWrite * :Autoformat " autoformat on write
@@ -341,6 +369,10 @@ noremap <leader>pu :PluginUpdate<CR>
 noremap <leader>pu :PluginUpgrade<CR>
 noremap <leader>ps :PluginStstus<CR>
 noremap <leader>pc :PluginClean<CR>
+
+" ncm2
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " KEYMAPS END
 
