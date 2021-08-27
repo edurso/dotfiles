@@ -98,7 +98,7 @@ Plugin 'gregsexton/MatchTag' " highlight match html tags
 Plugin 'airblade/vim-gitgutter' " git status in gutter
 Plugin 'jiangmiao/auto-pairs' " automatically close all open parenthesis/brackets
 
-" utilities
+" completion utilities
 Plugin 'ncm2/ncm2' " auto complete
 Plugin 'roxma/nvim-yarp' " auto complete
 Plugin 'ncm2/ncm2-bufword' " auto complete extension
@@ -121,6 +121,8 @@ Plugin 'TyberiusPrime/ncm2-bufline' " auto complete extension
 Plugin 'ncm2/ncm2-match-highlight' " auto complete extension
 Plugin 'ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']} " auto complete extension
 Plugin 'artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']} " auto complete extension
+
+" utilities
 Plugin 'preservim/nerdtree' " file tree explorer
 Plugin 'Xuyuanp/nerdtree-git-plugin' " git status by file in nerdtree
 Plugin 'dense-analysis/ale' " linting
@@ -243,12 +245,6 @@ function! LinterStatus() abort
                 \   all_non_errors,
                 \   all_errors
                 \)
-endfunction
-
-" check if last inserted char is a backspace
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " FUNCTIONS END
