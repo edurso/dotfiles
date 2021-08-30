@@ -59,8 +59,10 @@ let g:NERDTreeChDirMode=2
 let g:NERDTreeMapOpenSplit='$'
 
 " autoformat
-let g:python3_host_prog="/usr/bin/python3.9" " Location of python3 installation for vim-autoformat
-let g:formatterpath= ['$HOME/.config/nvim/fmt'] " Path to directory where formatters are installed for vim-autoformat
+if has('unix')
+    let g:python3_host_prog="/usr/bin/python3.9" " Location of python3 installation for vim-autoformat
+    let g:formatterpath= ['$HOME/.config/nvim/fmt'] " Path to directory where formatters are installed for vim-autoformat
+endif
 
 " context
 let g:context_nvim_no_redraw=1
@@ -78,7 +80,11 @@ filetype off
 " install plugins
 " note that most (all?) plugins have
 " GitHub repos with the same name
-set rtp+=~/.config/nvim/bundle/Vundle.vim " add vundle to runtime path
+if has('win32')
+    set rtp+=C:\Users\edurso\AppData\Local\nvim\bundle\Vundle.vim
+else
+    set rtp+=~/.config/nvim/bundle/Vundle.vim " add vundle to runtime path
+endif
 
 " setup Vundle
 call vundle#begin()
