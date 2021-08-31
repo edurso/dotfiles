@@ -107,26 +107,26 @@ Plugin 'jiangmiao/auto-pairs' " automatically close all open parenthesis/bracket
 " completion utilities
 Plugin 'ncm2/ncm2' " auto complete
 Plugin 'roxma/nvim-yarp' " auto complete
-Plugin 'ncm2/ncm2-bufword' " auto complete extension
-Plugin 'ncm2/ncm2-path' " auto complete extension
-Plugin 'ncm2/ncm2-github' " auto complete extension
-Plugin 'ncm2/ncm2-syntax' " auto complete extension
-Plugin 'Shougo/neco-syntax' " auto complete extension
-Plugin 'subnut/ncm2-github-emoji' " auto complete extension
-Plugin 'ncm2/ncm2-tmux' " auto complete extension
-Plugin 'ncm2/ncm2-tagprefix' " auto complete extension
-Plugin 'ncm2/ncm2-neoinclude' " auto complete extension
-Plugin 'Shougo/neoinclude.vim' " auto complete extension
-Plugin 'ncm2/ncm2-cssomni' " auto complete extension
-Plugin 'ncm2/ncm2-tern',  {'do': 'npm install'} " auto complete extension
-Plugin 'ncm2/ncm2-jedi' " auto complete extension
-Plugin 'ncm2/ncm2-pyclang' " auto complete extension
-Plugin 'ncm2/ncm2-vim' " auto complete extension
-Plugin 'Shougo/neco-vim' " auto complete extension
-Plugin 'TyberiusPrime/ncm2-bufline' " auto complete extension
-Plugin 'ncm2/ncm2-match-highlight' " auto complete extension
-Plugin 'ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']} " auto complete extension
-Plugin 'artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']} " auto complete extension
+"Plugin 'ncm2/ncm2-bufword' " auto complete extension
+"Plugin 'ncm2/ncm2-path' " auto complete extension
+"Plugin 'ncm2/ncm2-github' " auto complete extension
+"Plugin 'ncm2/ncm2-syntax' " auto complete extension
+"Plugin 'Shougo/neco-syntax' " auto complete extension
+"Plugin 'subnut/ncm2-github-emoji' " auto complete extension
+"Plugin 'ncm2/ncm2-tmux' " auto complete extension
+"Plugin 'ncm2/ncm2-tagprefix' " auto complete extension
+"Plugin 'ncm2/ncm2-neoinclude' " auto complete extension
+"Plugin 'Shougo/neoinclude.vim' " auto complete extension
+"Plugin 'ncm2/ncm2-cssomni' " auto complete extension
+"Plugin 'ncm2/ncm2-tern',  {'do': 'npm install'} " auto complete extension
+"Plugin 'ncm2/ncm2-jedi' " auto complete extension
+"Plugin 'ncm2/ncm2-pyclang' " auto complete extension
+"Plugin 'ncm2/ncm2-vim' " auto complete extension
+"Plugin 'Shougo/neco-vim' " auto complete extension
+"Plugin 'TyberiusPrime/ncm2-bufline' " auto complete extension
+"Plugin 'ncm2/ncm2-match-highlight' " auto complete extension
+"Plugin 'ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']} " auto complete extension
+"Plugin 'artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']} " auto complete extension
 
 " utilities
 Plugin 'preservim/nerdtree' " file tree explorer
