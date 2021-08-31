@@ -18,6 +18,14 @@ Project also contains `$HOME/bin` with a few handy scripts.
 
 ## Installation
 
+Unix:
+
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/edurso/dotfiles/master/install.sh)
+```
+
+Windows:
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/edurso/dotfiles/master/install.ps1" -OutFile "$HOME\tmp\install.ps1"; $HOME\tmp\install.ps1; rm $HOME\tmp\install.ps1
 ```
