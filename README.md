@@ -27,5 +27,5 @@ bash <(wget -qO- https://raw.githubusercontent.com/edurso/dotfiles/master/instal
 Windows:
 
 ```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/edurso/dotfiles/master/install.ps1" -OutFile "$HOME\tmp\install.ps1"; $HOME\tmp\install.ps1; rm $HOME\tmp\install.ps1
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/edurso/dotfiles/master/install.ps1" -OutFile ".\install.ps1"; .\install.ps1; rm .\install.ps1
 ```
