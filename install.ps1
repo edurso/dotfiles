@@ -30,10 +30,10 @@ if ( !(Test-Path "$HOME\AppData\Local\nvim\bundle\Vundle.vim") ) {
 
 # copy dotfiles to their proper windows locations
 Copy-Item -Path "$HOME\dotfiles\bin" -Destination "$HOME\bin" -Recurse
-Copy-Item "$HOME\dotfiles\.config\starship.toml" -Destination "$HOME\.config\starship.toml"
-Copy-Item "$HOME\dotfiles\.config\nvim\init.vim" -Destination "$HOME\AppData\Local\nvim\init.vim"
-Copy-Item "$HOME\dotfiles\.config\lazygit\config.yml" -Destination "$HOME\AppData\Roaming\lazygit\config.yml"
-Copy-Item "$HOME\dotfiles\win\Microsoft.PowerShell_profile.ps1" -Destination "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+Copy-Item "$HOME\dotfiles\.config\starship.toml" -Destination "$HOME\.config\"
+Copy-Item "$HOME\dotfiles\.config\nvim\init.vim" -Destination "$HOME\AppData\Local\nvim\"
+Copy-Item "$HOME\dotfiles\.config\lazygit\config.yml" -Destination "$HOME\AppData\Roaming\lazygit\"
+Copy-Item "$HOME\dotfiles\win\Microsoft.PowerShell_profile.ps1" -Destination "$HOME\Documents\WindowsPowerShell\"
 
 nvim +PluginInstall +qall
 
