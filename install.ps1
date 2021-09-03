@@ -59,5 +59,3 @@ if ( !(Test-Path "$HOME\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShel
 }
 Copy-Item "$HOME\dotfiles\win\Microsoft.PowerShell_profile.ps1" -Destination "$HOME\OneDrive\Documents\WindowsPowerShell\"
 
-nvim --noplugin +PluginInstall +qall
-
