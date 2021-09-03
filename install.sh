@@ -17,7 +17,7 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get update
 
 # Install dep packages
-declare -a packages=("git" "ripgrep" "lazygit" "curl" "gh" "zsh" "nodejs" "gcc" "g++" "make" "yarn" "python3.9" "python3.9-distutils" "openjdk-11-jdk" "gralde")
+declare -a packages=("git" "ripgrep" "lazygit" "curl" "gh" "zsh" "nodejs" "gcc" "g++" "make" "yarn" "python3.9" "python3.9-distutils" "openjdk-11-jdk" "gradle")
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
         echo "$package is installed"
