@@ -81,9 +81,9 @@ filetype off
 " note that most (all?) plugins have
 " GitHub repos with the same name
 if has('win32')
-    set rtp+=C:\Users\edurso\AppData\Local\nvim\bundle\Vundle.vim
+    set rtp+=$HOME\AppData\Local\nvim\bundle\Vundle.vim
 else
-    set rtp+=~/.config/nvim/bundle/Vundle.vim " add vundle to runtime path
+    set rtp+=$HOME/.config/nvim/bundle/Vundle.vim " add vundle to runtime path
 endif
 
 " setup Vundle
@@ -92,8 +92,9 @@ Plugin 'VundleVim/Vundle.vim'
 
 " themes, graphics, etc.
 Plugin 'kaicataldo/material.vim', { 'branch': 'main' } " colorscheme
-Plugin 'haishanh/night-owl.vim'
+Plugin 'haishanh/night-owl.vim' " colorscheme
 Plugin 'jaredgorski/spacecamp' " colorscheme
+Plugin 'joshdick/onedark.vim' " colorscheme
 Plugin 'dracula/vim', { 'as': 'dracula' } " colorscheme
 Plugin 'chriskempson/tomorrow-theme', { 'rtp': 'vim' } " colorscheme
 Plugin 'rhysd/vim-color-spring-night' " colorscheme
@@ -103,8 +104,6 @@ Plugin 'luochen1990/rainbow' " highlight parenthesis
 Plugin 'gregsexton/MatchTag' " highlight match html tags
 Plugin 'airblade/vim-gitgutter' " git status in gutter
 Plugin 'jiangmiao/auto-pairs' " automatically close all open parenthesis/brackets
-Plugin 'joshdick/onedark.vim' " colorscheme
-
 
 " completion utilities
 Plugin 'ncm2/ncm2' " auto complete
