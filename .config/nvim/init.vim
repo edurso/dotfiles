@@ -103,6 +103,8 @@ Plugin 'luochen1990/rainbow' " highlight parenthesis
 Plugin 'gregsexton/MatchTag' " highlight match html tags
 Plugin 'airblade/vim-gitgutter' " git status in gutter
 Plugin 'jiangmiao/auto-pairs' " automatically close all open parenthesis/brackets
+Plugin 'joshdick/onedark.vim' " colorscheme
+
 
 " completion utilities
 Plugin 'ncm2/ncm2' " auto complete
@@ -155,7 +157,7 @@ filetype plugin on
 " COLORSCHEME
 
 syntax on
-colorscheme spacecamp_lite
+colorscheme onedark
 
 " COLORSCHEME END
 

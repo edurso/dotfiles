@@ -14,7 +14,12 @@ scoop bucket add extras
 scoop bucket add versions
 
 # install tools
-scoop install git openjdk11 vscode lazygit starship neovim-nightly
+scoop install git
+scoop install openjdk11
+scoop install vscode
+scoop install lazygit
+scoop install starship
+scoop install neovim-nightly
 
 # set up dotfiles repository if it isn't there already
 if ( !(Test-Path "$HOME\dotfiles") ) {
@@ -29,11 +34,30 @@ if ( !(Test-Path "$HOME\AppData\Local\nvim\bundle\Vundle.vim") ) {
 }
 
 # copy dotfiles to their proper windows locations
+if ( !(Test-Path "$HOME\bin") ) {
+    Remove-Item -Recurse -Force "$HOME\bin"
+}
 Copy-Item -Path "$HOME\dotfiles\bin" -Destination "$HOME\bin" -Recurse
+
+if ( !(Test-Path "$HOME\.config\starship.toml") ) {
+    Remove-Item -Force "$HOME\.config\starship.toml"
+}
 Copy-Item "$HOME\dotfiles\.config\starship.toml" -Destination "$HOME\.config\"
+
+if ( !(Test-Path "$HOME\AppData\Local\nvim\init.vim") ) {
+    Remove-Item -Force "$HOME\AppData\Local\nvim\init.vim"
+}
 Copy-Item "$HOME\dotfiles\.config\nvim\init.vim" -Destination "$HOME\AppData\Local\nvim\"
+
+if ( !(Test-Path "$HOME\AppData\Roaming\lazygit\config.yml") ) {
+    Remove-Item -Force "$HOME\AppData\Roaming\lazygit\config.yml"
+}
 Copy-Item "$HOME\dotfiles\.config\lazygit\config.yml" -Destination "$HOME\AppData\Roaming\lazygit\"
+
+if ( !(Test-Path "$HOME\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1") ) {
+    Remove-Item -Force "$HOME\OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+}
 Copy-Item "$HOME\dotfiles\win\Microsoft.PowerShell_profile.ps1" -Destination "$HOME\OneDrive\Documents\WindowsPowerShell\"
 
-#nvim +PluginInstall +qall
+nvim --noplugin +PluginInstall +qall
 
