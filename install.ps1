@@ -33,7 +33,7 @@ Copy-Item -Path "$HOME\dotfiles\bin" -Destination "$HOME\bin" -Recurse
 Copy-Item "$HOME\dotfiles\.config\starship.toml" -Destination "$HOME\.config\"
 Copy-Item "$HOME\dotfiles\.config\nvim\init.vim" -Destination "$HOME\AppData\Local\nvim\"
 Copy-Item "$HOME\dotfiles\.config\lazygit\config.yml" -Destination "$HOME\AppData\Roaming\lazygit\"
-Copy-Item "$HOME\dotfiles\win\Microsoft.PowerShell_profile.ps1" -Destination "$HOME\Documents\WindowsPowerShell\"
+Copy-Item "$HOME\dotfiles\win\Microsoft.PowerShell_profile.ps1" -Destination "$HOME\OneDrive\Documents\WindowsPowerShell\"
 
-nvim +PluginInstall +qall
+#nvim +PluginInstall +qall
 
