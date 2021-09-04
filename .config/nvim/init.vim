@@ -64,6 +64,39 @@ endif
 " context
 let g:context_nvim_no_redraw=1
 
+" nvim-tree
+let g:nvim_tree_icons = {
+            \ 'default': '',
+            \ 'symlink': '',
+            \ 'git': {
+                \   'unstaged': "✗",
+                \   'staged': "✓",
+                \   'unmerged': "",
+                \   'renamed': "➜",
+                \   'untracked': "★",
+                \   'deleted': "",
+                \   'ignored': "◌"
+                \   },
+                \ 'folder': {
+                    \   'arrow_open': "",
+                    \   'arrow_closed': "",
+                    \   'default': "",
+                    \   'open': "",
+                    \   'empty': "",
+                    \   'empty_open': "",
+                    \   'symlink': "",
+                    \   'symlink_open': "",
+                    \   },
+                    \   'lsp': {
+                        \     'hint': "",
+                        \     'info': "",
+                        \     'warning': "",
+                        \     'error': "",
+                        \   }
+                        \ }
+let g:nvim_tree_auto_open = 1
+let g:nvim_tree_auto_close = 1
+
 " CONFIGURATION VARS END
 
 
@@ -127,8 +160,8 @@ Plugin 'ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']} " auto complete exten
 Plugin 'artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']} " auto complete extension
 
 " utilities
-Plugin 'preservim/nerdtree' " file tree explorer
-Plugin 'Xuyuanp/nerdtree-git-plugin' " git status by file in nerdtree
+Plugin 'kyazdani42/nvim-web-devicons' " tree icons
+Plugin 'kyazdani42/nvim-tree.lua' " filetree
 Plugin 'dense-analysis/ale' " linting
 Plugin 'mhinz/vim-startify' " cool start up screen
 Plugin 'Chiel92/vim-autoformat' " auto format
@@ -266,12 +299,8 @@ autocmd BufReadPost *
             \   exe "normal! g`\"" |
             \ endif
 
-" nerdtree
-autocmd BufWinEnter * silent NERDTreeMirror " Open the existing NERDTree on each new tab.
-autocmd VimEnter * NERDTree | wincmd p " Open NERDTree when Vim is opened
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-            \ quit | endif
+" nvim-tree
+autocmd BufEnter * :NvimTreeOpen " open nvim tree on new buffer
 
 " jsonc
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -358,9 +387,6 @@ nnoremap gb :!./gradlew build<CR>
 
 " formatter
 nnoremap <F3> :Autoformat<CR>
-
-" nerdtree
-nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
 " vundle shortcuts
 noremap <leader>pi :PluginInstall<CR>
