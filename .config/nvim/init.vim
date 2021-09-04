@@ -12,9 +12,6 @@ let g:ale_sign_column_always=1
 let g:ale_sign_error='✘'
 let g:ale_sign_warning=''
 
-" ncm2
-"let g:ncm2#match_highlight = 'bold'
-
 " startify
 let g:startify_padding_left=10
 let g:startify_session_persistence=1
@@ -104,6 +101,7 @@ Plugin 'luochen1990/rainbow' " highlight parenthesis
 Plugin 'gregsexton/MatchTag' " highlight match html tags
 Plugin 'airblade/vim-gitgutter' " git status in gutter
 Plugin 'jiangmiao/auto-pairs' " automatically close all open parenthesis/brackets
+Plugin 'akinsho/bufferline.nvim' " tabline
 
 " completion utilities
 Plugin 'ncm2/ncm2' " auto complete
@@ -375,5 +373,18 @@ noremap <leader>pc :PluginClean<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+" bufferline
+nnoremap <leader>n :BufferLineCycleNext<CR>
+nnoremap <leader>b :BufferLineCyclePrev<CR>
+
 " KEYMAPS END
+
+
+" LUA
+
+lua << EOF
+require("bufferline").setup{}
+EOF
+
+" LUA END
 
