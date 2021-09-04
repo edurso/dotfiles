@@ -120,13 +120,12 @@ lg() {
 }
 
 
-# add qt to path
-QT='/~/.app/qt/qt-everywhere-src-5.15.0/~/qt/qt515static'
-export PATH=$QT/bin:$PATH
-
-
 # add go to path
 export PATH=$PATH:/usr/local/go/bin
+
+
+# add yarn to path
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
 # add java to path
@@ -148,19 +147,6 @@ export PYSPARK_DRIVER_PYTHON="jupyter"
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 export PYSPARK_PYTHON=python3
 export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin
-
-# add raspbian 10 to path
-export PATH="$PATH:$HOME/.app/raspbian10/bin"
-
-# add rvm to path
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# add sdkman to path
-export SDKMAN_DIR="/home/edurso/.sdkman"
-[[ -s "/home/edurso/.sdkman/bin/sdkman-init.sh" ]] && source "/home/edurso/.sdkman/bin/sdkman-init.sh"
-
-# add neovim to path
-export PATH="$PATH:$HOME/nvim-linux64/bin"
 
 
 # source antigen plugin manager for zsh
@@ -185,5 +171,3 @@ antigen apply
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export LIBGL_ALWAYS_INDIRECT=1
 
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
