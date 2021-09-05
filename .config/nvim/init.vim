@@ -69,31 +69,31 @@ let g:nvim_tree_icons = {
             \ 'default': '',
             \ 'symlink': '',
             \ 'git': {
-                \   'unstaged': "✗",
-                \   'staged': "✓",
-                \   'unmerged': "",
-                \   'renamed': "➜",
-                \   'untracked': "★",
-                \   'deleted': "",
-                \   'ignored': "◌"
-                \   },
-                \ 'folder': {
-                    \   'arrow_open': "",
-                    \   'arrow_closed': "",
-                    \   'default': "",
-                    \   'open': "",
-                    \   'empty': "",
-                    \   'empty_open': "",
-                    \   'symlink': "",
-                    \   'symlink_open': "",
-                    \   },
-                    \   'lsp': {
-                        \     'hint': "",
-                        \     'info': "",
-                        \     'warning': "",
-                        \     'error': "",
-                        \   }
-                        \ }
+            \   'unstaged': "✗",
+            \   'staged': "✓",
+            \   'unmerged': "",
+            \   'renamed': "➜",
+            \   'untracked': "★",
+            \   'deleted': "",
+            \   'ignored': "◌"
+            \   },
+            \ 'folder': {
+            \   'arrow_open': "",
+            \   'arrow_closed': "",
+            \   'default': "",
+            \   'open': "",
+            \   'empty': "",
+            \   'empty_open': "",
+            \   'symlink': "",
+            \   'symlink_open': "",
+            \   },
+            \   'lsp': {
+            \     'hint': "",
+            \     'info': "",
+            \     'warning': "",
+            \     'error': "",
+            \   }
+            \ }
 let g:nvim_tree_auto_open = 1
 let g:nvim_tree_auto_close = 1
 
@@ -308,9 +308,6 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " ncm2
 autocmd BufEnter * call ncm2#enable_for_buffer()
 
-" autoformat
-au BufWrite * :Autoformat " autoformat on write
-
 " fzf
 command! -bang -nargs=? -complete=dir Files
             \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
@@ -355,8 +352,7 @@ nmap <leader>c :Colors<CR>
 nmap cs <leader>c
 
 " list files
-nmap <leader>f :Files<CR>
-nmap f <leader>f
+nmap f :Files<CR>
 
 " list git commit history
 nmap <leader>gc :Commits<CR>
@@ -387,6 +383,7 @@ nnoremap gb :!./gradlew build<CR>
 
 " formatter
 nnoremap <F3> :Autoformat<CR>
+nnoremap <leader>f :Autoformat<CR>
 
 " vundle shortcuts
 noremap <leader>pi :PluginInstall<CR>
