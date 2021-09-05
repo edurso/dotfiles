@@ -34,11 +34,6 @@ if ( !(Test-Path "$HOME\AppData\Local\nvim\bundle\Vundle.vim") ) {
 }
 
 # copy dotfiles to their proper windows locations
-if ( !(Test-Path "$HOME\bin") ) {
-    Remove-Item -Recurse -Force "$HOME\bin"
-}
-Copy-Item -Path "$HOME\dotfiles\bin" -Destination "$HOME\bin" -Recurse
-
 if ( !(Test-Path "$HOME\.config\starship.toml") ) {
     Remove-Item -Force "$HOME\.config\starship.toml"
 }
