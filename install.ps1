@@ -16,6 +16,7 @@ scoop bucket add versions
 # install tools
 scoop install git
 scoop install openjdk11
+scoop install gradle
 scoop install vscode
 scoop install lazygit
 scoop install starship
