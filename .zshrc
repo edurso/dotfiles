@@ -149,6 +149,14 @@ export PYSPARK_PYTHON=python3
 export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin
 
 
+# enable gpg signing
+export GPG_TTY=$(tty)
+if [ ! -f ~/.gnupg/S.gpg-agent ]; then
+    eval $( gpg-agent --daemon --options ~/.gnupg/gpg-agent.conf )
+fi
+export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
+
+
 # source antigen plugin manager for zsh
 source $HOME/.config/antigen.zsh
 
@@ -170,4 +178,5 @@ antigen apply
 # set display for X server
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export LIBGL_ALWAYS_INDIRECT=1
+
 
