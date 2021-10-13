@@ -12,6 +12,7 @@ if ( Test-Path "$HOME\scoop\shims\scoop" ) {
 scoop bucket add java
 scoop bucket add extras
 scoop bucket add versions
+scoop bucket add github-gh https://github.com/cli/scoop-gh.git
 
 # install tools
 scoop install git
@@ -22,6 +23,7 @@ scoop install lazygit
 scoop install starship
 scoop install neovim-nightly
 scoop install curl
+scoop install gh
 
 # set up dotfiles repository if it isn't there already
 if ( !(Test-Path "$HOME\dotfiles") ) {
