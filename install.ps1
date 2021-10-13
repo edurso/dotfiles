@@ -21,6 +21,7 @@ scoop install vscode
 scoop install lazygit
 scoop install starship
 scoop install neovim-nightly
+scoop install curl
 
 # set up dotfiles repository if it isn't there already
 if ( !(Test-Path "$HOME\dotfiles") ) {
