@@ -32,6 +32,7 @@ declare -a packages=(
     "openjdk-11-jdk"
     "gradle"
     "tree"
+    "cmake"
 )
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
