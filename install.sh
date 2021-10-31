@@ -166,7 +166,7 @@ if [[ -e "$HOME/.bash_logout" ]]; then
 fi
 
 # Set user shell to zsh (just installed)
-chsh -s /usr/bin/zsh $USER
+sudo chsh -s /usr/bin/zsh $USER
 
 # Change directory
 cd $HOME
