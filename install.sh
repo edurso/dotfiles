@@ -33,7 +33,7 @@ declare -a packages=(
     "gradle"
     "tree"
     "cmake"
-    "gnupg2"
+    # "gnupg2" # does not work on debian
 )
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
