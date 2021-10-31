@@ -41,6 +41,11 @@ declare -a packages=(
     "tree"
     "cmake"
     "gnupg2"
+    "ca-certificates"
+    "build-essential"
+    "gpg"
+    "gpg-agent"
+    "pinentry-curses"
     "code"
 )
 for package in ${packages[@]}; do
