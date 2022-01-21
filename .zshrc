@@ -75,25 +75,14 @@ alias jpnb='jupyter lab&'
 alias jl='jupyter lab&'
 alias ghu='gh-update'
 
-# docker aliases
-alias dk='docker'
-alias dkst='docker-start'
-alias dksp='docker-stop'
-alias dkp='docker pull'
-alias dki='docker image'
-alias dkis='docker images'
-alias dkr='docker run'
-alias dkps='docker ps -a'
-alias dkrma='docker rm $(docker ps -a -q -f status=exited)'
-
 # python version management
 PYTHON2='python2.7'
 PYTHON36='python3.6'
 PYTHON37='python3.7'
 PYTHON38='python3.8'
 PYTHON39='python3.9'
-alias python=$PYTHON39
-alias python3=$PYTHON39
+alias python=$PYTHON36
+alias python3=$PYTHON36
 alias pip='pip3'
 
 # additional parameterized shortcuts
