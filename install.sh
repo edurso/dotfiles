@@ -39,7 +39,7 @@ declare -a packages=(
     "g++"
     "make"
     "yarn"
-    "python3.6"
+    "python3"
     "openjdk-11-jdk"
     "gradle"
     "tree"
