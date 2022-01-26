@@ -1,10 +1,10 @@
-# Z-Shell Configuration File
-# Uses starship (see starship.rs) and antigen to manage plugins
+# Bash Configuration File
+# Uses starship (see starship.rs) and neovim
 # Author: @edurso
 
 
 # setup starship
-eval "$(starship init zsh)"
+eval "$(starship init bash)"
 
 
 # config bash settings
@@ -54,49 +54,14 @@ alias cls='clear'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # applications
-alias eclipse='/home/edurso/.app/eclipse/java-2020-06/eclipse/eclipse&'
-alias python='python3.9'
-alias python3='python3.9'
 alias pip='pip3'
-alias nvim='nvim.appimage'
-alias vim='nvim.appimage'
-alias vi='nvim.appimage'
-alias ee='cd /mnt/c/Users/eric'
-alias wk='cd /mnt/d/workspace'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 # application shortcuts
 alias as='run-as'
-alias ec='eclipse'
-alias qt='qtcreator&'
 alias df='dotfile'
-alias jlab='jupyter lab&'
-alias jpnb='jupyter lab&'
 alias jl='jupyter lab&'
 alias ghu='gh-update'
-
-# python version management
-PYTHON2='python2.7'
-PYTHON36='python3.6'
-PYTHON37='python3.7'
-PYTHON38='python3.8'
-PYTHON39='python3.9'
-alias python=$PYTHON36
-alias python3=$PYTHON36
-alias pip='pip3'
-
-# additional parameterized shortcuts
-
-# win app
-start() { explorer.exe "$1" }
-np() { notepad.exe "$1" & }
-
-# network
-putty() { putty.exe "$1" & }
-ping() { ping.exe "$1" }
-
-# util
-py() { /usr/bin/python3.8 "$1" }
 
 # lazygit
 lg() {
@@ -109,10 +74,6 @@ lg() {
 }
 
 
-# add go to path
-export PATH=$PATH:/usr/local/go/bin
-
-
 # add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -120,22 +81,11 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # add java to path
 
 # java paths
-JDK8='/usr/lib/jvm/java-8-openjdk-amd64'
 JDK11='/usr/lib/jvm/java-11-openjdk-amd64'
-JDK13='/usr/lib/jvm/jdk-13.0.2+8'
-JRE13='/usr/lib/jvm/jdk-13.0.2+8-jre'
 
 # add java to path
 export JAVA_HOME=$JAVA11 # current java version
 export PATH=$PATH:$HOME/bin:$JAVA_HOME/bin # add $JAVA_HOME to $PATH
-
-# add apache spark to path
-export SPARK_HOME='/home/edurso/.app/spark-2.4.5-bin-hadoop2.7' # note that spark requires java8
-export PYTHONPATH=$SPARK_HOME/python:$PYTHONPATH
-export PYSPARK_DRIVER_PYTHON="jupyter"
-export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
-export PYSPARK_PYTHON=python3
-export PATH=$SPARK_HOME:$PATH:~/.local/bin:$JAVA_HOME/bin:$JAVA_HOME/jre/bin
 
 
 # enable gpg signing
@@ -146,26 +96,6 @@ fi
 export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
 
 
-# source antigen plugin manager for zsh
-source $HOME/.config/antigen.zsh
-
-
-# select and apply zsh plugins
-antigen use oh-my-zsh
-antigen bundle git
-antigen bundle pip
-antigen bundle desyncr/auto-ls
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle xorkevin/code-review-zsh
-antigen bundle voronkovich/gitignore.plugin.zsh
-antigen bundle zpm-zsh/ls
-antigen apply
-
-
-# set display for X server
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-export LIBGL_ALWAYS_INDIRECT=1
-
-
+# ignore case in bash
+echo 'set completion-ignore-case On' >> /etc/inputrc
+echo 'set completion-ignore-case On' | sudo tee -a /etc/inputrc
