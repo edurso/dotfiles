@@ -4,8 +4,7 @@
 
 Built and tested on Ubuntu 18.04, Ubuntu 20.04, and Windows 10
 
-*   [Zsh](https://www.zsh.org/)
-*   Antigen to manage plugins
+*   [bash](https://www.gnu.org/software/bash/)
 *   [Starship](https://starship.rs/)
 *   [NeoVim](https://neovim.io/)
 *   [GitHub CLI](https://cli.github.com/)
