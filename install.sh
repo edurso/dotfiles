@@ -34,6 +34,7 @@ declare -a packages=(
     "lazygit"
     "gh"
     "nodejs"
+    "ruby-full"
     "gcc"
     "g++"
     "make"
@@ -49,7 +50,7 @@ declare -a packages=(
     "gpg"
     "gpg-agent"
     "pinentry-curses"
-    "code"
+    "docker.io"
 )
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
