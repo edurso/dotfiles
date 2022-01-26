@@ -33,7 +33,6 @@ declare -a packages=(
     "neovim"
     "lazygit"
     "gh"
-    "zsh"
     "nodejs"
     "gcc"
     "g++"
@@ -60,6 +59,11 @@ for package in ${packages[@]}; do
     }
 done
 sudo apt update
+
+# Get rid of old profiles if they exist
+if [[ -e "$HOME/.bashrc" ]]; then
+    rm -rf $HOME/.bashrc
+fi
 
 # Make directory for git repository if it doesn't exist
 if [[ ! -d "$HOME/dotfiles" ]]; then
@@ -155,26 +159,12 @@ done
 # Install/update starship
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
-# Get rid of old profiles if they exist
-if [[ -e "$HOME/.bashrc" ]]; then
-    rm -rf $HOME/.bashrc
-fi
-if [[ -e "$HOME/.profile" ]]; then
-    rm -rf $HOME/.profile
-fi
-if [[ -e "$HOME/.bash_history" ]]; then
-    rm -rf $HOME/.bash_history
-fi
-if [[ -e "$HOME/.bash_logout" ]]; then
-    rm -rf $HOME/.bash_logout
-fi
-
 # Set user shell to zsh (just installed)
-sudo chsh -s /usr/bin/zsh $USER
+sudo chsh -s /usr/bin/bash $USER
 
 # Change directory
 cd $HOME
 
 # Restart shell
-zsh
+bash
 
