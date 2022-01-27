@@ -56,6 +56,11 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # applications
 alias pip='pip3'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias vi='nvim'
+alias vim='nvim'
+
+# navigation
+alias dev='cd $HOME/dev'
 
 # application shortcuts
 alias as='run-as'
