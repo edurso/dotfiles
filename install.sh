@@ -40,6 +40,7 @@ declare -a packages=(
     "make"
     "yarn"
     "python3"
+    "python3-pip"
     "openjdk-11-jdk"
     "gradle"
     "tree"
@@ -60,6 +61,14 @@ for package in ${packages[@]}; do
     }
 done
 sudo apt update
+
+# Python libraries
+declare -a libs=(
+    "neovim"
+)
+for lib in ${libs[@]}; do 
+    pip3 install $lib
+done
 
 # Get rid of old profiles if they exist
 if [[ -e "$HOME/.bashrc" ]]; then
