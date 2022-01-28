@@ -50,52 +50,14 @@ let g:fzf_tags_command = 'ctags -R'
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
-" nerdtree
-let NERDTreeShowHidden=1
-let g:NERDTreeChDirMode=2
-let g:NERDTreeMapOpenSplit='$'
-
 " autoformat
 if has('unix')
-    let g:python3_host_prog="/usr/bin/python3.9" " Location of python3 installation for vim-autoformat
+    let g:python3_host_prog="/usr/bin/python3" " Location of python3 installation for vim-autoformat
     let g:formatterpath= ['$HOME/.config/nvim/fmt'] " Path to directory where formatters are installed for vim-autoformat
 endif
 
 " context
 let g:context_nvim_no_redraw=1
-
-" nvim-tree
-let g:nvim_tree_icons = {
-            \ 'default': '',
-            \ 'symlink': '',
-            \ 'git': {
-            \   'unstaged': "✗",
-            \   'staged': "✓",
-            \   'unmerged': "",
-            \   'renamed': "➜",
-            \   'untracked': "★",
-            \   'deleted': "",
-            \   'ignored': "◌"
-            \   },
-            \ 'folder': {
-            \   'arrow_open': "",
-            \   'arrow_closed': "",
-            \   'default': "",
-            \   'open': "",
-            \   'empty': "",
-            \   'empty_open': "",
-            \   'symlink': "",
-            \   'symlink_open': "",
-            \   },
-            \   'lsp': {
-            \     'hint': "",
-            \     'info': "",
-            \     'warning': "",
-            \     'error': "",
-            \   }
-            \ }
-let g:nvim_tree_auto_open = 1
-let g:nvim_tree_auto_close = 1
 
 " CONFIGURATION VARS END
 
@@ -145,7 +107,7 @@ Plugin 'ncm2/ncm2-github' " auto complete extension
 Plugin 'ncm2/ncm2-syntax' " auto complete extension
 Plugin 'Shougo/neco-syntax' " auto complete extension
 Plugin 'subnut/ncm2-github-emoji' " auto complete extension
-Plugin 'ncm2/ncm2-tmux' " auto complete extension
+"Plugin 'ncm2/ncm2-tmux' " auto complete extension
 Plugin 'ncm2/ncm2-tagprefix' " auto complete extension
 Plugin 'ncm2/ncm2-neoinclude' " auto complete extension
 Plugin 'Shougo/neoinclude.vim' " auto complete extension
@@ -160,8 +122,6 @@ Plugin 'ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']} " auto complete exten
 Plugin 'artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']} " auto complete extension
 
 " utilities
-Plugin 'kyazdani42/nvim-web-devicons' " tree icons
-Plugin 'kyazdani42/nvim-tree.lua' " filetree
 Plugin 'dense-analysis/ale' " linting
 Plugin 'mhinz/vim-startify' " cool start up screen
 Plugin 'Chiel92/vim-autoformat' " auto format
@@ -299,9 +259,6 @@ autocmd BufReadPost *
             \   exe "normal! g`\"" |
             \ endif
 
-" nvim-tree
-autocmd BufEnter * :NvimTreeOpen " open nvim tree on new buffer
-
 " jsonc
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -406,7 +363,9 @@ nnoremap <leader>b :BufferLineCyclePrev<CR>
 " LUA
 
 lua << EOF
+
 require("bufferline").setup{}
+
 EOF
 
 " LUA END

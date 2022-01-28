@@ -61,6 +61,7 @@ alias vim='nvim'
 
 # navigation
 alias dev='cd $HOME/dev'
+alias d='dev'
 
 # application shortcuts
 alias as='run-as'
@@ -104,3 +105,8 @@ export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
 # ignore case in bash
 echo 'set completion-ignore-case On' >> /etc/inputrc
 echo 'set completion-ignore-case On' | sudo tee -a /etc/inputrc
+
+
+# bash autocomplete
+source /etc/profile.d/bash_completion.sh
+
