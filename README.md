@@ -2,7 +2,8 @@
 
 ## Overview
 
-Built and tested on Ubuntu 18.04, Ubuntu 20.04, and Windows 10
+Only intended for Debain-based systems (uses `apt`)\
+Built and tested on Ubuntu 18.04, Ubuntu 20.04, and Windows 10 (not recommended)
 
 *   [bash](https://www.gnu.org/software/bash/)
 *   [Starship](https://starship.rs/)
