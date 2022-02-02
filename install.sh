@@ -40,6 +40,7 @@ declare -a packages=(
     "make"
     "yarn"
     "python3"
+    "net-tools"
     "python3-pip"
     "openjdk-11-jdk"
     "gradle"
@@ -66,7 +67,7 @@ sudo apt update
 declare -a libs=(
     "neovim"
 )
-for lib in ${libs[@]}; do 
+for lib in ${libs[@]}; do
     pip3 install $lib
 done
 
