@@ -66,6 +66,14 @@ sudo apt update
 # Python libraries
 declare -a libs=(
     "neovim"
+    "opencv-python"
+    "matplotlib"
+    "numpy"
+    "pandas"
+    "tensorflow"
+    "torch"
+    "keras"
+    "pillow"
 )
 for lib in ${libs[@]}; do
     pip3 install $lib
