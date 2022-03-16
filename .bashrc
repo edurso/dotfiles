@@ -87,7 +87,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # add java to path
 
 # java paths
-JDK11='/usr/lib/jvm/java-11-openjdk-amd64'
+JAVA11='/usr/lib/jvm/java-11-openjdk-amd64'
 
 # add java to path
 export JAVA_HOME=$JAVA11 # current java version
