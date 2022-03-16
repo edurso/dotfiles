@@ -53,6 +53,7 @@ declare -a packages=(
     "gpg-agent"
     "pinentry-curses"
     "docker.io"
+    "jupyter-core"
 )
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
