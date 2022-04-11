@@ -54,6 +54,7 @@ declare -a packages=(
     "pinentry-curses"
     "docker.io"
     "jupyter-core"
+    "neofetch"
 )
 for package in ${packages[@]}; do
     dpkg -s "$package" >/dev/null 2>&1 && {
