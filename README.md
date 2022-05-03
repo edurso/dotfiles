@@ -3,7 +3,7 @@
 ## Overview
 
 Only intended for Debain-based systems (uses `apt`)\
-Built and tested on Ubuntu 18.04, Ubuntu 20.04, and Windows 10 (not recommended)
+Built and tested on Ubuntu 18.04 and Ubuntu 20.04.
 
 *   [bash](https://www.gnu.org/software/bash/)
 *   [Starship](https://starship.rs/)
@@ -18,14 +18,7 @@ Project also contains `$HOME/bin` with a few handy scripts.
 
 ## Installation
 
-Unix:
-
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/edurso/dotfiles/master/install.sh)
 ```
 
-Windows:
-
-```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/edurso/dotfiles/master/install.ps1" -OutFile ".\install.ps1"; .\install.ps1; rm .\install.ps1
-```
