@@ -76,6 +76,7 @@ declare -a libs=(
     "torch"
     "keras"
     "pillow"
+    "tldr"
 )
 for lib in ${libs[@]}; do
     pip3 install $lib

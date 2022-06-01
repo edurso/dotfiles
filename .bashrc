@@ -69,6 +69,10 @@ alias df='dotfile'
 alias jl='jupyter lab&'
 alias ghu='gh-update'
 
+man() {
+    tldr "$1"
+}
+
 # lazygit
 lg() {
     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir

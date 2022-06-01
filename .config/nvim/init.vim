@@ -10,7 +10,7 @@ let mapleader=","
 " ale
 let g:ale_sign_column_always=1
 let g:ale_sign_error='✘'
-let g:ale_sign_warning=''
+let g:ale_sign_warning='!'
 
 " startify
 let g:startify_padding_left=10
@@ -44,8 +44,8 @@ let g:rainbow_active=1
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-x': 'split',
-            \ 'ctrl-v': 'vsplit' }
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
+            \ 'v': 'vsplit' }
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.5, 'height': 0.5,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 let g:fzf_tags_command = 'ctags -R'
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
@@ -107,7 +107,6 @@ Plugin 'ncm2/ncm2-github' " auto complete extension
 Plugin 'ncm2/ncm2-syntax' " auto complete extension
 Plugin 'Shougo/neco-syntax' " auto complete extension
 Plugin 'subnut/ncm2-github-emoji' " auto complete extension
-"Plugin 'ncm2/ncm2-tmux' " auto complete extension
 Plugin 'ncm2/ncm2-tagprefix' " auto complete extension
 Plugin 'ncm2/ncm2-neoinclude' " auto complete extension
 Plugin 'Shougo/neoinclude.vim' " auto complete extension
@@ -133,6 +132,7 @@ Plugin 'scrooloose/nerdcommenter' " comment shortcuts
 Plugin 'wellle/context.vim' " show context of buffer
 Plugin 'dansomething/vim-hackernews' " why not
 Plugin 'kevinoid/vim-jsonc' " jsonc (json w/ comments) integration
+Plugin 'sheerun/vim-polyglot' " syntax highligthing
 
 " let Vundle know it is done
 call vundle#end()
@@ -306,7 +306,7 @@ nnoremap x "_x
 
 " list colorschemes
 nmap <leader>c :Colors<CR>
-nmap cs <leader>c
+nmap cs :Colors<CR>
 
 " list files
 nmap f :Files<CR>
@@ -317,7 +317,7 @@ nmap gc <leader>gc
 nmap <leader>g gc
 
 " list open buffers
-nmap <leader>b :Buffers<CR>
+nmap <leader>bb :Buffers<CR>
 
 " startify
 nmap <leader>s :Startify<CR>
