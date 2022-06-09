@@ -20,26 +20,9 @@ let g:fzf_tags_command = 'ctags -R'
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
-" statusline/tabline config
-let g:lightline = {
-			\ 'colorscheme': 'one',
-			\ 'active': {
-			\   'left': [ [ 'mode', 'paste' ], [ 'gitbranch' ], [ 'readonly', 'filename', 'modified' ] ]
-			\ },
-			\ 'component_function': {
-			\   'gitbranch': 'FugitiveHead'
-			\ },
-			\ 'tabline': {
-			\   'left': [ ['buffers'] ],
-			\   'right': [ ['close'] ]
-			\ },
-			\ 'component_expand': {
-			\   'buffers': 'lightline#bufferline#buffers'
-			\ },
-			\ 'component_type': {
-			\   'buffers': 'tabsel'
-			\ }
-			\ }
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='sonokai'
 
 " CONFIGURATION VARS END
 
@@ -53,18 +36,18 @@ filetype off
 call plug#begin()
 
 " install plugins
-Plug 'NLKNguyen/papercolor-theme' " colorscheme
+Plug 'sainnhe/sonokai' " colorscheme
 Plug 'airblade/vim-gitgutter' " git status in gutter
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocompletion
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' } " tabnine
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fzf installer
 Plug 'junegunn/fzf.vim' " fzf vim plugin
 Plug 'jiangmiao/auto-pairs' " automatically close all open parenthesis/brackets
-Plug 'itchyny/lightline.vim' " statusline
-Plug 'mengelbrecht/lightline-bufferline' " bufferline integration to lightline
 Plug 'tpope/vim-fugitive' " git tool
+Plug 'vim-airline/vim-airline' " statusline
+Plug 'vim-airline/vim-airline-themes' " statusline themes
 
-" let Vundle know it is done
+" let vim-plug know it is done
 call plug#end()
 
 " indent based on filetype
@@ -77,11 +60,11 @@ filetype plugin on
 " COLORSCHEME
 
 if has('termguicolors')
-	set termguicolors
+    set termguicolors
 endif
 syntax on
 set background=dark
-colorscheme PaperColor
+colorscheme sonokai
 
 " COLORSCHEME END
 
@@ -134,7 +117,7 @@ set completeopt=noinsert,menuone,noselect
 
 " fzf
 command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
 
 " COMMANDS END
 
