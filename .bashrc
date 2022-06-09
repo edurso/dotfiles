@@ -47,7 +47,7 @@ fi
 # alias maps
 
 # edit .bashrc file
-alias ebrc='sudo nvim ~/.bashrc'
+alias ebrc='nvim ~/.bashrc'
 
 # std functions
 alias ll='ls -alF'
@@ -60,9 +60,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias python='python3'
 alias pip='pip3'
 alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-alias v='sudo nvim'
-alias vi='sudo nvim'
-alias vim='sudo nvim'
+alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
 
 # navigation
 alias dev='cd $HOME/dev'

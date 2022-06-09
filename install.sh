@@ -70,6 +70,7 @@ declare -a libs=(
     "neovim"
     "opencv-python"
     "matplotlib"
+    "pynvim"
     "numpy"
     "pandas"
     "tensorflow"
@@ -83,9 +84,9 @@ for lib in ${libs[@]}; do
 done
 
 # Get rid of old profiles if they exist
-if [[ -e "$HOME/.bashrc" ]]; then
-    rm -rf $HOME/.bashrc
-fi
+#if [[ -e "$HOME/.bashrc" ]]; then
+#    rm -rf $HOME/.bashrc
+#fi
 
 # Make directory for git repository if it doesn't exist
 if [[ ! -d "$HOME/dotfiles" ]]; then
@@ -99,13 +100,13 @@ if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME remote add origin git@github.com:edurso/dotfiles.git
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME fetch origin master
     git --git-dir=$HOME/dotfiles/ --work-tree=$HOME reset --hard FETCH_HEAD
+    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME pull origin master
 fi
 
-# Set Up NeoVim (VundleVim plugins, etc.)
-if [[ ! -d "$HOME/.config/nvim/bundle/Vundle.vim" ]]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
-fi
-nvim +PluginInstall +qall
+# Set Up NeoVim (vim-plug plugins, etc.)
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+nvim +PlugInstall +qall
 
 # Install vs code extensions
 declare -a extensions=(
