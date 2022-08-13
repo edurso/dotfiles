@@ -65,7 +65,6 @@ alias vi='nvim'
 alias vim='nvim'
 
 # navigation
-alias dev='cd $HOME/dev'
 alias d='dev'
 
 # application shortcuts
@@ -231,6 +230,12 @@ lg() {
 }
 
 
+# go to dev
+dev() {
+    cd /media/edurso/doc/
+}
+
+
 # add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -253,11 +258,6 @@ fi
 export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
 
 
-# ignore case in bash
-echo 'set completion-ignore-case On' >> /etc/inputrc
-echo 'set completion-ignore-case On' | sudo tee -a /etc/inputrc
-
-
-# bash autocomplete
-source /etc/profile.d/bash_completion.sh
+# disable ntfs color highlights
+LS_COLORS=$LS_COLORS:'ow=1;34:' ; export LS_COLORS
 
