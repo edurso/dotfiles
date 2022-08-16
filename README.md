@@ -1,6 +1,6 @@
 # edurso's dotfiles
 
-Ubuntu 20.04 configuration and tools.
+Ubuntu 18.04, 20.04, and 22.04 configuration and tools.
 
 *Installation:*
 

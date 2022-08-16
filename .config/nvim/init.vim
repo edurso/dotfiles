@@ -22,7 +22,7 @@ let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='sonokai'
+let g:airline_theme='onedark'
 
 " CONFIGURATION VARS END
 
