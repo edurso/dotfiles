@@ -36,7 +36,7 @@ filetype off
 call plug#begin()
 
 " install plugins
-Plug 'sainnhe/sonokai' " colorscheme
+Plug 'joshdick/onedark.vim' " colorscheme
 Plug 'airblade/vim-gitgutter' " git status in gutter
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocompletion
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' } " tabnine
@@ -64,7 +64,7 @@ if has('termguicolors')
 endif
 syntax on
 set background=dark
-colorscheme sonokai
+colorscheme onedark
 
 " COLORSCHEME END
 
