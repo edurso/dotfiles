@@ -182,7 +182,7 @@ done
 # Install/update starship
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
-# Set user shell to zsh (just installed)
+# Verify that bash is the configured shell
 sudo chsh -s /usr/bin/bash $USER
 
 # Change directory
