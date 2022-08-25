@@ -279,3 +279,7 @@ else
 fi
 unset __conda_setup
 
+
+# clear screen of gpg agent output
+clear
+
