@@ -63,6 +63,7 @@ alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
+alias vm='vmware-view'
 
 # navigation
 alias d='dev'
