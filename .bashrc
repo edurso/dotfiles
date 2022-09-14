@@ -90,6 +90,9 @@ alias untar='tar -xvf'
 alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
 
+# mrover utils
+alias source_mrover='source ~/dev/catkin_ws/devel/setup.bash'
+
 # auto ls after cd
 cd ()
 {
@@ -233,7 +236,7 @@ lg() {
 
 # go to dev
 dev() {
-    cd /media/edurso/doc/
+    cd /home/edurso/dev/
 }
 
 
@@ -281,6 +284,12 @@ fi
 unset __conda_setup
 
 
+# ros setup
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+
+
 # clear screen of gpg agent output
 clear
+
+source /opt/ros/noetic/setup.bash
 
