@@ -179,6 +179,10 @@ for ext in ${extensions[@]}; do
 done
 
 
+# Install act
+curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+
+
 # Install/update starship
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 

@@ -73,6 +73,7 @@ alias as='run-as'
 alias df='dotfile'
 alias jl='jupyter lab&'
 alias ghu='gh-update'
+alias firefox='/home/edurso/Documents/firefox-106.0.1/firefox/firefox'
 
 # shortcuts
 alias cd..='cd ..'
@@ -223,6 +224,15 @@ man() {
     tldr "$1"
 }
 
+# open in file explorer
+open() {
+    gio open "$1"
+}
+
+start() {
+    gio open "$1"
+}
+
 # lazygit
 lg() {
     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
@@ -233,7 +243,6 @@ lg() {
     fi
 }
 
-
 # go to dev
 dev() {
     cd /home/edurso/dev/
@@ -242,6 +251,10 @@ dev() {
 
 # add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+
+# add firefox to path
+export PATH="$HOME/Documents/firefox-106.0.1/firefox:$PATH"
 
 
 # add java to path
@@ -268,6 +281,7 @@ LS_COLORS=$LS_COLORS:'ow=1;34:' ; export LS_COLORS
 
 # matlab
 export PATH="/home/edurso/.local/share/applications/MATLAB/R2022a/bin:$PATH"
+export PATH="/home/edurso/Documents/MATLAB/R2022a/bin:$PATH"
 
 
 # anaconda initialize
@@ -285,11 +299,9 @@ unset __conda_setup
 
 
 # ros setup
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source /opt/ros/noetic/setup.bash
 
 
 # clear screen of gpg agent output
 clear
-
-source /opt/ros/noetic/setup.bash
 
