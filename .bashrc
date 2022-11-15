@@ -64,6 +64,7 @@ alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
 alias vm='vmware-view'
+alias logic='sudo $HOME/Documents/Logic-2.4.1-master.AppImage --no-sandbox'
 
 # navigation
 alias d='dev'
@@ -73,7 +74,6 @@ alias as='run-as'
 alias df='dotfile'
 alias jl='jupyter lab&'
 alias ghu='gh-update'
-alias firefox='/home/edurso/Documents/firefox-106.0.1/firefox/firefox'
 
 # shortcuts
 alias cd..='cd ..'
@@ -233,6 +233,11 @@ start() {
     gio open "$1"
 }
 
+# marktext
+mt() {
+    marktext "$1"
+}
+
 # lazygit
 lg() {
     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
@@ -251,10 +256,6 @@ dev() {
 
 # add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-
-# add firefox to path
-export PATH="$HOME/Documents/firefox-106.0.1/firefox:$PATH"
 
 
 # add java to path
