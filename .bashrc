@@ -92,7 +92,7 @@ alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
 
 # mrover utils
-alias source_mrover='source ~/dev/catkin_ws/devel/setup.bash'
+alias rover='source ~/dev/rover/devel/setup.bash'
 
 # auto ls after cd
 cd ()
@@ -306,3 +306,5 @@ source /opt/ros/noetic/setup.bash
 # clear screen of gpg agent output
 clear
 
+source /opt/ros/noetic/setup.bash
+. "$HOME/.cargo/env"
