@@ -64,7 +64,9 @@ alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
 alias vm='vmware-view'
-alias logic='sudo $HOME/Documents/Logic-2.4.1-master.AppImage --no-sandbox'
+alias logic='sudo $HOME/Documents/Logic-2.4.4-master.AppImage --no-sandbox'
+alias obsidian='$HOME/Documents/Obsidian-1.1.9.AppImage'
+alias o='obsidian'
 
 # navigation
 alias d='dev'
@@ -308,3 +310,4 @@ clear
 
 source /opt/ros/noetic/setup.bash
 . "$HOME/.cargo/env"
+source /opt/ros/noetic/setup.bash
