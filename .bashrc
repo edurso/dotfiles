@@ -66,6 +66,7 @@ alias vim='nvim'
 alias vm='vmware-view'
 alias logic='sudo $HOME/Documents/Logic-2.4.4-master.AppImage --no-sandbox &'
 alias obsidian='$HOME/Documents/Obsidian-1.1.9.AppImage'
+alias caen='ssh edurso@login.engin.umich.edu'
 alias o='obsidian'
 
 # navigation
