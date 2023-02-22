@@ -79,9 +79,9 @@ declare -a libs=(
     "pillow"
     "tldr"
 )
-#for lib in ${libs[@]}; do
-#    pip3 install $lib
-#done
+for lib in ${libs[@]}; do
+    pip3 install $lib
+done
 
 # Get rid of old profiles if they exist
 #if [[ -e "$HOME/.bashrc" ]]; then
