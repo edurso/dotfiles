@@ -94,10 +94,6 @@ alias untar='tar -xvf'
 alias unbz2='tar -xvjf'
 alias ungz='tar -xvzf'
 
-# mrover utils
-alias rover_old='source ~/dev/rover/devel/setup.bash'
-alias rover='source ~/catkin_ws/devel/setup.bash'
-
 
 # ROS setup
 ros ()
