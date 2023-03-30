@@ -2,4 +2,5 @@
 .vscode
 .idea
 .catkin_tools/**/*
+.ipynb_checkpoints
 
