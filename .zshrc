@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Zsh Configuration File
 # Author: @edurso
 
@@ -8,7 +15,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="steeef"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -94,8 +101,8 @@ alias ungz='tar -xvzf'
 # ROS setup
 ros ()
 {
-    source /opt/ros/noetic/setup.bash
-    source ./devel/setup.bash
+    source /opt/ros/noetic/setup.zsh
+    source ./devel/setup.zsh
 }
 
 # auto ls after cd
@@ -130,6 +137,7 @@ cpp()
 	count += $NF
 	if (count % 10 == 0) {
 		percent = count / total_size * 100
+
 		printf "%3d%% [", percent
 		for (i=0;i<=percent;i++)
 			printf "="
@@ -254,7 +262,7 @@ export PATH=$PATH:$HOME/bin:$JAVA_HOME/bin # add $JAVA_HOME to $PATH
 
 
 # enable gpg signing
-export GPG_TTY=$(tty)
+export GPG_TTY=$TTY
 if [ ! -f ~/.gnupg/S.gpg-agent ]; then
     eval $( gpg-agent --daemon --options ~/.gnupg/gpg-agent.conf )
 fi
@@ -285,10 +293,14 @@ export PATH="/home/edurso/Documents/MATLAB/R2022a/bin:$PATH"
 
 
 # ros setup
-source /opt/ros/noetic/setup.bash
+source /opt/ros/noetic/setup.zsh
 
 
 # clear screen of gpg agent output
 clear
 
 . "$HOME/.cargo/env"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
