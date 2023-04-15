@@ -84,9 +84,13 @@ for lib in ${libs[@]}; do
 done
 
 # Get rid of old profiles if they exist
-#if [[ -e "$HOME/.bashrc" ]]; then
-#    rm -rf $HOME/.bashrc
-#fi
+if [[ -e "$HOME/.bashrc" ]]; then
+   rm -rf $HOME/.bashrc
+fi
+
+if [[ -e "$HOME/.zshrc" ]]; then
+   rm -rf $HOME/.zshrc
+fi
 
 # Make directory for git repository if it doesn't exist
 if [[ ! -d "$HOME/dotfiles" ]]; then
@@ -108,20 +112,22 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 nvim +PlugInstall +qall
 
-
 # Install act
 curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 
-
-# Install/update starship
-sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+# Zsh and Plugins
+sudo apt install zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 
 # Verify that bash is the configured shell
-sudo chsh -s /usr/bin/bash $USER
+sudo chsh -s /usr/bin/zsh $USER
 
 # Change directory
 cd $HOME
 
 # Restart shell
-bash
+zsh
 
