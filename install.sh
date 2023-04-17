@@ -65,6 +65,8 @@ for package in ${packages[@]}; do
 done
 sudo apt update
 
+sudo apt-get install linux-tools-$(uname -r)
+
 # Python libraries
 declare -a libs=(
     "neovim"
