@@ -76,7 +76,7 @@ if [[ ! -e "$USER_HOME/dotfiles/HEAD" ]]; then
 fi
 
 # Set Up NeoVim (vim-plug plugins, etc.)
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$USER_HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 nvim +PlugInstall +qall
 
@@ -84,8 +84,8 @@ nvim +PlugInstall +qall
 curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 
 # Install SKDMan
-curl -s "https://get.sdkman.io" | bash
-source "$HOME/.sdkman/bin/sdkman-init.sh"
+sudo -u $SUDO_USER curl -s "https://get.sdkman.io" | bash
+sudo -u $SUDO_USER source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Zsh and Plugins
 apt install zsh
