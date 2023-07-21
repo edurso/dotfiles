@@ -296,11 +296,22 @@ unset __conda_setup
 source /opt/ros/noetic/setup.zsh
 
 
+# activate conda environment
+conda activate edurso
+
 # clear screen of gpg agent output
 clear
 
 . "$HOME/.cargo/env"
 
+# CUDA
+export PATH="/usr/local/cuda/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+export CPLUS_INCLUDE_PATH=/usr/local/cuda/include
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
