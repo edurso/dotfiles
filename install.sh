@@ -67,12 +67,12 @@ fi
 
 # If there is no HEAD file in "$HOME/dotfiles" then make git repo
 if [[ ! -e "$USER_HOME/dotfiles/HEAD" ]]; then
-    git init --bare $USER_HOME/dotfiles
-    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME config --local status.showUntrackedFiles no
-    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME remote add origin git@github.com:edurso/dotfiles.git
-    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME fetch origin master
-    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME reset --hard FETCH_HEAD
-    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME pull origin master
+    sudo -u $SUDO_USER git init --bare $USER_HOME/dotfiles
+    sudo -u $SUDO_USER git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME config --local status.showUntrackedFiles no
+    sudo -u $SUDO_USER git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME remote add origin git@github.com:edurso/dotfiles.git
+    sudo -u $SUDO_USER git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME fetch origin master
+    sudo -u $SUDO_USER git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME reset --hard FETCH_HEAD
+    sudo -u $SUDO_USER git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME pull origin master
 fi
 
 # Set Up NeoVim (vim-plug plugins, etc.)
@@ -90,9 +90,9 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 # Zsh and Plugins
 apt install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
-git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+sudo -u $SUDO_USER git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
+sudo -u $SUDO_USER git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+sudo -u $SUDO_USER git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 
 # Verify that bash is the configured shell
 chsh -s /usr/bin/zsh $SUDO_USER
