@@ -7,6 +7,8 @@ if [[ $(id -u) -ne 0 ]]; then
     exit 1
 fi
 
+USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
+
 get_miniconda_url() {
     if [[ "$MINICONDA_VERSION" == "latest" ]]; then
         echo "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
@@ -40,7 +42,7 @@ snap install --classic obsidian pycharm-professional intellij-idea-ultimate clio
 
 echo "Installing miniconda3..."
 MINICONDA_VERSION="latest"
-INSTALL_DIR="$HOME/miniconda3"
+INSTALL_DIR="$USER_HOME/miniconda3"
 MINICONDA_URL=$(get_miniconda_url)
 curl -o ~/miniconda_installer.sh -L $MINICONDA_URL
 bash ~/miniconda_installer.sh -b -p $INSTALL_DIR
@@ -55,27 +57,27 @@ echo "Installing Oh My Zsh..."
 sudo -u "$user" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Get rid of old profiles if they exist
-if [[ -e "$HOME/.bashrc" ]]; then
-   rm -rf $HOME/.bashrc
+if [[ -e "$USER_HOME/.bashrc" ]]; then
+   rm -rf $USER_HOME/.bashrc
 fi
 
-if [[ -e "$HOME/.zshrc" ]]; then
-   rm -rf $HOME/.zshrc
+if [[ -e "$USER_HOME/.zshrc" ]]; then
+   rm -rf $USER_HOME/.zshrc
 fi
 
 # Make directory for git repository if it doesn't exist
-if [[ ! -d "$HOME/dotfiles" ]]; then
-    mkdir -p $HOME/dotfiles
+if [[ ! -d "$USER_HOME/dotfiles" ]]; then
+    mkdir -p $USER_HOME/dotfiles
 fi
 
 # If there is no HEAD file in "$HOME/dotfiles" then make git repo
-if [[ ! -e "$HOME/dotfiles/HEAD" ]]; then
-    git init --bare $HOME/dotfiles
-    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME remote add origin git@github.com:edurso/dotfiles.git
-    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME fetch origin master
-    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME reset --hard FETCH_HEAD
-    git --git-dir=$HOME/dotfiles/ --work-tree=$HOME pull origin master
+if [[ ! -e "$USER_HOME/dotfiles/HEAD" ]]; then
+    git init --bare $USER_HOME/dotfiles
+    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME config --local status.showUntrackedFiles no
+    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME remote add origin git@github.com:edurso/dotfiles.git
+    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME fetch origin master
+    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME reset --hard FETCH_HEAD
+    git --git-dir=$USER_HOME/dotfiles/ --work-tree=$USER_HOME pull origin master
 fi
 
 # Set Up NeoVim (vim-plug plugins, etc.)
@@ -87,17 +89,17 @@ nvim +PlugInstall +qall
 curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 
 # Zsh and Plugins
-sudo apt install zsh
+apt install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 
 # Verify that bash is the configured shell
-sudo chsh -s /usr/bin/zsh $USER
+chsh -s /usr/bin/zsh $SUDO_USER
 
 # Change directory
-cd $HOME
+cd $USER_HOME
 
 # Restart shell
 zsh
