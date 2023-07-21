@@ -38,7 +38,10 @@ apt update
 apt install -y gnome-shell gnome-control-center gnome-terminal gnome-tweaks code git ripgrep neovim lazygit gh nodejs ruby-full gcc g++ make yarn python3 net-tools python3-pip openjdk-11-jdk gradle tree cmake gnupg2 ca-certificates build-essential gpg gpg-agent pinentry-curses docker.io jupyter-core neofetch linux-tools-$(uname -r)
 
 echo "Installing snaps"
-snap install --classic obsidian pycharm-professional intellij-idea-ultimate clion
+snap install --classic obsidian
+snap install --classic clion
+snap install --classic pycharm-professional
+snap install --classic intellij-idea-ultimate
 
 echo "Installing miniconda3..."
 MINICONDA_VERSION="latest"
