@@ -51,14 +51,6 @@ curl -o ~/miniconda_installer.sh -L $MINICONDA_URL
 bash ~/miniconda_installer.sh -b -p $INSTALL_DIR
 rm ~/miniconda_installer.sh
 
-echo "Setting Zsh as the default shell..."
-user=$(logname)
-chsh -s $(which zsh) "$user"
-
-# Install Oh My Zsh (optional but highly recommended)
-echo "Installing Oh My Zsh..."
-sudo -u "$user" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 # Get rid of old profiles if they exist
 if [[ -e "$USER_HOME/.bashrc" ]]; then
    rm -rf $USER_HOME/.bashrc
@@ -90,6 +82,10 @@ nvim +PlugInstall +qall
 
 # Install act
 curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+
+# Install SKDMan
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Zsh and Plugins
 apt install zsh
