@@ -88,7 +88,7 @@ sudo -u $SUDO_USER curl -s "https://get.sdkman.io" | bash
 sudo -u $SUDO_USER source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Zsh and Plugins
-apt install zsh
+apt install zsh -y
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 sudo -u $SUDO_USER git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
 sudo -u $SUDO_USER git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
