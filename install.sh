@@ -37,11 +37,13 @@ sudo snap install --classic clion
 sudo snap install --classic pycharm-professional
 sudo snap install --classic intellij-idea-ultimate
 
-echo "Installing conda..."
-ANACONDA_INSTALLER="Anaconda3-latest-Linux-x86_64.sh"
-wget https://repo.anaconda.com/archive/$ANACONDA_INSTALLER -O /tmp/$ANACONDA_INSTALLER
-bash /tmp/$ANACONDA_INSTALLER -b -p $USER_HOME/anaconda3
-rm /tmp/$ANACONDA_INSTALLER
+echo "Installing miniconda3..."
+MINICONDA_VERSION="latest"
+INSTALL_DIR="$USER_HOME/miniconda3"
+MINICONDA_URL=$(get_miniconda_url)
+curl -o ~/miniconda_installer.sh -L $MINICONDA_URL
+bash ~/miniconda_installer.sh -b -p $INSTALL_DIR
+rm ~/miniconda_installer.sh
 
 # Get rid of old profiles if they exist
 if [[ -e "$USER_HOME/.bashrc" ]]; then
@@ -68,9 +70,7 @@ if [[ ! -e "$USER_HOME/dotfiles/HEAD" ]]; then
 fi
 
 # Setup Python env
-echo "Creating and activating the environment..."
-conda env create -f env.yml
-conda activate edurso
+python3 -m pip install pynvim
 
 # Set Up NeoVim (vim-plug plugins, etc.)
 sudo sh -c 'curl -fLo "${XDG_DATA_HOME:-$USER_HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
