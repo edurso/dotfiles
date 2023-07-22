@@ -279,14 +279,15 @@ export PATH="/home/edurso/Documents/MATLAB/R2022a/bin:$PATH"
 
 
 # anaconda initialize
-__conda_setup="$('/home/edurso/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+conda_loc="/home/edurso/anaconda3"
+__conda_setup="$('$conda_loc/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/edurso/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/edurso/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "$conda_loc/etc/profile.d/conda.sh" ]; then
+        . "$conda_loc/etc/profile.d/conda.sh"
     else
-        export PATH="/home/edurso/anaconda3/bin:$PATH"
+        export PATH="$conda_loc/bin:$PATH"
     fi
 fi
 unset __conda_setup
