@@ -2,7 +2,7 @@
 
 # Author: @edurso
 
-USER_HOME=$HOME  # $(getent passwd $SUDO_USER | cut -d: -f6)
+USER_HOME=$HOME
 
 get_miniconda_url() {
     if [[ "$MINICONDA_VERSION" == "latest" ]]; then
@@ -85,6 +85,7 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Zsh and Plugins
 sudo apt install zsh -y
+ZSH_CUSTOM=$USER_HOME/.oh-my-zsh/custom
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
