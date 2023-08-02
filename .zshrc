@@ -278,6 +278,10 @@ export PATH="/home/edurso/.local/share/applications/MATLAB/R2022a/bin:$PATH"
 export PATH="/home/edurso/Documents/MATLAB/R2022a/bin:$PATH"
 
 
+# thunderbird
+export PATH="/home/edurso/Documents/thunderbird:$PATH"
+
+
 # anaconda initialize
 conda_loc="/home/edurso/anaconda3"
 __conda_setup="$('$conda_loc/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
