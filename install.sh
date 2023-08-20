@@ -99,3 +99,4 @@ cd $USER_HOME
 
 # Restart shell
 zsh
+
