@@ -71,6 +71,8 @@ alias vim='nvim'
 alias vm='vmware-view'
 alias logic='sudo $HOME/Documents/Logic-2.4.4-master.AppImage --no-sandbox'
 alias obsidian='$HOME/Documents/Obsidian-1.1.9.AppImage'
+alias modelsim='$HOME/intelFPGA/20.1/modelsim_ase/bin/vsim'
+alias quartus='$HOME/intelFPGA_lite/22.1std/quartus/bin/quartus'
 alias caen='ssh edurso@login.engin.umich.edu'
 alias o='obsidian'
 
@@ -323,3 +325,5 @@ export CPLUS_INCLUDE_PATH=/usr/local/cuda/include
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+
+export QSYS_ROOTDIR="/home/edurso/intelFPGA_lite/22.1std/quartus/sopc_builder/bin"
