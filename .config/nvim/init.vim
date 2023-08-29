@@ -63,8 +63,12 @@ if has('termguicolors')
     set termguicolors
 endif
 syntax on
-set background=dark
 colorscheme onedark
+set background=dark
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight Normal guibg=none
+highlight NonText guibg=none
 
 " COLORSCHEME END
 

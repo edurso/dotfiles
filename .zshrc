@@ -73,6 +73,7 @@ alias logic='sudo $HOME/Documents/Logic-2.4.4-master.AppImage --no-sandbox'
 alias obsidian='$HOME/Documents/Obsidian-1.1.9.AppImage'
 alias modelsim='$HOME/intelFPGA/20.1/modelsim_ase/bin/vsim'
 alias quartus='$HOME/intelFPGA_lite/22.1std/quartus/bin/quartus'
+alias ltspice='wine $HOME/.wine/drive_c/Program\ Files/LTC/LTspiceXVII/XVIIx64.exe'
 alias caen='ssh edurso@login.engin.umich.edu'
 alias o='obsidian'
 
@@ -317,6 +318,9 @@ clear
 export PATH="/usr/local/cuda/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 export CPLUS_INCLUDE_PATH=/usr/local/cuda/include
+
+# MATLAB
+export PATH="$HOME/matlab/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
