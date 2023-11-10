@@ -3,4 +3,5 @@
 .idea
 .catkin_tools/**/*
 .ipynb_checkpoints
+**/CMakeLists.txt
 

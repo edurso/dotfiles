@@ -329,5 +329,8 @@ export PATH="$HOME/matlab/bin:$PATH"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+export PATH="/opt/st/stm32cubeide_1.13.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.linux64_1.1.0.202305231506/tools/bin:$PATH"
+
 
 export QSYS_ROOTDIR="/home/edurso/intelFPGA_lite/22.1std/quartus/sopc_builder/bin"
+
