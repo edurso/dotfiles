@@ -38,7 +38,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting virtualenvwrapper fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -334,3 +334,16 @@ export PATH="/opt/st/stm32cubeide_1.13.1/plugins/com.st.stm32cube.ide.mcu.extern
 
 export QSYS_ROOTDIR="/home/edurso/intelFPGA_lite/22.1std/quartus/sopc_builder/bin"
 
+readonly CATKIN_WORKSPACE_PATH=~/dev/rover
+source /opt/ros/noetic/setup.zsh
+readonly CATKIN_SETUP_PATH=${CATKIN_WORKSPACE_PATH}/devel/setup.zsh
+if [ -f ${CATKIN_SETUP_PATH} ]; then
+    source ${CATKIN_SETUP_PATH}
+fi
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
