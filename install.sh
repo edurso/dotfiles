@@ -165,7 +165,6 @@ fi
 
 # run ansible playbook
 echo -e "${BLUE}install parameters: ${ansible_params}${NC}"
-exit
 ansible-playbook -i "localhost," -c local "$REPO_DIR/ansible/env.yml" -e "$ansible_params"
 
 # change ownership of installed directories if ran as sudo
