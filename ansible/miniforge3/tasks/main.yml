@@ -1,0 +1,37 @@
+- name: Download Miniforge installer
+  get_url:
+    url: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh"
+    dest: "/tmp/Miniforge3-Linux-x86_64.sh"
+
+- name: Run Miniforge installer
+  shell: "/bin/bash /tmp/Miniforge3-Linux-x86_64.sh -b -p $HOME/miniforge3"
+  args:
+    creates: "{{ ansible_env.HOME }}/miniforge3/bin/conda"
+
+- name: Clean up temporary files
+  file:
+    path: /tmp/Miniforge3-Linux-x86_64.sh
+    state: absent
+  ignore_errors: true
+
+- name: Set shell configuration file based on user's shell
+  set_fact:
+    shell_config_file: "{{ ansible_env.HOME }}/.bashrc"
+  when: ansible_env.SHELL.endswith('bash')
+
+- name: Set shell configuration file to .zshrc if using zsh
+  set_fact:
+    shell_config_file: "{{ ansible_env.HOME }}/.zshrc"
+  when: ansible_env.SHELL.endswith('zsh')
+
+- name: Add Miniforge3 to PATH
+  lineinfile:
+    path: "{{ shell_config_file }}"
+    line: 'export PATH="$HOME/miniforge3/bin:$PATH"'
+    insertafter: EOF
+  when: shell_config_file is defined
+
+- name: Update conda
+  command: "$HOME/miniforge3/bin/conda update -n base -c defaults conda"
+  environment:
+    PATH: "$HOME/miniforge3/bin:$PATH"

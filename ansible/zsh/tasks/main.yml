@@ -1,0 +1,42 @@
+- name: upgrade apt packages
+  become: true
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    upgrade: yes
+
+- name: install apt packages for zsh
+  become: true
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    name:
+      - zsh
+      - fzf
+
+- name: install oh-my-zsh
+  git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: ~/.oh-my-zsh
+    version: master
+
+- name: clone powerlevel10k repository
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
+
+- name: clone zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: clone zsh-syntax-highlighting
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+- name: zsh dotfiles
+  synchronize:
+    src: files/
+    dest: ~/
+    recursive: true

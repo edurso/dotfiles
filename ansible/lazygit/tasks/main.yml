@@ -1,0 +1,53 @@
+- name: download lazygit latest release tarball
+  shell: |
+    curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest \
+    | grep "browser_download_url.*Linux_x86_64.tar.gz" \
+    | cut -d : -f 2,3 \
+    | tr -d \" \
+    | wget -qi - -O /tmp/lazygit.tar.gz
+
+- name: extract lazygit tarball
+  unarchive:
+    src: /tmp/lazygit.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: find lazygit binary
+  find:
+    paths: /tmp
+    patterns: "lazygit"
+    recurse: yes
+  register: lazygit_binary
+
+- name: move lazygit binary to /usr/local/bin
+  copy:
+    src: "{{ lazygit_binary.files[0].path }}"
+    dest: /usr/local/bin/lazygit
+    mode: '0755'
+
+- name: clean up temporary files
+  file:
+    path: /tmp/lazygit.tar.gz
+    state: absent
+  ignore_errors: true
+
+- name: clean up temporary files
+  file:
+    path: /tmp/lazygit
+    state: absent
+  ignore_errors: true
+
+- name: verify lazygit installation
+  command: lazygit --version
+  register: lazygit_version
+
+- name: display lazygit version
+  debug:
+    msg: "lazygit version installed: {{ lazygit_version.stdout }}"
+  when: verbose
+
+- name: install lazygit config files
+  synchronize:
+    src: files/
+    dest: ~/
+    recursive: true

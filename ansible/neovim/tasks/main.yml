@@ -1,0 +1,39 @@
+- name: upgrade apt packages
+  become: true
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    upgrade: yes
+
+- name: install apt packages for neovim
+  become: true
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    name:
+      - neovim
+      - ripgrep
+
+- name: create necessary directories for vim-plug
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - ~/.local
+    - ~/.local/share
+    - ~/.local/share/nvim
+    - ~/.local/share/nvim/site
+    - ~/.local/share/nvim/site/autoload
+
+- name: install vim-plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: ~/.local/share/nvim/site/autoload/plug.vim
+    mode: '0644'
+
+- name: install neovim configuration
+  synchronize:
+    src: files/
+    dest: ~/
+    recursive: true

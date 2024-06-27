@@ -1,0 +1,14 @@
+- name: get install script
+  synchronize:
+    src: files/
+    dest: ~/
+    recursive: true
+
+- name: install jetbrains toolbox
+  command: "bash $HOME/jetbrains-install.sh"
+
+- name: clean up temporary files
+  file:
+    path: "$HOME/jetbrains-install.sh"
+    state: absent
+  ignore_errors: true
