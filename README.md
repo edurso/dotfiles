@@ -2,9 +2,15 @@
 
 @edurso's dotfiles
 
+> **IMPORTANT:** These are still buggy and thus under very active development.
+
 ## Installation
 
-in progress
+1. Install `git`
+2. Clone the repository into the home directory
+3. Configure git (`./git.py` helps with this)
+4. Run `sudo ./install.sh`
+5. Reboot when prompted
 
 ## Organization
 

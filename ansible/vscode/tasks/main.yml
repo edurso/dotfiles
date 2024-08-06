@@ -1,0 +1,36 @@
+- name: update package index
+  apt:
+    update_cache: yes
+
+- name: install dependencies
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+
+- name: add ms gpg key
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+
+- name: add vs code repo
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    state: present
+
+- name: update package index
+  apt:
+    update_cache: yes
+
+- name: install vs code
+  apt:
+    name: code
+    state: present
+
+- name: verify vs code version
+  apt:
+    name: code
+    state: latest

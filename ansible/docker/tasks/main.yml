@@ -1,0 +1,44 @@
+- name: install required system packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: latest
+    update_cache: true
+
+- name: add docker gpg key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: add docker repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu {{ ubuntu_release }} stable
+    state: present
+
+- name: update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
+
+- name: install docker packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - podman
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin
+
+- name: add user to the docker group
+  user:
+    name: "$USER"
+    groups: docker
+    append: yes

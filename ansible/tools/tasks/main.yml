@@ -1,0 +1,48 @@
+- name: add signal gpg key
+  apt_key:
+    url: https://updates.signal.org/desktop/apt/keys.asc
+    state: present
+
+- name: add vs code repo
+  apt_repository:
+    repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+    state: present
+
+- name: update package index
+  apt:
+    update_cache: yes
+
+- name: install tools
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    name:
+      - gnucash
+      - encfs
+      - mysql-workbench
+      - signal-desktop
+
+- name: check if snap is installed
+  apt:
+    name: snapd
+    state: present
+  register: snapd_installed
+  ignore_errors: yes
+
+- name: check snapd is running
+  service:
+    name: snapd
+    state: started
+    enabled: yes
+  when: snapd_installed is succeeded
+
+- name: install snaps
+  when: snapd_installed is succeeded
+  snap:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - slack
+    - discord
+    - nordpass
+    - localsend

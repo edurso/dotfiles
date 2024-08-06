@@ -1,0 +1,42 @@
+[core]
+    pager = delta
+    excludesfile = ~/.gitignore
+    compression = 0
+	autocrlf = input
+	ignorecase = false
+[color]
+    ui = true
+[color "branch"]
+    current = yellow reverse
+    local = yello
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = red
+[url "git@github.com:"]
+    insteadOf = gh:
+[url "git@github.com:edurso/"]
+    insteadOf = edurso/
+[init]
+    defaultBranch = master
+[web]
+    browser = firefox
+[pull]
+    ff = only
+[push]
+    default = current
+[merge]
+    conflictstyle = zdiff3
+[diff]
+    algorithm = histogram
+    submodule = log
+[status]
+    submoduleSummary = true
+[submodule]
+    recurse = true

@@ -1,0 +1,26 @@
+- name: check if sdkman is present
+  shell: command -v sdk
+  register: sdk_installed
+  ignore_errors: yes
+
+- name: download installer
+  when: sdk_installed is failed
+  get_url:
+    url: https://get.sdkman.io
+    dest: /tmp/sdkman.sh
+    mode: '0755'
+    force: 'yes'
+
+- name: install sdkman
+  when: sdk_installed is failed
+  shell: /tmp/sdkman.sh 
+
+- name: setup sdkman
+  when: sdk_installed is failed
+  command: "source $HOME/.sdkman/bin/sdkman-init.sh"
+
+- name: install java
+  command: "sdk install java 17.0.12-oracle"
+
+- name: install gradle
+  command: "sdk install gradle"

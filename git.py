@@ -8,6 +8,7 @@ Git Configuration Aid
 import os
 import subprocess
 import sys
+from configparser import ConfigParser
 from getpass import getpass
 from pathlib import Path
 from subprocess import CompletedProcess
@@ -111,6 +112,28 @@ def get_basic_config() -> GitConfig:
             "tool": diff_tool,
         },
     }
+
+
+def get_base_config(config: GitConfig) -> GitConfig:
+    """
+    Combine config with the base .gitconfig file if it exists
+    :param config: Git configuration
+    :return: Combined git configuration
+    """
+    gitconfig_path = Path(Path(__file__).parent, '.base_gitconfig')
+    if not gitconfig_path.exists() or not yes_no('do you wish to use the base configuration provided?'):
+        return config
+
+    base_config = ConfigParser()
+    base_config.read(gitconfig_path)
+
+    for section in base_config.sections():
+        if section not in config:
+            config[section] = {}
+        for key, value in base_config.items(section):
+            config[section][key] = value
+
+    return config
 
 
 def get_ssh_key(config: GitConfig) -> GitConfig:
@@ -325,13 +348,14 @@ def write_config(config: GitConfig) -> None:
     :param config: Valid git configuration to be written
     :return: None
     """
+    gitconfig = ConfigParser()
     gitconfig_path = Path(Path.home(), '.gitconfig')
 
-    with open(gitconfig_path, 'w') as f:
-        for key, value in config.items():
-            f.write(f'[{key}]\n')
-            for k, v in value.items():
-                f.write(f'\t{k} = {v}\n')
+    for section, values in config.items():
+        gitconfig[section] = values
+
+    with open(gitconfig_path, 'w') as handle:
+        gitconfig.write(handle)
 
 
 def main() -> None:
@@ -341,6 +365,7 @@ def main() -> None:
     """
     check_git_installed()
     config = get_basic_config()
+    config = get_base_config(config)
     config = get_ssh_key(config)
     config = get_gpg_key(config)
     write_config(config)

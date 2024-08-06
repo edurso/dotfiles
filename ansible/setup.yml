@@ -1,0 +1,49 @@
+---
+- hosts: all
+  vars:
+    verbose: false
+    ubuntu_release: noble
+    wsl: false
+    is_sudo: true
+    shell: true
+    toolchain: true
+    desktop: true
+  roles:
+
+    - role: core
+      when:
+        - is_sudo
+
+    - name: command line developer extensions
+      include_role:
+        name: "{{ item }}"
+      when:
+        - is_sudo
+        - shell
+      loop:
+        - zsh
+        - neovim
+        - lazygit
+
+    - name: devel toolchains
+      include_role:
+        name: "{{ item }}"
+      when: toolchain
+      loop:
+        - cpp
+        - rust
+        - python
+        - docker
+        - java
+
+    - name: desktop apps & environments
+      include_role:
+        name: "{{ item }}"
+      when:
+        - is_sudo
+        - desktop
+      loop:
+        - tools
+        - jetbrains
+        - vscode
+        - firefox

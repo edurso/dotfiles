@@ -16,8 +16,12 @@ function display_help {
     echo -e "${BLUE}Usage: [sudo] $0 [options]${NC}"
     echo -e
     echo -e "Options:"
-    echo -e "  -v, --verbose   flag for verbose output"
-    echo -e "  -h, --help      display this help message"
+    echo -e "  -v, --verbose      verbose output"
+    echo -e "  -b, --bare         bare installation"
+    echo -e "  -s, --shell        ignore shell configurations"
+    echo -e "  -t, --toolchain    ignore toolchain configurations"
+    echo -e "  -d, --desktop      ignore desktop configurations"
+    echo -e "  -h, --help         display this help message"
     echo -e
     exit 1
 }
@@ -38,18 +42,39 @@ function select_continue {
 # parse command line args
 declare -A vars
 vars[verbose]=false
+vars[shell]=true
+vars[toolchain]=true
+vars[desktop]=true
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         -v|--verbose)
 			echo -e "${BLUE}configuring verbose roles${NC}"
             vars[verbose]=true
             ;;
+        -b|--bare)
+			echo -e "${YELLOW}running bare installation${NC}"
+            vars[shell]=false
+			vars[toolchain]=false
+			vars[desktop]=false
+            break
+            ;;
         -h|--help)
             display_help
             ;;
+        -s|--shell)
+			echo -e "${BLUE}running without shell configurations${NC}"
+            vars[shell]=false
+            ;;
+        -t|--toolchain)
+			echo -e "${BLUE}running without toolchain configurations${NC}"
+            vars[toolchain]=false
+            ;;
+        -d|--desktop)
+			echo -e "${BLUE}running without desktop configurations${NC}"
+            vars[desktop]=false
+            ;;
         *)
             echo -e "${RED}unknown option: $1${NC}"
-            display_help
             ;;
     esac
     shift
@@ -174,8 +199,8 @@ for key in "${!vars[@]}"; do
 done
 
 # run ansible playbook
-#echo -e "${BLUE}install parameters: ${ansible_params}${NC}"
-#ansible-playbook -i "localhost," -c local "$REPO_DIR/ansible/env.yml" -e "$ansible_params"
+echo -e "${BLUE}install parameters: ${ansible_params}${NC}"
+ansible-playbook -i "localhost," -c local "$REPO_DIR/ansible/setup.yml" -e "$ansible_params"
 
 # change ownership of installed directories if ran as sudo
 if [ "${vars[is_sudo]}" = true ]; then
@@ -191,5 +216,21 @@ if [ "${vars[shell]}" = true ]; then
 	chsh --shell "$(which zsh)" "$USER"
 fi
 
-echo -e "${GREEN}installation finished successfully${NC}"
-exit 0
+# prompt reboot
+echo -e "${GREEN}configuration finished successfully${NC}"
+echo -e "${GREEN}please reboot now to complete installation${NC}"
+while true; do
+	echo -e "${BLUE}reboot now? (y/n): ${NC}"
+    read -p "" choice
+    choice=$(echo "$choice" | tr '[:upper:]' '[:lower:]')
+    if [[ "$choice" == "y" ]]; then
+        echo -e "${GREEN}rebooting now...${NC}"
+        reboot
+        break
+    elif [[ "$choice" == "n" ]]; then
+        echo -e "${YELLOW}reboot canceled, please reboot soon${NC}"
+        break
+    else
+        echo -e "${RED}invalid input${NC}"
+    fi
+done
