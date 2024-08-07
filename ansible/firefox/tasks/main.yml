@@ -1,0 +1,51 @@
+- name: ensure the keyrings directory exists
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: install wget if it's not already installed
+  apt:
+    name: wget
+    state: present
+
+- name: get mozilla apt key
+  command: wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+
+- name: verify mozilla apt key
+  command: >
+    gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc |
+    awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nThe key fingerprint matches ("$0").\n"; else print "\nVerification failed: the fingerprint ("$0") does not match the expected one.\n"}'
+  register: gpg_check
+  failed_when: "'The key fingerprint matches' not in gpg_check.stdout"
+
+- name: add mozilla apt repository
+  apt_repository:
+    repo: deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main
+    filename: mozilla
+    state: present
+
+- name: set mozilla repo priority
+  copy:
+    dest: /etc/apt/preferences.d/mozilla
+    content: |
+      Package: *
+      Pin: origin packages.mozilla.org
+      Pin-Priority: 1000
+    mode: '0644'
+
+- name: update package index
+  apt:
+    update_cache: yes
+
+- name: install firefox
+  apt:
+    name: firefox
+    state: present
+
+- name: set firefox as the primary browser
+  alternatives:
+    name: x-www-browser
+    link: /usr/bin/firefox
+    path: /usr/bin/firefox
+    priority: 100

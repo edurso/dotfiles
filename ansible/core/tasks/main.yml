@@ -5,25 +5,21 @@
     state: latest
     upgrade: yes
 
-- name: install apt packages for basic development
+- name: install apt packages for core development
   become: true
   apt:
     cache_valid_time: 604800
     state: latest
     name:
-      - build-essential
       - sudo
-      - cmake
-      - ccache
-      - ninja-build
-      - clang
-      - clangd
-      - clang-tidy
-      - clang-format
-      - lld
-      - lldb
-      - gcc
-      - g++
+      - stow
+      - build-essential
+      - make
+      - grep
+      - file
+      - pkg-config
+      - libssl-dev
+      - libudev-dev
       - tmux
       - htop
       - nvtop
@@ -33,18 +29,14 @@
       - unzip
       - rsync
       - ripgrep
-      - net-tools 
+      - net-tools
       - tree
-      - gnupg2
-      - ca-certificates
       - gpg
       - gpg-agent
       - pinentry-curses
+      - gnupg2
+      - ca-certificates
       - neofetch
-      - file
-      - pkg-config
-      - libssl-dev
-      - libudev-dev
 
 - name: install linux-tools-{{ ansible_kernel }}
   become: true
@@ -53,8 +45,7 @@
     state: present
   when: not wsl
 
-- name: install configuration files
-  synchronize:
-    src: files/
-    dest: ~/
-    recursive: true
+- name: stow core dotfiles
+  command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
+  loop:
+    - tmux

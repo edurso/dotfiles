@@ -6,104 +6,141 @@ set -o pipefail
 
 # display constant
 readonly RED='\033[1;31m'
-readonly BLUE='\033[1;34m'
+readonly GREEN='\033[1;32m'
 readonly YELLOW='\033[1;33m'
+readonly BLUE='\033[1;34m'
 readonly NC='\033[0m'
 
 # help function
 function display_help {
-    echo "Usage: [sudo] $0 [options]"
-    echo
-    echo "Options:"
-    echo "  -v, --verbose   flag for verbose ansible output"
-    echo "  -d, --desktop   configure for desktop environments"
-    echo "  -s, --shell     install shell script customizations"
-    echo "  -h, --help      display this help message"
-    echo
+    echo -e "${BLUE}Usage: [sudo] $0 [options]${NC}"
+    echo -e
+    echo -e "Options:"
+    echo -e "  -v, --verbose      verbose output"
+    echo -e "  -b, --bare         bare installation"
+    echo -e "  -s, --shell        ignore shell configurations"
+    echo -e "  -t, --toolchain    ignore toolchain configurations"
+    echo -e "  -d, --desktop      ignore desktop configurations"
+    echo -e "  -h, --help         display this help message"
+    echo -e
     exit 1
+}
+
+# function to allow the user to select to continue execution
+function select_continue {
+	while true; do
+		echo -e "${YELLOW}do you wish to continue? (y/n) ${NC}"
+		read -p "" yn
+		case $yn in
+			[Yy]* ) break;;
+			[Nn]* ) exit;;
+			* ) echo -e "${RED}answer yes (y) or no (n)${NC}";;
+		esac
+	done
 }
 
 # parse command line args
 declare -A vars
-vars[desktop]=false
-vars[shell]=false
 vars[verbose]=false
+vars[shell]=true
+vars[toolchain]=true
+vars[desktop]=true
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         -v|--verbose)
 			echo -e "${BLUE}configuring verbose roles${NC}"
             vars[verbose]=true
             ;;
-        -d|--desktop)
-			echo -e "${BLUE}configuring desktop roles${NC}"
-            vars[desktop]=true
-            ;;
-        -s|--shell)
-			echo -e "${BLUE}configuring shell roles${NC}"
-            vars[shell]=true
+        -b|--bare)
+			echo -e "${YELLOW}running bare installation${NC}"
+            vars[shell]=false
+			vars[toolchain]=false
+			vars[desktop]=false
+            break
             ;;
         -h|--help)
             display_help
             ;;
+        -s|--shell)
+			echo -e "${BLUE}running without shell configurations${NC}"
+            vars[shell]=false
+            ;;
+        -t|--toolchain)
+			echo -e "${BLUE}running without toolchain configurations${NC}"
+            vars[toolchain]=false
+            ;;
+        -d|--desktop)
+			echo -e "${BLUE}running without desktop configurations${NC}"
+            vars[desktop]=false
+            ;;
         *)
             echo -e "${RED}unknown option: $1${NC}"
-            display_help
             ;;
     esac
     shift
 done
 
-# distro info
-if ! grep -qi "ubuntu" /etc/os-release; then
-	echo -e "${RED}this script is designed for ubuntu systems only${NC}"
-	exit 1
-fi
-vars[ubuntu_release]=$(grep VERSION_CODENAME /etc/os-release | cut -d'=' -f2)
-echo -e "${BLUE}configuring environment for ubuntu ${vars[ubuntu_release]}${NC}"
-
-# check wsl
-vars[wsl]=false
-if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null; then
-	vars[wsl]=true
-fi
-
 # check sudo
-echo -e "${BLUE}checking sudo ...${NC}"
 vars[is_sudo]=true
 if [ "$(id -u)" -ne 0 ]; then
 	vars[is_sudo]=false
 	HOME=$(getent passwd "$USER" | cut -d: -f6)
 	GRP=$(basename "$HOME")
-	USER="$USER"
     echo -e "${YELLOW}sudo was not used, though recommended${NC}"
+	select_continue
 else
 	vars[is_sudo]=true
 	HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+	# shellcheck disable=SC2034
 	GRP=$(basename "$HOME")
 	USER="$SUDO_USER"
-    echo -e "${BLUE}environment will be configured as admin${NC}"
 fi
 
-# force ssh keys
-if [ "$production" = false ]; then
-	echo -e "${BLUE}ensuring SSH keys are set up ...${NC}"
-	if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
-		echo -e "${RED}configure SSH keys for GitHub: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent${NC}"
-		exit 1
-	fi
+# check ssh keys
+if [ -f "$HOME/.ssh/id_ed25519" ] || [ -f "$HOME/.ssh/github" ]; then
+	echo -e "${GREEN}ssh keys properly configured${NC}"
+else
+	echo -e "${RED}ssh keys are not configured, cannot verify dotfiles${NC}"
+	echo -e "${RED}to fix, run \`python3 git.py\` and follow prompts before attempting reinstall${NC}"
+	exit 1
 fi
+
+# check distro and platform
+echo -e "${BLUE}checking system configuration ...${NC}"
+if ! grep -qi "ubuntu" /etc/os-release; then
+	echo -e "${RED}this script is designed for ubuntu systems only${NC}"
+	exit 1
+fi
+vars[ubuntu_release]=$(grep VERSION_CODENAME /etc/os-release | cut -d'=' -f2)
+vars[wsl]=false
+if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null; then
+	vars[wsl]=true
+fi
+
+# display distro and platform
+disp_wsl=''
+if [ "${vars[wsl]}" = true ]; then
+	disp_wsl='wsl'
+fi
+echo -e "${BLUE}configuring environment for $disp_wsl ubuntu ${vars[ubuntu_release]}${NC}"
 
 # check if ansible is installed
 ansible_installed=true
 if ! command -v ansible-playbook &> /dev/null; then
-	echo "${RED}ansible is not installed - install or run as 'sudo'${NC}"
+	if [ "${vars[is_sudo]}" = false ]; then
+		echo -e "${RED}ansible is not installed - install or run as 'sudo'${NC}"
+		exit 1
+	fi
 	ansible_installed=false
 fi
 
 # check if git is installed
 git_installed=true
 if ! command -v git &> /dev/null; then
-	echo "${RED}git is not installed - install or run as 'sudo'${NC}"
+	if [ "${vars[is_sudo]}" = false ]; then
+		echo -e "${RED}git is not installed - install or run as 'sudo'${NC}"
+		exit 1
+	fi
 	git_installed=false
 fi
 
@@ -112,6 +149,7 @@ if [ "${vars[is_sudo]}" = true ]; then
 	if [ "$ansible_installed" = false ] || [ "$git_installed" = false ]; then
 		PPAS=(
 			ansible/ansible
+			git-core/ppa
 		)
 		NEED_APT_UPDATE=false
 		for PPA in "${PPAS[@]}"; do
@@ -125,8 +163,8 @@ if [ "${vars[is_sudo]}" = true ]; then
 		if [ "$NEED_APT_UPDATE" = true ]; then
 			sudo apt update
 		fi
-		# install aptitude, ansible, and git
-		sudo apt install -y aptitude ansible git
+		# install ansible and git
+		sudo apt install -y ansible git
 		ansible_installed=true
 		git_installed=true
 	fi
@@ -137,35 +175,45 @@ if [ "$ansible_installed" = false ] || [ "$git_installed" = false ]; then
 	exit 1
 fi
 
-# build ansible params list
-ansible_params=""
-for key in "${!vars[@]}"; do
-    ansible_params+="$key=${vars[$key]} "
-done
-
 # clone or update repository
 readonly REPO_URL="git@github.com:edurso/dotfiles.git"
-readonly REPO_DIR="$HOME/dev/dotfiles"
+readonly REPO_DIR="$HOME/dotfiles"
 if [ -d "$REPO_DIR" ]; then
     cd "$REPO_DIR"
     echo -e "${BLUE}dotfiles repository exists, updating${NC}"
+
+	REMOTE_URL=$(git config --get remote.origin.url)
+	if [[ "$REMOTE_URL" =~ ^https:// ]]; then
+		echo -e "${BLUE}git remote is ${REMOTE_URL}, switching to ${REPO_URL}${NC}"
+		git remote set-url origin "$REPO_URL"
+	else
+		echo -e "${GREEN}repository info verified${NC}"
+	fi
+
 	if [ "${vars[is_sudo]}" = true ]; then
-		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/id_ed25519" -o IdentitiesOnly=yes' git pull
+		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/github" -o IdentitiesOnly=yes' git pull
 	else
 		git pull
 	fi
 else
     echo -e "${BLUE}cloning ${REPO_URL} into ${REPO_DIR}${NC}"
 	if [ "${vars[is_sudo]}" = true ]; then
-		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/id_ed25519" -o IdentitiesOnly=yes' git clone "$REPO_URL"
+		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/github" -o IdentitiesOnly=yes' git clone "$REPO_URL"
 	else
 		git clone "$REPO_URL"
 	fi
 fi
 
+# build ansible params list
+ansible_params=""
+for key in "${!vars[@]}"; do
+    ansible_params+="$key=${vars[$key]} "
+done
+
 # run ansible playbook
 echo -e "${BLUE}install parameters: ${ansible_params}${NC}"
-ansible-playbook -i "localhost," -c local "$REPO_DIR/ansible/env.yml" -e "$ansible_params"
+echo -e "${YELLOW}do you wish to proceed with installation?${NC}"; select_continue
+ansible-playbook -i "localhost," -c local "$REPO_DIR/ansible/setup.yml" -e "$ansible_params"
 
 # change ownership of installed directories if ran as sudo
 if [ "${vars[is_sudo]}" = true ]; then
@@ -175,8 +223,22 @@ if [ "${vars[is_sudo]}" = true ]; then
 	fi
 fi
 
-# set shell to zsh
-if [ "${vars[shell]}" = true ]; then
-	echo -e "${BLUE}forcing shell to zsh ...${NC}"
-	chsh --shell "$(which zsh)" "$USER"
-fi
+# prompt reboot
+echo -e "${GREEN}configuration finished successfully${NC}"
+echo -e "${GREEN}please reboot now to complete installation${NC}"
+while true; do
+	echo -e "${BLUE}reboot now? (y/n): ${NC}"
+    read -p "" choice
+    choice=$(echo "$choice" | tr '[:upper:]' '[:lower:]')
+    if [[ "$choice" == "y" ]]; then
+        echo -e "${GREEN}rebooting now...${NC}"
+        reboot
+        break
+    elif [[ "$choice" == "n" ]]; then
+        echo -e "${YELLOW}reboot canceled, please reboot soon${NC}"
+        break
+    else
+        echo -e "${RED}invalid input${NC}"
+    fi
+done
+

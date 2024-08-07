@@ -5,42 +5,45 @@
       - ca-certificates
       - curl
       - software-properties-common
-      - python3-pip
-      - virtualenv
-      - python3-setuptools
     state: latest
     update_cache: true
+  when: not wsl
 
 - name: add docker gpg key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
+  when: not wsl
 
 - name: add docker repository
   apt_repository:
     repo: deb https://download.docker.com/linux/ubuntu {{ ubuntu_release }} stable
     state: present
+  when: not wsl
 
 - name: update apt and install docker-ce
   apt:
     name: docker-ce
     state: latest
     update_cache: true
+  when: not wsl
 
 - name: install docker packages
-  become: True
+  become: true
   apt:
     name: "{{ item }}"
     state: present
+  when: not wsl
   loop:
+    - podman
     - docker-ce
     - docker-ce-cli
     - containerd.io
     - docker-buildx-plugin
     - docker-compose-plugin
-    - podman
 
 - name: add user to the docker group
+  when: not wsl
   user:
     name: "$USER"
     groups: docker

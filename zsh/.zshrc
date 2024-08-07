@@ -6,14 +6,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 HIST_STAMPS="dd.mm.yyyy"
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting virtualenvwrapper fzf)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-bat fzf)
 source $ZSH/oh-my-zsh.sh
 
 if [[ -n $SSH_CONNECTION ]]; then
@@ -21,6 +17,12 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='nvim'
 fi
+
+# zsh-autosuggestions
+bindkey '^I' autosuggest-accept
+
+# fzf
+source <(fzf --zsh)
 
 # edit .zshrc file
 alias ezrc='nvim ~/.zshrc'
@@ -36,11 +38,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
-alias tool='jetbrains-toolbox'
-alias jb='jetbrains-toolbox'
-
-# application shortcuts
-alias jl='jupyter lab&'
 
 # shortcuts
 alias cd..='cd ..'
@@ -48,7 +45,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias rm='rm -rf'
 
 # auto ls after cd
 cd ()
@@ -190,6 +186,18 @@ export GPG_AGENT_INFO=${HOME}/.gnupg/S.gpg-agent:0:1
 # disable ntfs color highlights
 LS_COLORS=$LS_COLORS:'ow=1;34:' ; export LS_COLORS
 
+# user aliases
+alias tool='jetbrains-toolbox'
+alias jb='jetbrains-toolbox'
+alias jl='jupyter lab&'
+alias rm='rm -rf'
+
+# cargo/rust init
+if [ -d "$HOME/.cargo" ]; then
+    . "$HOME/.cargo/env"
+fi
+
+# init mamba
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('$HOME/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -208,30 +216,29 @@ if [ -f "$HOME/miniforge3/etc/profile.d/mamba.sh" ]; then
     . "$HOME/miniforge3/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
-
-# wrc env dirs
-export WRC_DEV_DIRECTORY="$HOME/technology/dev"
-export WRC_DATA_DIRECTORY="${WRC_DATA_DIRECTORY:-"$HOME/technology/data"}"
-
-# go to dev
-dev() {
-    cd "$WRC_DEV_DIRECTORY"
-}
-
-# user aliases
-
-
-# path
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/scripts/bin:$PATH"
-export PATH="$HOME/miniforge3/bin:$PATH"
-export PATH="$WRC_DEV_DIRECTORY/wolv/bin:$PATH"
-
-# init mamba
 mamba activate
 
-# clear screen of gpg agent output
-clear
+# mamba aliases
+m() {
+    mamba "$@"
+}
+ma() {
+    mamba activate "$1"
+}
+me() {
+    mamba env "$@"
+}
+
 
 # to customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# clear screen of gpg agent output
+clear
+. "$HOME/.cargo/env"
+export PATH="$HOME/miniforge3/bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+

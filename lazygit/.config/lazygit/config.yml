@@ -21,7 +21,7 @@ gui:
     commitLength:
         show: true
     mouseEvents: true
-    skipUnstageLineWarning: false
+    skipDiscardChangeWarning: false
     skipStashWarning: true
 git:
     paging:
@@ -49,7 +49,7 @@ update:
 reporting: 'undetermined' # one of: 'on' | 'off' | 'undetermined'
 confirmOnQuit: false
 # determines whether hitting 'esc' will quit the application when there is nothing to cancel/close
-quitOnTopLevelReturn: false 
+quitOnTopLevelReturn: false
 disableStartupPopups: true
 notARepository: 'skip'
 keybinding:

@@ -32,8 +32,25 @@
     dest: ~/.local/share/nvim/site/autoload/plug.vim
     mode: '0644'
 
-- name: install neovim configuration
-  synchronize:
-    src: files/
-    dest: ~/
-    recursive: true
+- name: stow neovim dotfiles
+  command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
+  loop:
+    - neovim
+
+- name: install neovim plugins
+  command: "nvim --headless +PlugInstall +qall"
+
+- name: verify pip is installed
+  apt:
+    name: python3-pip
+    state: present
+  become: true
+
+- name: install pynvim
+  pip:
+    name: pynvim
+    state: present
+  become: true
+
+- name: configure python plugins
+  command: "nvim --headless +UpdateRemotePlugins +qall"

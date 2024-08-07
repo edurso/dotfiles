@@ -35,8 +35,20 @@
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
     dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
-- name: zsh dotfiles
-  synchronize:
-    src: files/
-    dest: ~/
-    recursive: true
+- name: clone zsh-bat
+  git:
+    repo: https://github.com/fdellwing/zsh-bat.git
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-bat
+
+- name: stow zsh dotfiles
+  command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
+  loop:
+    - zsh
+
+- name: set shell to zsh
+  command: chsh -s /usr/bin/zsh $USER
+  become: true
+
+- name: note shell is zsh
+  set_fact:
+    is_zsh: true

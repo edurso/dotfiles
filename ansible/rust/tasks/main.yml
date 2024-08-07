@@ -1,0 +1,33 @@
+- name: CAN FAIL - check if rust is installed
+  shell: command -v rustc >/dev/null 2>&1
+  register: rust_installed
+  ignore_errors: yes
+
+- name: download installer
+  when: rust_installed is failed
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/sh.rustup.rs
+    mode: '0755'
+    force: 'yes'
+
+- name: install rust and cargo
+  when: rust_installed is failed
+  shell: /tmp/sh.rustup.rs -y
+
+- name: set shell configuration file to .zshrc if using zsh
+  set_fact:
+    shell_config_file: "{{ ansible_env.HOME }}/.zshrc"
+  when: is_zsh | default(false)
+
+- name: set shell configuration file to .bashrc if using bash
+  set_fact:
+    shell_config_file: "{{ ansible_env.HOME }}/.bashrc"
+  when: not is_zsh | default(false)
+
+- name: add rust to path
+  lineinfile:
+    path: "{{ shell_config_file }}"
+    line: '. "$HOME/.cargo/env"'
+    insertafter: EOF
+  when: shell_config_file is defined

@@ -1,0 +1,64 @@
+---
+- hosts: all
+  vars:
+    verbose: false
+    ubuntu_release: noble
+    wsl: false
+    is_sudo: true
+    shell: true
+    toolchain: true
+    desktop: true
+  roles:
+
+    # core packages
+    - role: core
+      when:
+        - is_sudo
+
+    # command line developer extensions
+    - role: zsh
+      when:
+        - is_sudo
+        - shell
+    - role: neovim
+      when:
+        - is_sudo
+        - shell
+    - role: lazygit
+      when:
+        - is_sudo
+        - shell
+
+    # devel toolchains
+    - role: cpp
+      when: toolchain
+    - role: rust
+      when: toolchain
+    - role: python
+      when: toolchain
+    - role: docker
+      when: toolchain
+    - role: java
+      when: toolchain
+
+    # desktop utilities
+    - role: vscode
+      when:
+        - is_sudo
+        - desktop
+        - not wsl
+    - role: jetbrains
+      when:
+        - is_sudo
+        - desktop
+        - not wsl
+    - role: tools
+      when:
+        - is_sudo
+        - desktop
+        - not wsl
+    - role: firefox
+      when:
+        - is_sudo
+        - desktop
+        - not wsl

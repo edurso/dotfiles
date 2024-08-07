@@ -1,14 +1,7 @@
-- name: get install script
-  synchronize:
-    src: files/
-    dest: ~/
-    recursive: true
+- name: stow jetbrains dotfiles
+  command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
+  loop:
+    - jetbrains
 
 - name: install jetbrains toolbox
   command: "bash $HOME/jetbrains-install.sh"
-
-- name: clean up temporary files
-  file:
-    path: "$HOME/jetbrains-install.sh"
-    state: absent
-  ignore_errors: true
