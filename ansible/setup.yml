@@ -36,7 +36,17 @@
         - docker
         - java
 
-    - name: desktop apps & environments
+    - name: editors
+      include_role:
+        name: "{{ item }}"
+      when:
+        - is_sudo
+        - desktop
+      loop:
+        - vscode
+        - jetbrains
+
+    - name: desktop utilities
       include_role:
         name: "{{ item }}"
       when:
@@ -45,6 +55,4 @@
         - not wsl
       loop:
         - tools
-        - jetbrains
-        - vscode
         - firefox
