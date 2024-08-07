@@ -42,6 +42,7 @@
       when:
         - is_sudo
         - desktop
+        - not wsl
       loop:
         - tools
         - jetbrains
