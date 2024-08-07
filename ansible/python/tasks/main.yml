@@ -31,7 +31,7 @@
     insertafter: EOF
   when: shell_config_file is defined
 
-- name: Update conda
+- name: update conda
   command: "$HOME/miniforge3/bin/conda update -n base -c defaults conda"
   environment:
     PATH: "$HOME/miniforge3/bin:$PATH"

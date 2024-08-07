@@ -1,5 +1,4 @@
 [core]
-    pager = delta
     excludesfile = ~/.gitignore
     compression = 0
 	autocrlf = input

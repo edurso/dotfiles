@@ -128,7 +128,7 @@ echo -e "${BLUE}configuring environment for $disp_wsl ubuntu ${vars[ubuntu_relea
 ansible_installed=true
 if ! command -v ansible-playbook &> /dev/null; then
 	if [ "${vars[is_sudo]}" = false ]; then
-		echo "${RED}ansible is not installed - install or run as 'sudo'${NC}"
+		echo -e "${RED}ansible is not installed - install or run as 'sudo'${NC}"
 		exit 1
 	fi
 	ansible_installed=false
@@ -138,7 +138,7 @@ fi
 git_installed=true
 if ! command -v git &> /dev/null; then
 	if [ "${vars[is_sudo]}" = false ]; then
-		echo "${RED}git is not installed - install or run as 'sudo'${NC}"
+		echo -e "${RED}git is not installed - install or run as 'sudo'${NC}"
 		exit 1
 	fi
 	git_installed=false

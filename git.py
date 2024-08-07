@@ -248,6 +248,8 @@ def new_gpg_key(config: GitConfig, init_keys: list[str]) -> str:
         pass2 = getpass("confirm passphrase: ")
     passphrase = pass1
 
+    print('creating new gpg key, this may take a few seconds...')
+
     gpg_input = f"""
     Key-Type: default
     Key-Length: 4096
