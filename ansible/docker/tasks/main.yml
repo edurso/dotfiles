@@ -43,6 +43,7 @@
     - docker-compose-plugin
 
 - name: add user to the docker group
+  when: not wsl
   user:
     name: "$USER"
     groups: docker

@@ -7,10 +7,12 @@
 ## Installation
 
 1. Install `git`
-2. Clone the repository into the home directory
+2. Clone the repository (via https) into the home directory
 3. Make scripts executable with `chmod +x git.py install.sh`
 4. Configure git (`./git.py` helps with this)
+    - Optionally, switch remote to `ssh`
 5. Run `sudo ./install.sh`
+   - Run `./install.sh -h` for custom install options
 6. Reboot when prompted
 
 ## Organization

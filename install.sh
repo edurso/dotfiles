@@ -80,8 +80,26 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
+# check sudo
+vars[is_sudo]=true
+if [ "$(id -u)" -ne 0 ]; then
+	vars[is_sudo]=false
+	HOME=$(getent passwd "$USER" | cut -d: -f6)
+	GRP=$(basename "$HOME")
+    echo -e "${YELLOW}sudo was not used, though recommended${NC}"
+	select_continue
+else
+	vars[is_sudo]=true
+	HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+	# shellcheck disable=SC2034
+	GRP=$(basename "$HOME")
+	USER="$SUDO_USER"
+fi
+
 # check ssh keys
-if [ ! -f "$HOME/.ssh/id_ed25519" ] && [ ! -f "$HOME/.ssh/github" ]; then
+if [ -f "$HOME/.ssh/id_ed25519" ] || [ -f "$HOME/.ssh/github" ]; then
+	echo -e "${GREEN}ssh keys properly configured${NC}"
+else
 	echo -e "${RED}ssh keys are not configured, cannot verify dotfiles${NC}"
 	echo -e "${RED}to fix, run \`python3 git.py\` and follow prompts before attempting reinstall${NC}"
 	exit 1
@@ -105,22 +123,6 @@ if [ "${vars[wsl]}" = true ]; then
 	disp_wsl='wsl'
 fi
 echo -e "${BLUE}configuring environment for $disp_wsl ubuntu ${vars[ubuntu_release]}${NC}"
-
-# check sudo
-vars[is_sudo]=true
-if [ "$(id -u)" -ne 0 ]; then
-	vars[is_sudo]=false
-	HOME=$(getent passwd "$USER" | cut -d: -f6)
-	GRP=$(basename "$HOME")
-    echo -e "${YELLOW}sudo was not used, though recommended${NC}"
-	select_continue
-else
-	vars[is_sudo]=true
-	HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
-	# shellcheck disable=SC2034
-	GRP=$(basename "$HOME")
-	USER="$SUDO_USER"
-fi
 
 # check if ansible is installed
 ansible_installed=true
@@ -147,6 +149,7 @@ if [ "${vars[is_sudo]}" = true ]; then
 	if [ "$ansible_installed" = false ] || [ "$git_installed" = false ]; then
 		PPAS=(
 			ansible/ansible
+			git-core/ppa
 		)
 		NEED_APT_UPDATE=false
 		for PPA in "${PPAS[@]}"; do
@@ -179,14 +182,14 @@ if [ -d "$REPO_DIR" ]; then
     cd "$REPO_DIR"
     echo -e "${BLUE}dotfiles repository exists, updating${NC}"
 	if [ "${vars[is_sudo]}" = true ]; then
-		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/id_ed25519" -o IdentitiesOnly=yes' git pull
+		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/github" -o IdentitiesOnly=yes' git pull
 	else
 		git pull
 	fi
 else
     echo -e "${BLUE}cloning ${REPO_URL} into ${REPO_DIR}${NC}"
 	if [ "${vars[is_sudo]}" = true ]; then
-		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/id_ed25519" -o IdentitiesOnly=yes' git clone "$REPO_URL"
+		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/github" -o IdentitiesOnly=yes' git clone "$REPO_URL"
 	else
 		git clone "$REPO_URL"
 	fi
@@ -200,6 +203,7 @@ done
 
 # run ansible playbook
 echo -e "${BLUE}install parameters: ${ansible_params}${NC}"
+echo -e "${YELLOW}do you wish to proceed with installation?${NC}"; select_continue
 ansible-playbook -i "localhost," -c local "$REPO_DIR/ansible/setup.yml" -e "$ansible_params"
 
 # change ownership of installed directories if ran as sudo
@@ -208,12 +212,6 @@ if [ "${vars[is_sudo]}" = true ]; then
 		echo -e "${BLUE}user ownership of $HOME ...${NC}"
 		sudo chown -R "$USER":"$GRP" "$HOME"
 	fi
-fi
-
-# set shell to zsh
-if [ "${vars[shell]}" = true ]; then
-	echo -e "${BLUE}forcing shell to zsh ...${NC}"
-	chsh --shell "$(which zsh)" "$USER"
 fi
 
 # prompt reboot

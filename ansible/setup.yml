@@ -10,49 +10,55 @@
     desktop: true
   roles:
 
+    # core packages
     - role: core
       when:
         - is_sudo
 
-    - name: command line developer extensions
-      include_role:
-        name: "{{ item }}"
+    # command line developer extensions
+    - role: zsh
       when:
         - is_sudo
         - shell
-      loop:
-        - zsh
-        - neovim
-        - lazygit
-
-    - name: devel toolchains
-      include_role:
-        name: "{{ item }}"
-      when: toolchain
-      loop:
-        - cpp
-        - rust
-        - python
-        - docker
-        - java
-
-    - name: editors
-      include_role:
-        name: "{{ item }}"
+    - role: neovim
       when:
         - is_sudo
-        - desktop
-      loop:
-        - vscode
-        - jetbrains
+        - shell
+    - role: lazygit
+      when:
+        - is_sudo
+        - shell
 
-    - name: desktop utilities
-      include_role:
-        name: "{{ item }}"
+    # devel toolchains
+    - role: cpp
+      when: toolchain
+    - role: rust
+      when: toolchain
+    - role: python
+      when: toolchain
+    - role: docker
+      when: toolchain
+    - role: java
+      when: toolchain
+
+    # desktop utilities
+    - role: vscode
       when:
         - is_sudo
         - desktop
         - not wsl
-      loop:
-        - tools
-        - firefox
+    - role: jetbrains
+      when:
+        - is_sudo
+        - desktop
+        - not wsl
+    - role: tools
+      when:
+        - is_sudo
+        - desktop
+        - not wsl
+    - role: firefox
+      when:
+        - is_sudo
+        - desktop
+        - not wsl

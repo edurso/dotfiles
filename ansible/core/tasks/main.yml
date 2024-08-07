@@ -45,16 +45,6 @@
     state: present
   when: not wsl
 
-- name: gnome to dark if desktop
-  become: true
-  command: >
-    gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-dark'
-  environment:
-    DISPLAY: ":0"
-    XAUTHORITY: "$HOME/.Xauthority"
-  ignore_errors: true
-  when: desktop
-
 - name: stow core dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
   loop:

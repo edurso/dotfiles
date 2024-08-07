@@ -39,3 +39,11 @@
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
   loop:
     - zsh
+
+- name: set shell to zsh
+  command: chsh -s /usr/bin/zsh $USER
+  become: true
+
+- name: note shell is zsh
+  set_fact:
+    is_zsh: true
