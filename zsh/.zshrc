@@ -9,7 +9,7 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 HIST_STAMPS="dd.mm.yyyy"
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting virtualenvwrapper fzf)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-bat fzf)
 source $ZSH/oh-my-zsh.sh
 
 if [[ -n $SSH_CONNECTION ]]; then
@@ -17,6 +17,12 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='nvim'
 fi
+
+# zsh-autosuggestions
+bindkey '^I' autosuggest-accept
+
+# fzf
+source <(fzf --zsh)
 
 # edit .zshrc file
 alias ezrc='nvim ~/.zshrc'
@@ -235,3 +241,4 @@ export PATH="$HOME/miniforge3/bin:$PATH"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+

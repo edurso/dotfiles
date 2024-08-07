@@ -181,6 +181,15 @@ readonly REPO_DIR="$HOME/dotfiles"
 if [ -d "$REPO_DIR" ]; then
     cd "$REPO_DIR"
     echo -e "${BLUE}dotfiles repository exists, updating${NC}"
+
+	REMOTE_URL=$(git config --get remote.origin.url)
+	if [[ "$REMOTE_URL" =~ ^https:// ]]; then
+		echo -e "${BLUE}git remote is ${REMOTE_URL}, switching to ${REPO_URL}${NC}"
+		git remote set-url origin "$REPO_URL"
+	else
+		echo -e "${GREEN}repository info verified${NC}"
+	fi
+
 	if [ "${vars[is_sudo]}" = true ]; then
 		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/github" -o IdentitiesOnly=yes' git pull
 	else
@@ -232,3 +241,4 @@ while true; do
         echo -e "${RED}invalid input${NC}"
     fi
 done
+
