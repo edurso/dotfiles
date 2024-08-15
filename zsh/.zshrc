@@ -18,6 +18,9 @@ else
   export EDITOR='nvim'
 fi
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # fzf
 source <(fzf --zsh)
 
