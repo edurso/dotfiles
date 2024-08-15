@@ -5,52 +5,90 @@
     state: latest
     upgrade: yes
 
-- name: install apt packages for neovim
+- name: check if neovim is installed
+  shell: command -v nvim
+  register: nvim_exists
+  ignore_errors: yes
+
+- name: install build dependencies
+  when: nvim_exists is failed
   become: true
+  tags: install
   apt:
     cache_valid_time: 604800
     state: latest
     name:
-      - neovim
+      - ninja-build
+      - gettext
+      - cmake
+      - unzip
+      - curl
+      - build-essential
+
+- name: clone neovim source code into /usr/local/src
+  when: nvim_exists is failed
+  become: true
+  tags: install
+  git:
+    repo: https://github.com/neovim/neovim.git
+    dest: /usr/local/src/neovim
+    version: stable
+
+- name: build neovim
+  when: nvim_exists is failed
+  become: true
+  tags: install
+  make:
+    chdir: /usr/local/src/neovim
+    target: all
+    params:
+      CMAKE_BUILD_TYPE: RelWithDebInfo
+
+- name: build deb package
+  when: nvim_exists is failed
+  become: true
+  tags: install
+  command: cpack -G DEB
+  args:
+    chdir: /usr/local/src/neovim/build
+
+- name: install neovim deb package
+  when: nvim_exists is failed
+  become: true
+  tags: install
+  apt:
+    deb: /usr/local/src/neovim/build/nvim-linux64.deb
+
+- name: install lazy.nvim plugin dependencies
+  become: true
+  tags: config
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    name:
       - ripgrep
-
-- name: create necessary directories for vim-plug
-  file:
-    path: "{{ item }}"
-    state: directory
-    mode: '0755'
-  loop:
-    - ~/.local
-    - ~/.local/share
-    - ~/.local/share/nvim
-    - ~/.local/share/nvim/site
-    - ~/.local/share/nvim/site/autoload
-
-- name: install vim-plug
-  get_url:
-    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    dest: ~/.local/share/nvim/site/autoload/plug.vim
-    mode: '0644'
+      - fd-find
+      - xclip
 
 - name: stow neovim dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
   loop:
     - neovim
 
-- name: install neovim plugins
-  command: "nvim --headless +PlugInstall +qall"
+# - name: install neovim plugins
+#   command: "nvim --headless +PlugInstall +qall"
 
-- name: verify pip is installed
-  apt:
-    name: python3-pip
-    state: present
-  become: true
+# - name: verify pip is installed
+#   apt:
+#     name: python3-pip
+#     state: present
+#   become: true
 
-- name: install pynvim
-  pip:
-    name: pynvim
-    state: present
-  become: true
+# - name: install pynvim
+#   pip:
+#     name: pynvim
+#     state: present
+#   become: true
 
-- name: configure python plugins
-  command: "nvim --headless +UpdateRemotePlugins +qall"
+# - name: configure python plugins
+#   command: "nvim --headless +UpdateRemotePlugins +qall"

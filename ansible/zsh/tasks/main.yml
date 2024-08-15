@@ -13,6 +13,14 @@
     name:
       - zsh
       - fzf
+      # - cmake 
+      # - pkg-config 
+      # - libfreetype6-dev 
+      # - libfontconfig1-dev 
+      # - libxcb-xfixes0-dev 
+      # - libxkbcommon-dev 
+      # - python3
+      # - alacritty
 
 - name: install oh-my-zsh
   git:
@@ -39,6 +47,17 @@
   git:
     repo: https://github.com/fdellwing/zsh-bat.git
     dest: ~/.oh-my-zsh/custom/plugins/zsh-bat
+
+- name: fzf plugin repo
+  git:
+    repo: https://github.com/junegunn/fzf
+    dest: ~/.fzf
+
+- name: install fzf plugin
+  command: ~/.fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+
+- name: install zoxide plugin
+  shell: curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
 - name: stow zsh dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
