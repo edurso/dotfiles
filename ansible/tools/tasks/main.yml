@@ -21,6 +21,12 @@
       - encfs
       - mysql-workbench
       - signal-desktop
+      - alacritty
+
+- name: stow alacritty dotfiles
+  command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
+  loop:
+    - alacritty
 
 - name: check if snap is installed
   apt:

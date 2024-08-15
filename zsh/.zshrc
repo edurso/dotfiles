@@ -18,9 +18,6 @@ else
   export EDITOR='nvim'
 fi
 
-# zsh-autosuggestions
-bindkey '^I' autosuggest-accept
-
 # fzf
 source <(fzf --zsh)
 

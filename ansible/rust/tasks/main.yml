@@ -31,3 +31,6 @@
     line: '. "$HOME/.cargo/env"'
     insertafter: EOF
   when: shell_config_file is defined
+
+- name: install rust analyzer
+  shell: rustup component add rust-analyzer

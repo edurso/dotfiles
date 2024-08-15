@@ -5,7 +5,7 @@
     state: latest
     upgrade: yes
 
-- name: check if neovim is installed
+- name: CAN FAIL - check if neovim is installed
   shell: command -v nvim
   register: nvim_exists
   ignore_errors: yes
@@ -74,21 +74,3 @@
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
   loop:
     - neovim
-
-# - name: install neovim plugins
-#   command: "nvim --headless +PlugInstall +qall"
-
-# - name: verify pip is installed
-#   apt:
-#     name: python3-pip
-#     state: present
-#   become: true
-
-# - name: install pynvim
-#   pip:
-#     name: pynvim
-#     state: present
-#   become: true
-
-# - name: configure python plugins
-#   command: "nvim --headless +UpdateRemotePlugins +qall"
