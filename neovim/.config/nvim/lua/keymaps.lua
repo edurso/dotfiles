@@ -2,6 +2,7 @@
 vim.api.nvim_set_keymap('n', 'qq', ':q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'q!', ':q!<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qa', ':qa<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-s>', ':wa<CR>', { noremap = true, silent = true })
 
 -- move around splits
 vim.api.nvim_set_keymap('i', '<C-h>', '<C-\\><C-N><C-w>h', { noremap = true, silent = true })
