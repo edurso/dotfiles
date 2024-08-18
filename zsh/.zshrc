@@ -191,6 +191,7 @@ alias tool='jetbrains-toolbox'
 alias jb='jetbrains-toolbox'
 alias jl='jupyter lab&'
 alias rm='rm -rf'
+alias fin='encfs ~/dropbox/personal/Dropbox/finance ~/finance'
 
 # cargo/rust init
 if [ -d "$HOME/.cargo" ]; then
@@ -228,7 +229,6 @@ ma() {
 me() {
     mamba env "$@"
 }
-
 
 # to customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
