@@ -259,6 +259,8 @@ def new_gpg_key(config: GitConfig, init_keys: list[str]) -> str:
     Name-Email: {config['user']['email']}
     Expire-Date: 0
     Passphrase: {passphrase}
+    Key-Curve: Ed25519
+    Subkey-Curve: Ed25519
     %commit
     %echo done
     """
