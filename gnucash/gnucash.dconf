@@ -1,0 +1,39 @@
+[GnuCash/dialogs/account]
+last-geometry=(775, 246, 420, 582)
+
+[GnuCash/dialogs/new-user]
+first-startup=false
+
+[GnuCash/dialogs/open-save]
+last-path='/home/edurso/finance/gnucash'
+
+[GnuCash/dialogs/preferences]
+last-geometry=(542, 182, 885, 710)
+
+[GnuCash/dialogs/reconcile]
+last-geometry=(306, 1221, 1281, 798)
+
+[GnuCash/dialogs/tip-of-the-day]
+current-tip=1
+last-geometry=(785, 405, 400, 300)
+show-at-startup=false
+
+[GnuCash/dialogs/transfer]
+last-geometry=(658, 1318, 494, 576)
+
+[GnuCash/general]
+account-separator='/'
+autosave-show-explanation=false
+date-completion-thisyear=false
+prefs-version=5005
+reversed-accounts-none=false
+summarybar-position-top=false
+tab-position-left=true
+tab-position-top=false
+
+[GnuCash/general/register]
+default-style-journal=true
+default-style-ledger=false
+
+[GnuCash/history]
+file0='/home/edurso/finance/gnucash/personal.gnucash'

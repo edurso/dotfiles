@@ -1,0 +1,16 @@
+- name: install dropbox
+  apt:
+    name: nautilus-dropbox
+    state: present
+
+- name: stow dropbox dotfiles
+  command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
+  loop:
+    - dropbox
+  
+- name: setup dropbox
+  command: |
+    mkdir -p $HOME/dropbox/personal
+    mkdir -p $HOME/dropbox/umich
+    HOME=~/dropbox/personal dropbox start -i
+    HOME=~/dropbox/umich dropbox start -i

@@ -34,3 +34,6 @@
   apt:
     name: code
     state: latest
+
+- name: load vscode extensions
+  command: while read extension; do code --install-extension "$extension"; done < $HOME/dotfiles/vscode/extensions.txt

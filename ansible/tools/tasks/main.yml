@@ -3,7 +3,7 @@
     url: https://updates.signal.org/desktop/apt/keys.asc
     state: present
 
-- name: add vs code repo
+- name: add signal repo
   apt_repository:
     repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
     state: present
@@ -22,18 +22,27 @@
       - mysql-workbench
       - signal-desktop
       - alacritty
+      - gparted
+      - thunderbird
+      - wireshark
 
 - name: stow alacritty dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
   loop:
     - alacritty
 
+- name: dconf load gnucash
+  command: dconf load /org/gnucash/ < $HOME/dotfiles/gnucash/gnucash-settings.dconf
+
+- name: install zed
+  command: curl -f https://zed.dev/install.sh | sh
+
 - name: check if snap is installed
   apt:
     name: snapd
     state: present
   register: snapd_installed
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: check snapd is running
   service:
@@ -52,3 +61,4 @@
     - discord
     - nordpass
     - localsend
+    - scrcpy
