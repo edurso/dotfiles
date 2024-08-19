@@ -39,13 +39,6 @@
       - neofetch
       - dbus-x11
 
-- name: install linux-tools-{{ ansible_kernel }}
-  become: true
-  apt:
-    name: linux-tools-{{ ansible_kernel }}
-    state: present
-  when: not wsl
-
 - name: stow core dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
   loop:

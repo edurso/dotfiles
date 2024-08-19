@@ -44,7 +44,7 @@
 - name: display lazygit version
   debug:
     msg: "lazygit version installed: {{ lazygit_version.stdout }}"
-  when: verbose
+  when: verbose == true
 
 - name: stow lazygit dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"

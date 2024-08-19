@@ -6,7 +6,7 @@
 - name: display sdkman install state
   debug:
     msg: "sdkman install state: {{ sdk_installed }}"
-  when: verbose
+  when: verbose == true
 
 - name: download installer
   when: sdk_installed is failed

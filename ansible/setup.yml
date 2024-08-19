@@ -13,52 +13,63 @@
     # core packages
     - role: core
       when:
-        - is_sudo
+        - is_sudo == "true"
 
     # command line developer extensions
     - role: zsh
       when:
-        - is_sudo
-        - shell
+        - is_sudo == "true"
+        - shell == "true"
     - role: neovim
       when:
-        - is_sudo
-        - shell
+        - is_sudo == "true"
+        - shell == "true"
     - role: lazygit
       when:
-        - is_sudo
-        - shell
+        - is_sudo == "true"
+        - shell == "true"
 
     # devel toolchains
     - role: cpp
-      when: toolchain
+      when: 
+        - toolchain == "true"
     - role: rust
-      when: toolchain
+      when: 
+        - toolchain == "true"
     - role: python
-      when: toolchain
+      when: 
+        - toolchain == "true"
     - role: docker
-      when: toolchain
+      when: 
+        - toolchain == "true"
+        - wsl == "false"
     - role: java
-      when: toolchain
+      when: 
+        - toolchain == "true"
 
     # desktop utilities
     - role: vscode
       when:
-        - is_sudo
-        - desktop
+        - is_sudo == "true"
+        - desktop == "true"
+        - wsl == "false"
     - role: jetbrains
       when:
-        - is_sudo
-        - desktop
+        - is_sudo == "true"
+        - desktop == "true"
+        - wsl == "false"
     - role: tools
       when:
-        - is_sudo
-        - desktop
+        - is_sudo == "true"
+        - desktop == "true"
+        - wsl == "false"
     - role: dropbox
       when:
-        - is_sudo
-        - desktop
+        - is_sudo == "true"
+        - desktop == "true"
+        - wsl == "false"
     - role: firefox
       when:
-        - is_sudo
-        - desktop
+        - is_sudo == "true"
+        - desktop == "true"
+        - wsl == "false"
