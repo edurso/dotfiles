@@ -21,6 +21,14 @@ vim.api.nvim_set_keymap('n', '<S-Enter>', 'O<ESC>', { noremap = true, silent = t
 -- lazy.nvim
 vim.api.nvim_set_keymap('n', 'l', ':Lazy<CR>', { noremap = true, silent = true })
 
+-- multi-cursor
+vim.g.VM_maps = {
+    ['Add Cursor Up'] = '<A-S-Up>',
+    ['Add Cursor Down'] = '<A-S-Down>',
+}
+vim.api.nvim_set_keymap('n', '<A-S-Up>', '<Plug>(VM-Add-Cursor-Up)', {})
+vim.api.nvim_set_keymap('n', '<A-S-Down>', '<Plug>(VM-Add-Cursor-Down)', {})
+
 -- telescope.nvim
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', 'ff', builtin.find_files, {})

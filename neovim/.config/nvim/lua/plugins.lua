@@ -67,4 +67,5 @@ require("lazy").setup({
         after = 'nvim-web-devicons',
         requires = 'nvim-tree/nvim-web-devicons',
     },
+    {'mg979/vim-visual-multi'},
 })

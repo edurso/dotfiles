@@ -38,6 +38,12 @@
       - ca-certificates
       - neofetch
       - dbus-x11
+      - xclip
+
+- name: setup tpm
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
 
 - name: stow core dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
