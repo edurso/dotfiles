@@ -23,6 +23,12 @@ Once installed as shown below, it can be added to Ubuntu via `gnome-tweaks`.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 ```
 
+## Desktop
+
+Ubuntu has some annoying desktop settings, fixes for them enumerated below.
+
+- Default directories (`~/Downloads`, `~/Documents`, etc.) can be [renamed or disabled](https://superuser.com/questions/223918/ubuntu-permanently-remove-videos-and-public)
+
 ## Organization
 
 Dotfile "packages" are listed in the root directory of the project and are managed with [GNU Stow](https://www.gnu.org/software/stow/). 
