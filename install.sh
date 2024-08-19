@@ -97,7 +97,8 @@ else
 fi
 
 # check ssh keys
-if [ -f "$HOME/.ssh/id_ed25519" ] || [ -f "$HOME/.ssh/github" ]; then
+matches=("$HOME/.ssh/github"*)
+if [ -n "${matches[0]}" ] || [ -f "$HOME/.ssh/id_ed25519" ]; then
 	echo -e "${GREEN}ssh keys properly configured${NC}"
 else
 	echo -e "${RED}ssh keys are not configured, cannot verify dotfiles${NC}"
@@ -175,35 +176,6 @@ if [ "$ansible_installed" = false ] || [ "$git_installed" = false ]; then
 	exit 1
 fi
 
-# clone or update repository
-readonly REPO_URL="git@github.com:edurso/dotfiles.git"
-readonly REPO_DIR="$HOME/dotfiles"
-if [ -d "$REPO_DIR" ]; then
-    cd "$REPO_DIR"
-    echo -e "${BLUE}dotfiles repository exists, updating${NC}"
-
-	REMOTE_URL=$(git config --get remote.origin.url)
-	if [[ "$REMOTE_URL" =~ ^https:// ]]; then
-		echo -e "${BLUE}git remote is ${REMOTE_URL}, switching to ${REPO_URL}${NC}"
-		git remote set-url origin "$REPO_URL"
-	else
-		echo -e "${GREEN}repository info verified${NC}"
-	fi
-
-	if [ "${vars[is_sudo]}" = true ]; then
-		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/github" -o IdentitiesOnly=yes' git pull
-	else
-		git pull
-	fi
-else
-    echo -e "${BLUE}cloning ${REPO_URL} into ${REPO_DIR}${NC}"
-	if [ "${vars[is_sudo]}" = true ]; then
-		GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/github" -o IdentitiesOnly=yes' git clone "$REPO_URL"
-	else
-		git clone "$REPO_URL"
-	fi
-fi
-
 # build ansible params list
 ansible_params=""
 for key in "${!vars[@]}"; do
@@ -211,6 +183,7 @@ for key in "${!vars[@]}"; do
 done
 
 # run ansible playbook
+readonly REPO_DIR="$HOME/dotfiles"
 echo -e "${BLUE}install parameters: ${ansible_params}${NC}"
 echo -e "${YELLOW}do you wish to proceed with installation?${NC}"; select_continue
 ansible-playbook -i "localhost," -c local "$REPO_DIR/ansible/setup.yml" -e "$ansible_params"
