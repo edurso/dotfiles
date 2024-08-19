@@ -61,15 +61,10 @@ require("lazy").setup({
 			"nvim-neotest/nvim-nio"
 		}
 	},
+    {'nvim-tree/nvim-web-devicons'},
 	{
-		"nvim-tree/nvim-tree.lua",
-		version = "*",
-		lazy = false,
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
-		config = function()
-			require("nvim-tree").setup({})
-		end,
-	}
+        'nvim-tree/nvim-tree.lua',
+        after = 'nvim-web-devicons',
+        requires = 'nvim-tree/nvim-web-devicons',
+    },
 })

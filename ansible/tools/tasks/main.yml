@@ -24,6 +24,7 @@
       - gparted
       - thunderbird
       - wireshark
+      - gnome-tweaks
 
 - name: stow alacritty dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
