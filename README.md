@@ -14,6 +14,15 @@
     - Run `./install.sh -h` for custom install options
 5. Reboot when prompted
 
+## Fonts
+
+Haven't added these to installation candidate yet, but [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) is a nice font.
+Once installed as shown below, it can be added to Ubuntu via `gnome-tweaks`.
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+```
+
 ## Organization
 
 Dotfile "packages" are listed in the root directory of the project and are managed with [GNU Stow](https://www.gnu.org/software/stow/). 
