@@ -37,6 +37,7 @@
       - gnupg2
       - ca-certificates
       - neofetch
+      - dbus-x11
 
 - name: install linux-tools-{{ ansible_kernel }}
   become: true

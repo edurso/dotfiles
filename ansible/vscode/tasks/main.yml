@@ -36,4 +36,4 @@
     state: latest
 
 - name: load vscode extensions
-  command: while read extension; do code --install-extension "$extension"; done < $HOME/dotfiles/vscode/extensions.txt
+  shell: /bin/bash -c 'while read extension; do code --no-sandbox --user-data-dir $HOME/.vscode --install-extension "$extension"; done < $HOME/dotfiles/vscode/extensions.txt'

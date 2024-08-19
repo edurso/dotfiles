@@ -19,7 +19,6 @@
     name:
       - gnucash
       - encfs
-      - mysql-workbench
       - signal-desktop
       - alacritty
       - gparted
@@ -32,10 +31,7 @@
     - alacritty
 
 - name: dconf load gnucash
-  command: dconf load /org/gnucash/ < $HOME/dotfiles/gnucash/gnucash-settings.dconf
-
-- name: install zed
-  command: curl -f https://zed.dev/install.sh | sh
+  shell: dconf load /org/gnucash/ < $HOME/dotfiles/gnucash/gnucash.dconf
 
 - name: check if snap is installed
   apt:

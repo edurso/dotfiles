@@ -46,24 +46,19 @@
       when:
         - is_sudo
         - desktop
-        - not wsl
     - role: jetbrains
       when:
         - is_sudo
         - desktop
-        - not wsl
     - role: tools
       when:
         - is_sudo
         - desktop
-        - not wsl
     - role: dropbox
       when:
         - is_sudo
         - desktop
-        - not wsl
     - role: firefox
       when:
         - is_sudo
         - desktop
-        - not wsl

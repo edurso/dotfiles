@@ -1,7 +1,2 @@
-- name: stow jetbrains dotfiles
-  command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
-  loop:
-    - jetbrains
-
 - name: install jetbrains toolbox
-  command: "bash $HOME/jetbrains-install.sh"
+  command: "bash $HOME/dotfiles/jetbrains/scripts/jetbrains-install.sh"
