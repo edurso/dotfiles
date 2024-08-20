@@ -26,6 +26,7 @@
       - wireshark
       - gnome-tweaks
       - evolution
+      - gnome-shell-extension-manager
 
 - name: stow alacritty dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
