@@ -18,6 +18,9 @@
     state: latest
     name:
       - gnucash
+      - libdbd-sqlite3
+      - libdbd-mysql
+      - libdbd-pgsql
       - encfs
       - signal-desktop
       - alacritty
