@@ -13,7 +13,7 @@ readonly NC='\033[0m'
 # directories
 TMP_DIR="/tmp"
 INSTALL_DIR="$HOME/bin"
-CI="true"  # NOTE: set this to false if running manually
+CI="true"  # NOTE: unset this variable to install interactively
 
 echo -e "${BLUE}fetching URL of latest version...${NC}"
 ARCHIVE_URL=$(curl -s 'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' | grep -Po '"linux":.*?[^\\]",' | awk -F ':' '{print $3,":"$4}'| sed 's/[", ]//g')
