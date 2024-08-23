@@ -41,7 +41,7 @@ Dropbox utilities are copied to `~/dropbox`.
 The `init.sh` script starts the dropbox installation process.
 It does this for two accounts (personal and umich) and will launch a browser window with dropbox for authentication.
 
-The `start.sh` will launch all dropbox dameon's installed under `~/dropbox` on system startup.
+The `dropbox.sh` will launch all dropbox dameon's installed under `~/dropbox` on system startup.
 Thus, it should be added to the list of system startup applications.
 
 ### Desktop
