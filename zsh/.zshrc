@@ -243,6 +243,27 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
     fi
 fi
 
+# mrover stuff
+alias mrover="cd ~/dev/rover/src/mrover && source ~/dev/rover/src/mrover/venv/bin/activate && source /home/edurso/dev/rover/install/setup.zsh"
+
+readonly ROS2_WS_PATH="~/dev/rover"
+source /opt/ros/humble/setup.zsh
+readonly CATKIN_SETUP_PATH=${ROS2_WS_PATH}/install/setup.zsh
+if [ -f ${CATKIN_SETUP_PATH} ]; then
+    source ${CATKIN_SETUP_PATH}
+fi
+
+# bun completions
+[ -s "/home/mrover/.bun/_bun" ] && source "/home/mrover/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# ros2 completions
+eval "$(register-python-argcomplete3 ros2)"
+eval "$(register-python-argcomplete3 colcon)"
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
