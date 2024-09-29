@@ -30,6 +30,7 @@
       - gnome-tweaks
       - evolution
       - gnome-shell-extension-manager
+      - adb
 
 - name: stow alacritty dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
