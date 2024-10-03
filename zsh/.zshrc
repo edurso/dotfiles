@@ -237,11 +237,11 @@ me() {
 clear
 
 # start tmux by default on interactive shells
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-    if [ -n "$ALACRITTY_LOG" ]; then
-    	exec tmux
-    fi
-fi
+#if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#    if [ -n "$ALACRITTY_LOG" ]; then
+#    	exec tmux
+#    fi
+#fi
 
 # mrover stuff
 alias mrover="mamba deactivate && cd ~/dev/rover/src/mrover && source ~/dev/rover/src/mrover/venv/bin/activate && source /home/edurso/dev/rover/install/setup.zsh"
