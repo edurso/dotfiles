@@ -31,6 +31,7 @@
       - evolution
       - gnome-shell-extension-manager
       - adb
+      - sublime-music
 
 - name: stow alacritty dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"

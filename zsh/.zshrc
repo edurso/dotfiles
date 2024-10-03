@@ -244,7 +244,7 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
 fi
 
 # mrover stuff
-alias mrover="cd ~/dev/rover/src/mrover && source ~/dev/rover/src/mrover/venv/bin/activate && source /home/edurso/dev/rover/install/setup.zsh"
+alias mrover="mamba deactivate && cd ~/dev/rover/src/mrover && source ~/dev/rover/src/mrover/venv/bin/activate && source /home/edurso/dev/rover/install/setup.zsh"
 
 readonly ROS2_WS_PATH="~/dev/rover"
 source /opt/ros/humble/setup.zsh
