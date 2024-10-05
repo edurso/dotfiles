@@ -48,9 +48,6 @@
 - name: install fzf plugin
   command: ~/.fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
 
-- name: install zoxide plugin
-  shell: curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-
 - name: stow zsh dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
   loop:

@@ -34,7 +34,7 @@
 
 - name: install nvim to /opt
   unarchive:
-    src: /tmp/nvim-linux64.tar.gz
+    src: /tmp/nvim.tar.gz
     dest: /opt
     remote_src: yes
 
