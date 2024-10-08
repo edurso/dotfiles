@@ -264,6 +264,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 eval "$(register-python-argcomplete3 ros2)"
 eval "$(register-python-argcomplete3 colcon)"
 
+# cmake config fixes
+export CMAKE_IGNORE_PREFIX_PATH="$HOME/miniforge3"
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
