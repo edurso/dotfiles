@@ -11,11 +11,9 @@
     - role: vscode
       when:
         - is_sudo == "true"
-        - desktop == "true"
         - wsl == "false"
     - role: jetbrains
       when:
         - is_sudo == "true"
-        - desktop == "true"
         - wsl == "false"
 
