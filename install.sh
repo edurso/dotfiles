@@ -146,7 +146,21 @@ sudo apt update
 sudo apt upgrade -y
 
 # install fonts
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+is_font_installed() {
+    fc-list | grep -qi "JetBrains Mono"
+}
+
+if is_font_installed; then
+    display -g "jetbrains mono fonts are already installed"
+else
+    display -b "jetbrains mono fonts not found, installing..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+    if is_font_installed; then
+        display -g "jetbrains mono fonts installed successfully"
+    else
+        display -r "failed to install jetbrains mono fonts"
+    fi
+fi
 
 # prompt reboot
 display -g "configuration finished successfully"
