@@ -6,7 +6,6 @@
       - curl
       - software-properties-common
     state: latest
-    update_cache: true
 
 - name: add docker gpg key
   apt_key:
@@ -22,7 +21,6 @@
   apt:
     name: docker-ce
     state: latest
-    update_cache: true
 
 - name: install docker packages
   become: true

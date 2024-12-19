@@ -1,4 +1,8 @@
 - name: install cargo packages
-  command: "cargo install {{ item }}"
+  shell: |
+    . "$HOME/.cargo/env"
+    cargo install {{ item }}
+  args:
+    executable: /bin/bash
   loop:
     - just
