@@ -145,6 +145,9 @@ fi
 sudo apt update
 sudo apt upgrade -y
 
+# install fonts
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+
 # prompt reboot
 display -g "configuration finished successfully"
 display -g "please reboot now to complete installation"

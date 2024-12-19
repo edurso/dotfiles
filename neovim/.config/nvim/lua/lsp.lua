@@ -29,7 +29,7 @@ require('mason-lspconfig').setup({
         'lua_ls',
         'gradle_ls',
         'markdown_oxide',
-        'nginx_language_server',
+        -- 'nginx_language_server',
         'pylsp',
         'svls',
     },
