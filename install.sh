@@ -141,6 +141,10 @@ if [ "${vars[is_sudo]}" = true ]; then
 	fi
 fi
 
+# update & upgrade
+sudo apt update
+sudo apt upgrade -y
+
 # prompt reboot
 display -g "configuration finished successfully"
 display -g "please reboot now to complete installation"
