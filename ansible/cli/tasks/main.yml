@@ -1,0 +1,4 @@
+- name: install cargo packages
+  command: "cargo install {{ item }}"
+  loop:
+    - just

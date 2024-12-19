@@ -244,25 +244,25 @@ clear
 #fi
 
 # mrover stuff
-alias mrover="mamba deactivate && cd ~/dev/rover/src/mrover && source ~/dev/rover/src/mrover/venv/bin/activate && source /home/edurso/dev/rover/install/setup.zsh"
+# alias mrover="mamba deactivate && cd ~/dev/rover/src/mrover && source ~/dev/rover/src/mrover/venv/bin/activate && source /home/edurso/dev/rover/install/setup.zsh"
 
-readonly ROS2_WS_PATH="~/dev/rover"
-source /opt/ros/humble/setup.zsh
-readonly CATKIN_SETUP_PATH=${ROS2_WS_PATH}/install/setup.zsh
-if [ -f ${CATKIN_SETUP_PATH} ]; then
-    source ${CATKIN_SETUP_PATH}
-fi
+# readonly ROS2_WS_PATH="~/dev/rover"
+# source /opt/ros/humble/setup.zsh
+# readonly CATKIN_SETUP_PATH=${ROS2_WS_PATH}/install/setup.zsh
+# if [ -f ${CATKIN_SETUP_PATH} ]; then
+#     source ${CATKIN_SETUP_PATH}
+# fi
 
-# bun completions
-[ -s "/home/mrover/.bun/_bun" ] && source "/home/mrover/.bun/_bun"
+# # bun completions
+# [ -s "/home/mrover/.bun/_bun" ] && source "/home/mrover/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# # bun
+# export BUN_INSTALL="$HOME/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
 
-# ros2 completions
-eval "$(register-python-argcomplete3 ros2)"
-eval "$(register-python-argcomplete3 colcon)"
+# # ros2 completions
+# eval "$(register-python-argcomplete3 ros2)"
+# eval "$(register-python-argcomplete3 colcon)"
 
 # cmake config fixes
 export CMAKE_IGNORE_PREFIX_PATH="$HOME/miniforge3"

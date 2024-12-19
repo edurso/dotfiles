@@ -1,0 +1,21 @@
+---
+- hosts: all
+  vars:
+    verbose: false
+    ubuntu_release: noble
+    wsl: false
+    is_sudo: true
+  roles:
+
+    # desktop utilities
+    - role: vscode
+      when:
+        - is_sudo == "true"
+        - desktop == "true"
+        - wsl == "false"
+    - role: jetbrains
+      when:
+        - is_sudo == "true"
+        - desktop == "true"
+        - wsl == "false"
+

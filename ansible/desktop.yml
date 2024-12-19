@@ -1,0 +1,22 @@
+---
+- hosts: all
+  vars:
+    verbose: false
+    ubuntu_release: noble
+    wsl: false
+    is_sudo: true
+  roles:
+
+    # desktop utilities
+    - role: tools
+      when:
+        - is_sudo == "true"
+        - wsl == "false"
+    - role: dropbox
+      when:
+        - is_sudo == "true"
+        - wsl == "false"
+    - role: firefox
+      when:
+        - is_sudo == "true"
+        - wsl == "false"

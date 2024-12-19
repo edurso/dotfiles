@@ -1,7 +1,7 @@
 - name: CAN FAIL - check if rust is installed
   shell: command -v rustc >/dev/null 2>&1
   register: rust_installed
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: download installer
   when: rust_installed is failed

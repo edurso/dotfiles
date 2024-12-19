@@ -5,9 +5,6 @@
     ubuntu_release: noble
     wsl: false
     is_sudo: true
-    shell: true
-    toolchain: true
-    desktop: true
   roles:
 
     # core packages

@@ -1,0 +1,37 @@
+---
+- hosts: all
+  vars:
+    verbose: false
+    ubuntu_release: noble
+    wsl: false
+    is_sudo: true
+  roles:
+
+    # core packages
+    - role: core
+      when:
+        - is_sudo == "true"
+
+    # command line developer extensions
+    - role: zsh
+      when:
+        - is_sudo == "true"
+    - role: neovim
+      when:
+        - is_sudo == "true"
+    - role: lazygit
+      when:
+        - is_sudo == "true"
+
+    # devel toolchains
+    - role: cpp
+      when:
+        - is_sudo == "true"
+    - role: rust
+    - role: python
+    - role: docker
+      when:
+        - wsl == "false"
+        - is_sudo == "true"
+    - role: java
+    - role: cli

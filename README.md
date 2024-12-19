@@ -18,7 +18,6 @@ and applications defined by the installation script that do not necessary have d
 3. Configure git (`./git.py` helps with this)
 4. Run `sudo ./install.sh`
     - Note that the configuration steps of the installer are interactive, and will install ansible if ran as `sudo`
-    - Run `./install.sh -h` for custom install options
 5. Reboot when prompted
 
 ## Additional Configuration

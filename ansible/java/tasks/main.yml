@@ -1,7 +1,7 @@
 - name: CAN FAIL - check if sdkman is installed
   shell: command -v sdk >/dev/null 2>&1
   register: sdk_installed
-  ignore_errors: yes
+  ignore_errors: True
 
 - name: display sdkman install state
   debug:
