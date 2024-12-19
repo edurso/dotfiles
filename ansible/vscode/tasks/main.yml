@@ -1,7 +1,3 @@
-- name: update package index
-  apt:
-    update_cache: yes
-
 - name: install dependencies
   apt:
     name:
@@ -20,10 +16,6 @@
   apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
     state: present
-
-- name: update package index
-  apt:
-    update_cache: yes
 
 - name: install vs code
   apt:
