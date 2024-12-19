@@ -24,16 +24,12 @@ and applications defined by the installation script that do not necessary have d
 
 ### Fonts
 
-Haven't added these to installation candidate yet, but [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) is a nice font.
-Once installed as shown below, it can be added to Ubuntu via `gnome-tweaks`.
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
-```
+[JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) is installed through the insallation script, and is set as the default font for
+[alacritty](https://alacritty.org/). This font can be added to the rest of the system via `gnome-tweaks`.
 
 ### Dropbox
 
-Due to the interactive dropbox configuration process, it is not started by the installer.
+Due to the interactive dropbox configuration process, it is not completely configured by the installer.
 
 Dropbox utilities are copied to `~/dropbox`.
 
