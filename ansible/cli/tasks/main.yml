@@ -6,3 +6,4 @@
     executable: /bin/bash
   loop:
     - just
+    - zoxide
