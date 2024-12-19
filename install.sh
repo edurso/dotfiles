@@ -142,18 +142,20 @@ if [ "${vars[is_sudo]}" = true ]; then
 fi
 
 # update & upgrade
-sudo apt update
-sudo apt upgrade -y
+display -b "updating apt packages..."
+sudo apt-get update > /dev/null
+sudo apt-get upgrade -y > /dev/null
 
 # install fonts
 is_font_installed() {
-    fc-list | grep -qi "JetBrains Mono"
+    fc-list | grep "JetBrains" > /dev/null
 }
 
+display -b "installing jetbrains mono fonts..."
 if is_font_installed; then
     display -g "jetbrains mono fonts are already installed"
 else
-    display -b "jetbrains mono fonts not found, installing..."
+    display -b "installing jetbrains mono fonts..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
     if is_font_installed; then
         display -g "jetbrains mono fonts installed successfully"
