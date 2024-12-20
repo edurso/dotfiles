@@ -1,6 +1,6 @@
 # dotfiles
 
-@edurso's dotfiles
+[@edurso](https://edurso.com)'s dotfiles
 
 > **IMPORTANT:** These are still under very active development and thus very buggy.
 
@@ -18,6 +18,7 @@ and applications defined by the installation script that do not necessary have d
 3. Configure git (`./git.py` helps with this)
 4. Run `sudo ./install.sh`
     - Note that the configuration steps of the installer are interactive, and will install ansible if ran as `sudo`
+    - There are 3 installation phases: the base components, the development components (i.e. ides, etc.), and the desktop components (i.e.) general applications. 
 5. Reboot when prompted
 
 ## Additional Configuration
@@ -38,6 +39,11 @@ It does this for two accounts (personal and umich) and will launch a browser win
 
 The `dropbox.sh` will launch all dropbox dameon's installed under `~/dropbox` on system startup.
 Thus, it should be added to the list of system startup applications.
+
+### Obsidian
+
+The Obsidian package is not available on `apt` or as a ppa, so it needs to be installed manually.
+Find the latest released debian package [here](https://github.com/obsidianmd/obsidian-releases/releases/latest), and install with `sudo apt install ./<download-name>.deb`
 
 ### Desktop
 
