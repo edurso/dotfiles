@@ -68,4 +68,5 @@ require("lazy").setup({
         requires = 'nvim-tree/nvim-web-devicons',
     },
     {'mg979/vim-visual-multi'},
+    {'NoahTheDuke/vim-just'},
 })
