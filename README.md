@@ -45,6 +45,10 @@ Thus, it should be added to the list of system startup applications.
 The Obsidian package is not available on `apt` or as a ppa, so it needs to be installed manually.
 Find the latest released debian package [here](https://github.com/obsidianmd/obsidian-releases/releases/latest), and install with `sudo apt install ./<download-name>.deb`
 
+### NordVPN
+
+The NordVPN installation script can be found [here](https://nordvpn.com/download/linux/#install-nordvpn).
+
 ### Desktop
 
 Ubuntu has some annoying desktop settings, fixes for them enumerated below.
