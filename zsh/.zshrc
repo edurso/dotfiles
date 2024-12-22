@@ -39,6 +39,11 @@ alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
 
+# just typos
+alias j='just'
+alias ju='just'
+alias jus='just'
+
 # shortcuts
 alias cd..='cd ..'
 alias ..='cd ..'
