@@ -24,6 +24,7 @@
       - lldb
       - gcc
       - g++
+      - nasm
 
 - name: stow cpp dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
