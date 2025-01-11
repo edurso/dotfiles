@@ -30,3 +30,132 @@
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
   loop:
     - gdb
+
+- name: python ppa
+  become: True
+  apt_repository:
+    repo: ppa:deadsnakes/ppa
+
+# Allows us to install G++13, so we can use an updated libstdc++ which provides more standard library features (C++20)
+- name: gcc ppa
+  become: True
+  apt_repository:
+    repo: ppa:ubuntu-toolchain-r/test
+
+- name: llvm apt key
+  become: True
+  apt_key:
+    url: https://apt.llvm.org/llvm-snapshot.gpg.key
+
+# Allows us to install LLVM tools
+- name: llvm apt list
+  become: True
+  apt_repository:
+    repo: deb http://apt.llvm.org/{{ ubuntu_release }}/ llvm-toolchain-{{ ubuntu_release }}-18 main
+    filename: llvm
+
+- name: cmake apt key
+  become: True
+  apt_key:
+    url: https://apt.kitware.com/keys/kitware-archive-latest.asc
+    keyring: /usr/share/keyrings/kitware-archive-keyring.gpg
+
+# Allows us to install CMake versions newer than 3.22
+- name: cmake apt list
+  become: True
+  apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ {{ ubuntu_release }} main
+    filename: kitware
+
+- name: apt update
+  become: True
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    upgrade: yes
+
+- name: install apt packages
+  become: True
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    name:
+      - cmake
+      - ccache
+      - ninja-build
+      - shellcheck
+      - clang-18
+      - clangd-18
+      - clang-tidy-18
+      - clang-format-18
+      - lld-18
+      - lldb-18
+      - gcc-12
+      - g++-12
+      - gcc-13
+      - g++-13
+      - libbullet-dev
+      - libglfw3-dev
+      - libx11-xcb-dev
+      - libnl-3-dev
+      - libnl-route-3-dev
+      - libtbb-dev
+      - libassimp-dev
+      - libeigen3-dev
+      - libopencv-dev
+
+- name: g++13 default
+  become: True
+  alternatives:
+    name: g++
+    path: /usr/bin/g++-13
+    link: /usr/bin/g++
+    priority: 130
+
+- name: gcc-13 default
+  become: True
+  alternatives:
+    name: gcc
+    path: /usr/bin/gcc-13
+    link: /usr/bin/gcc
+    priority: 130
+
+- name: clang++18 default
+  become: True
+  alternatives:
+    name: clang++
+    path: /usr/bin/clang++-18
+    link: /usr/bin/clang++
+    priority: 180
+
+- name: clang-18 default
+  become: True
+  alternatives:
+    name: clang
+    path: /usr/bin/clang-18
+    link: /usr/bin/clang
+    priority: 180
+
+- name: clangd 18 default
+  become: True
+  alternatives:
+    name: clangd
+    path: /usr/bin/clangd-18
+    link: /usr/bin/clangd
+    priority: 180
+
+- name: LLD 18 default
+  become: True
+  alternatives:
+    name: lld
+    path: /usr/bin/lld-18
+    link: /usr/bin/lld
+    priority: 180
+
+- name: clang-tidy 18 default
+  become: True
+  alternatives:
+    name: clang-tidy
+    path: /usr/bin/clang-tidy-18
+    link: /usr/bin/clang-tidy
+    priority: 180
