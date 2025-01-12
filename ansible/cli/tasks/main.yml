@@ -7,3 +7,4 @@
   loop:
     - just
     - zoxide
+    - typst-cli
