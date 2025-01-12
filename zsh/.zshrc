@@ -244,9 +244,9 @@ clear
 if command -v rosdep &> /dev/null; then
 	alias mrover="cd ~/dev/rover/src/mrover && source ~/dev/rover/src/mrover/venv/bin/activate"
 
-	readonly ROS2_WS_PATH=~/dev/rover
+	ROS2_WS_PATH="~/dev/rover"
 	source /opt/ros/humble/setup.zsh
-	readonly CATKIN_SETUP_PATH=${ROS2_WS_PATH}/install/setup.zsh
+	CATKIN_SETUP_PATH="${ROS2_WS_PATH}/install/setup.zsh"
 	if [ -f ${CATKIN_SETUP_PATH} ]; then
 		source ${CATKIN_SETUP_PATH}
 	fi
@@ -265,6 +265,11 @@ fi
 
 # cmake config fixes
 export CMAKE_IGNORE_PREFIX_PATH="$HOME/miniforge3"
+
+arm_compilers="/home/edurso/toolchains/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin"
+if [ -d "$arm_compilers" ]; then
+    export PATH="$arm_compilers:$PATH"
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
