@@ -103,6 +103,7 @@
       - libassimp-dev
       - libeigen3-dev
       - libopencv-dev
+      - openocd
 
 - name: g++13 default
   become: True
