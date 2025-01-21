@@ -266,9 +266,16 @@ fi
 # cmake config fixes
 export CMAKE_IGNORE_PREFIX_PATH="$HOME/miniforge3"
 
+# GNU ARM cross-compilers for embedded
 arm_compilers="/home/edurso/toolchains/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin"
 if [ -d "$arm_compilers" ]; then
     export PATH="$arm_compilers:$PATH"
+fi
+
+# check cuda and include if present
+cuda_dir="/usr/local/cuda/bin"
+if [ -d "$cuda_dir" ]; then
+    export PATH="$cuda_dir:$PATH"
 fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
