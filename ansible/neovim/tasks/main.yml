@@ -1,12 +1,11 @@
-- name: upgrade apt packages
-  become: true
-  apt:
-    cache_valid_time: 604800
-    state: latest
-    upgrade: yes
+- name: check if neovim is installed
+  shell: command -v nvim
+  register: nvim_exists
+  ignore_errors: True
 
 - name: install build dependencies
-  become: true
+  when: nvim_exists is failed
+  become: True
   tags: install
   apt:
     cache_valid_time: 604800
@@ -19,27 +18,42 @@
       - curl
       - build-essential
 
-- name: download installer
-  get_url:
-    url: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-    dest: /tmp/nvim.tar.gz
-    mode: '0755'
-    force: 'yes'
+- name: clone Neovim source code into /usr/local/src
+  when: nvim_exists is failed
+  become: True
+  tags: install
+  git:
+    repo: https://github.com/neovim/neovim.git
+    dest: /usr/local/src/neovim
+    version: stable
 
-- name: remove /opt/nvim 
-  file:
-    path: /opt/nvim
-    state: absent
-    force: yes
+- name: build neovim
+  when: nvim_exists is failed
+  become: True
+  tags: install
+  make:
+    chdir: /usr/local/src/neovim
+    target: all
+    params:
+      CMAKE_BUILD_TYPE: RelWithDebInfo
 
-- name: install nvim to /opt
-  unarchive:
-    src: /tmp/nvim.tar.gz
-    dest: /opt
-    remote_src: yes
+- name: build debian package
+  when: nvim_exists is failed
+  become: True
+  tags: install
+  command: cpack -G DEB
+  args:
+    chdir: /usr/local/src/neovim/build
+
+- name: install neovim debian package
+  when: nvim_exists is failed
+  become: True
+  tags: install
+  apt:
+    deb: /usr/local/src/neovim/build/nvim-linux64.deb
 
 - name: install lazy.nvim plugin dependencies
-  become: true
+  become: True
   tags: config
   apt:
     cache_valid_time: 604800
