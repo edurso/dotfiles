@@ -1,15 +1,11 @@
-- name: CAN FAIL - check if sdkman is installed
-  shell: command -v sdk >/dev/null 2>&1
-  register: sdk_installed
+- name: check if sdkman is installed
+  shell: command -v sdk
+  register: sdk_exists
   ignore_errors: True
 
-- name: display sdkman install state
-  debug:
-    msg: "sdkman install state: {{ sdk_installed }}"
-  when: verbose == true
-
 - name: download installer
-  when: sdk_installed is failed
+  when: sdk_exists is failed
+  become: True
   get_url:
     url: https://get.sdkman.io
     dest: /tmp/sdkman.sh
@@ -17,11 +13,13 @@
     force: 'yes'
 
 - name: install sdkman
-  when: sdk_installed is failed
+  when: sdk_exists is failed
+  become: True
   shell: /tmp/sdkman.sh 
 
 - name: setup sdkman and install java, gradle
-  when: sdk_installed is failed
+  when: sdk_exists is failed
+  become: True
   shell: |
     source $HOME/.sdkman/bin/sdkman-init.sh
     sdk install java 17.0.12-oracle

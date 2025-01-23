@@ -36,7 +36,6 @@
   apt_repository:
     repo: ppa:deadsnakes/ppa
 
-# Allows us to install G++13, so we can use an updated libstdc++ which provides more standard library features (C++20)
 - name: gcc ppa
   become: True
   apt_repository:
@@ -47,7 +46,6 @@
   apt_key:
     url: https://apt.llvm.org/llvm-snapshot.gpg.key
 
-# Allows us to install LLVM tools
 - name: llvm apt list
   become: True
   apt_repository:
@@ -60,7 +58,6 @@
     url: https://apt.kitware.com/keys/kitware-archive-latest.asc
     keyring: /usr/share/keyrings/kitware-archive-keyring.gpg
 
-# Allows us to install CMake versions newer than 3.22
 - name: cmake apt list
   become: True
   apt_repository:

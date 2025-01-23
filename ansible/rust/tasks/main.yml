@@ -1,10 +1,11 @@
-- name: CAN FAIL - check if rust is installed
-  shell: command -v rustc >/dev/null 2>&1
-  register: rust_installed
-  ignore_errors: true
+- name: check if rust is installed
+  shell: command -v rustup
+  register: rust_exists
+  ignore_errors: True
 
 - name: download installer
-  when: rust_installed is failed
+  when: rust_exists is failed
+  become: True
   get_url:
     url: https://sh.rustup.rs
     dest: /tmp/sh.rustup.rs
@@ -12,7 +13,8 @@
     force: 'yes'
 
 - name: install rust and cargo
-  when: rust_installed is failed
+  when: rust_exists is failed
+  become: True
   shell: /tmp/sh.rustup.rs -y
 
 - name: set shell configuration file to .zshrc if using zsh

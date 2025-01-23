@@ -1,14 +1,25 @@
+- name: check if mamba is installed
+  shell: command -v mamba
+  register: mamba_exists
+  ignore_errors: True
+
 - name: download miniforge installer
+  when: mamba_exists is failed
+  become: True
   get_url:
     url: "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh"
     dest: "/tmp/Miniforge3-Linux-x86_64.sh"
 
 - name: run miniforge installer
+  when: mamba_exists is failed
+  become: True
   shell: "/bin/bash /tmp/Miniforge3-Linux-x86_64.sh -b -p $HOME/miniforge3"
   args:
     creates: "{{ ansible_env.HOME }}/miniforge3/bin/conda"
 
 - name: clean up temporary files
+  when: mamba_exists is failed
+  become: True
   file:
     path: /tmp/Miniforge3-Linux-x86_64.sh
     state: absent

@@ -61,11 +61,11 @@ require("lazy").setup({
 			"nvim-neotest/nvim-nio"
 		}
 	},
-    {'nvim-tree/nvim-web-devicons'},
+    {'kyazdani42/nvim-web-devicons'},
 	{
-        'nvim-tree/nvim-tree.lua',
+        'kyazdani42/nvim-tree.lua',
         after = 'nvim-web-devicons',
-        requires = 'nvim-tree/nvim-web-devicons',
+        requires = 'kyazdani42/nvim-web-devicons',
     },
     {'mg979/vim-visual-multi'},
     {'NoahTheDuke/vim-just'},
