@@ -278,6 +278,11 @@ if [ -d "$cuda_dir" ]; then
     export PATH="$cuda_dir:$PATH"
 fi
 
+# if on wsl, start tmux
+if [ -f "/etc/wsl.conf" ]; then
+    tmux
+fi
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
