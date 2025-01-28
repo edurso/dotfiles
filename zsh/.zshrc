@@ -242,7 +242,7 @@ me() {
 clear
 
 if command -v rosdep &> /dev/null; then
-	alias mrover="cd ~/dev/rover/src/mrover && source ~/dev/rover/src/mrover/venv/bin/activate"
+	alias mrover="mamba deactivate && cd ~/dev/rover/src/mrover && source ~/dev/rover/src/mrover/venv/bin/activate"
 
 	ROS2_WS_PATH="~/dev/rover"
 	source /opt/ros/humble/setup.zsh
