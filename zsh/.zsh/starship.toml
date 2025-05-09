@@ -1,0 +1,145 @@
+# Starship Configutaion
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """\
+[$username@$hostname]($username.style) $directory$git_branch\
+$shell
+$character
+"""
+
+[username]
+style_user = "bold green"
+show_always = true
+format = '[$user]($style)'
+
+[hostname]
+style = "bold blue"
+ssh_only = false
+format = '[$ssh_symbol$hostname]($style)'
+
+[directory]
+style = "bold cyan"
+truncation_length = 0
+truncate_to_repo = false
+format = "[$path]($style) "
+
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = "[❌](bold red)"
+
+[git_branch]
+only_attached = false
+format = '[$symbol$branch(:$remote_branch)]($style) ' 
+
+[git_status]
+disabled = true
+
+[package]
+disabled = true
+
+[aws]
+disabled = true
+[azure]
+disabled = true
+[bun]
+disabled = true
+[c]
+disabled = true
+[cmake]
+disabled = true
+[conda]
+disabled = true
+[crystal]
+disabled = true
+[daml]
+disabled = true
+[dart]
+disabled = true
+[deno]
+disabled = true
+[docker_context]
+disabled = true
+[dotnet]
+disabled = true
+[elixir]
+disabled = true
+[elm]
+disabled = true
+[erlang]
+disabled = true
+[golang]
+disabled = true
+[gradle]
+disabled = true
+[guix_shell]
+disabled = true
+[haskell]
+disabled = true
+[helm]
+disabled = true
+[java]
+disabled = true
+[julia]
+disabled = true
+[kotlin]
+disabled = true
+[lua]
+disabled = true
+[memory_usage]
+disabled = true
+[nim]
+disabled = true
+[nix_shell]
+disabled = true
+[nodejs]
+disabled = true
+[ocaml]
+disabled = true
+[openstack]
+disabled = true
+[perl]
+disabled = true
+[php]
+disabled = true
+[pijul_channel]
+disabled = true
+[python]
+disabled = true
+[raku]
+disabled = true
+[red]
+disabled = true
+[ruby]
+disabled = true
+[rust]
+disabled = true
+[scala]
+disabled = true
+[shell]
+disabled = true
+[shlvl]
+disabled = true
+[singularity]
+disabled = true
+[solidity]
+disabled = true
+[spack]
+disabled = true
+[swift]
+disabled = true
+[terraform]
+disabled = true
+[time]
+disabled = true
+[typst]
+disabled = true
+[vagrant]
+disabled = true
+[vlang]
+disabled = true
+[zig]
+disabled = true
+

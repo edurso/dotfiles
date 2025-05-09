@@ -6,5 +6,4 @@
     executable: /bin/bash
   loop:
     - just
-    - zoxide
     - typst-cli

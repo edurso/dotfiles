@@ -14,39 +14,51 @@
       - zsh
       - fzf
 
-- name: install oh-my-zsh
-  git:
-    repo: https://github.com/ohmyzsh/ohmyzsh.git
-    dest: ~/.oh-my-zsh
-    version: master
-
-- name: clone powerlevel10k repository
-  git:
-    repo: https://github.com/romkatv/powerlevel10k.git
-    dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
-
 - name: clone zsh-autosuggestions
   git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
-    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    dest: ~/.zsh/plug/zsh-autosuggestions
 
 - name: clone zsh-syntax-highlighting
   git:
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    dest: ~/.zsh/plug/zsh-syntax-highlighting
 
-- name: clone zsh-bat
-  git:
-    repo: https://github.com/fdellwing/zsh-bat.git
-    dest: ~/.oh-my-zsh/custom/plugins/zsh-bat
+# - name: clone zsh-bat
+#   git:
+#     repo: https://github.com/fdellwing/zsh-bat.git
+#     dest: ~/.oh-my-zsh/custom/plugins/zsh-bat
 
-- name: fzf plugin repo
-  git:
-    repo: https://github.com/junegunn/fzf
-    dest: ~/.fzf
+- name: download starship install script
+  get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship_install.sh
+    mode: '0755'
 
-- name: install fzf plugin
-  command: ~/.fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+- name: run starship install script
+  shell: /tmp/starship_install.sh -y
+  args:
+    creates: /usr/local/bin/starship
+
+- name: download mcfly install script
+  get_url:
+    url: https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh
+    dest: /tmp/mcfly_install.sh
+    mode: '0755'
+
+- name: run mcfly install script
+  command: /tmp/mcfly_install.sh --git cantino/mcfly --force
+
+- name: download zoxide install script
+  get_url:
+    url: https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh
+    dest: /tmp/zoxide_install.sh
+    mode: '0755'
+
+- name: run zoxide install script
+  shell: /tmp/zoxide_install.sh --bin-dir /usr/local/bin
+  args:
+    creates: /usr/local/bin/zoxide
 
 - name: stow zsh dotfiles
   command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
