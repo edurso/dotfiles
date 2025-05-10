@@ -1,0 +1,13 @@
+- name: download zed install script
+  get_url:
+    url: https://zed.dev/install.sh
+    dest: /tmp/zed_install.sh
+    mode: "0755"
+
+- name: run zed install script
+  shell: /tmp/zed_install.sh
+
+- name: stow zed config
+  command: "stow -d $HOME/dotfiles -t ~/ {{ item }}"
+  loop:
+    - zed

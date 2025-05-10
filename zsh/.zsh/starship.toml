@@ -5,7 +5,7 @@
 add_newline = false
 
 format = """\
-[$username@$hostname]($username.style) $directory$git_branch\
+[$username@$hostname]($username.style) $directory$conda$git_branch\
 $shell
 $character
 """
@@ -18,7 +18,7 @@ format = '[$user]($style)'
 [hostname]
 style = "bold blue"
 ssh_only = false
-format = '[$ssh_symbol$hostname]($style)'
+format = '[$hostname]($style)'
 
 [directory]
 style = "bold cyan"
@@ -28,17 +28,21 @@ format = "[$path]($style) "
 
 [character]
 success_symbol = '[➜](bold green)'
-error_symbol = "[❌](bold red)"
+error_symbol = "[➜](bold red)"
 
 [git_branch]
 only_attached = false
-format = '[$symbol$branch(:$remote_branch)]($style) ' 
+format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [git_status]
 disabled = true
 
 [package]
 disabled = true
+
+[conda]
+disabled = true
+format = '[env:$environment](green) '
 
 [aws]
 disabled = true
@@ -49,8 +53,6 @@ disabled = true
 [c]
 disabled = true
 [cmake]
-disabled = true
-[conda]
 disabled = true
 [crystal]
 disabled = true
@@ -142,4 +144,3 @@ disabled = true
 disabled = true
 [zig]
 disabled = true
-

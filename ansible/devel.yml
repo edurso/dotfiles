@@ -12,6 +12,10 @@
       when:
         - is_sudo == "true"
         - wsl == "false"
+    - role: zed
+      when:
+        - is_sudo == "true"
+        - wsl == "false"
     - role: jetbrains
       when:
         - is_sudo == "true"
