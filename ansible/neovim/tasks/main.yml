@@ -50,7 +50,7 @@
   become: True
   tags: install
   apt:
-    deb: /usr/local/src/neovim/build/nvim-linux64.deb
+    deb: /usr/local/src/neovim/build/nvim-linux-x86_64.deb
 
 - name: install lazy.nvim plugin dependencies
   become: True
