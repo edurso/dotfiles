@@ -7,6 +7,7 @@ dan-c-underwood.arm
 davidanson.vscode-markdownlint
 dbaeumer.vscode-eslint
 dbankier.vscode-instant-markdown
+docker.docker
 docsmsft.docs-markdown
 donjayamanne.githistory
 donjayamanne.python-environment-manager
@@ -14,7 +15,6 @@ donjayamanne.python-extension-pack
 dotdevru.prettier-java
 ecmel.vscode-html-css
 eirikpre.systemverilog
-equinusocio.vsc-material-theme-icons
 esbenp.prettier-vscode
 fallenwood.viml
 fill-labs.dependi
@@ -41,6 +41,7 @@ luqimin.velocity
 mathworks.language-matlab
 mdickin.markdown-shortcuts
 mechatroner.rainbow-csv
+moozzyk.arduino
 ms-azuretools.vscode-docker
 ms-dotnettools.csharp
 ms-dotnettools.vscode-dotnet-runtime
@@ -76,6 +77,7 @@ mshr-h.veriloghdl
 myriad-dreamin.tinymist
 naco-siren.gradle-language
 nefrob.vscode-just-syntax
+ngtystr.ppm-pgm-viewer-for-vscode
 njpwerner.autodocstring
 pdconsec.vscode-print
 pkief.material-icon-theme
@@ -89,6 +91,7 @@ rust-lang.rust-analyzer
 shd101wyy.markdown-preview-enhanced
 shopify.ruby-lsp
 simonsiefke.svg-preview
+streetsidesoftware.code-spell-checker
 surfer-project.surfer
 swellaby.rust-pack
 tamasfe.even-better-toml

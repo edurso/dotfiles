@@ -39,6 +39,7 @@
       - neofetch
       - dbus-x11
       - xclip
+      - direnv
 
 - name: setup tpm
   git:

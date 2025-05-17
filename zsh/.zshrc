@@ -9,7 +9,7 @@ export STARSHIP_CONFIG=~/.zsh/starship.toml
 eval "$(starship init zsh)"
 
 # initialize mamba
-source ~/.zsh/mamba.zsh
+#source ~/.zsh/mamba.zsh
 
 # mrover configurations
 source ~/.zsh/mrover.zsh
@@ -36,5 +36,14 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$HOME/miniforge3/bin:$PATH"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
+# configs/licenses for fpga devel
+source ~/.zsh/fpga.zsh
+
 # use aliases configuration
 source ~/.zsh/alias.zsh
+
+# hook direnv to shell to recognize .envrc files
+eval "$(direnv hook zsh)"
+
+# fix this for some reason
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib:/lib"

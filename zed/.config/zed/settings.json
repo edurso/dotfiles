@@ -1421,6 +1421,15 @@
         "Plain Text": {
             "allow_rewrap": "anywhere"
         },
+        "Python": {
+            "language_servers": ["pyright", "ruff"],
+            "format_on_save": "on",
+            "formatter": [
+                {
+                    "language_server": { "name": "ruff" }
+                }
+            ]
+        },
         "Ruby": {
             "language_servers": ["solargraph", "!ruby-lsp", "!rubocop", "..."]
         },
@@ -1639,7 +1648,25 @@
     //     ]
     //   }
     // ]
-    "ssh_connections": [],
+    "ssh_connections": [
+    {
+      "host": "10.0.0.102",
+      "username": "edurso",
+      "projects": [
+        {
+          "paths": [
+            "/home/edurso"
+          ]
+        },
+        {
+          "paths": [
+            "/home/edurso/media"
+          ]
+        }
+      ],
+      "nickname": "shaw"
+    }
+  ],
     // Configures context servers for use by the agent.
     "context_servers": {},
     "debugger": {

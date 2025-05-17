@@ -28,7 +28,7 @@
       when:
         - is_sudo == "true"
     - role: rust
-    - role: python
+    # - role: python
     - role: docker
       when:
         - wsl == "false"

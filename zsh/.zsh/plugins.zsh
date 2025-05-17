@@ -12,5 +12,14 @@ eval "$(mcfly init zsh)"
 source ~/.zsh/plug/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/plug/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# autocompletion
+autoload -Uz +X compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu select
+
+# bind keys for jumping
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
 # zoxide
 eval "$(zoxide init zsh)"
