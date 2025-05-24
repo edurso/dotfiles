@@ -31,39 +31,6 @@
   loop:
     - gdb
 
-- name: python ppa
-  become: True
-  apt_repository:
-    repo: ppa:deadsnakes/ppa
-
-- name: gcc ppa
-  become: True
-  apt_repository:
-    repo: ppa:ubuntu-toolchain-r/test
-
-- name: llvm apt key
-  become: True
-  apt_key:
-    url: https://apt.llvm.org/llvm-snapshot.gpg.key
-
-- name: llvm apt list
-  become: True
-  apt_repository:
-    repo: deb http://apt.llvm.org/{{ ubuntu_release }}/ llvm-toolchain-{{ ubuntu_release }}-18 main
-    filename: llvm
-
-- name: cmake apt key
-  become: True
-  apt_key:
-    url: https://apt.kitware.com/keys/kitware-archive-latest.asc
-    keyring: /usr/share/keyrings/kitware-archive-keyring.gpg
-
-- name: cmake apt list
-  become: True
-  apt_repository:
-    repo: deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ {{ ubuntu_release }} main
-    filename: kitware
-
 - name: apt update
   become: True
   apt:
@@ -87,10 +54,18 @@
       - clang-format-18
       - lld-18
       - lldb-18
-      - gcc-12
-      - g++-12
+      - clang-20
+      - clangd-20
+      - clang-tidy-20
+      - clang-format-20
+      - lld-20
+      - lldb-20
       - gcc-13
       - g++-13
+      - gcc-14
+      - g++-14
+      - gcc-15
+      - g++-15
       - libbullet-dev
       - libglfw3-dev
       - libx11-xcb-dev
@@ -102,58 +77,58 @@
       - libopencv-dev
       - openocd
 
-- name: g++13 default
+- name: g++14 default
   become: True
   alternatives:
     name: g++
-    path: /usr/bin/g++-13
+    path: /usr/bin/g++-14
     link: /usr/bin/g++
     priority: 130
 
-- name: gcc-13 default
+- name: gcc-14 default
   become: True
   alternatives:
     name: gcc
-    path: /usr/bin/gcc-13
+    path: /usr/bin/gcc-14
     link: /usr/bin/gcc
     priority: 130
 
-- name: clang++18 default
+- name: clang++20 default
   become: True
   alternatives:
     name: clang++
-    path: /usr/bin/clang++-18
+    path: /usr/bin/clang++-20
     link: /usr/bin/clang++
     priority: 180
 
-- name: clang-18 default
+- name: clang-20 default
   become: True
   alternatives:
     name: clang
-    path: /usr/bin/clang-18
+    path: /usr/bin/clang-20
     link: /usr/bin/clang
     priority: 180
 
-- name: clangd 18 default
+- name: clangd 20 default
   become: True
   alternatives:
     name: clangd
-    path: /usr/bin/clangd-18
+    path: /usr/bin/clangd-20
     link: /usr/bin/clangd
     priority: 180
 
-- name: LLD 18 default
+- name: LLD 20 default
   become: True
   alternatives:
     name: lld
-    path: /usr/bin/lld-18
+    path: /usr/bin/lld-20
     link: /usr/bin/lld
     priority: 180
 
-- name: clang-tidy 18 default
+- name: clang-tidy 20 default
   become: True
   alternatives:
     name: clang-tidy
-    path: /usr/bin/clang-tidy-18
+    path: /usr/bin/clang-tidy-20
     link: /usr/bin/clang-tidy
     priority: 180

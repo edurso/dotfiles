@@ -7,15 +7,46 @@
       - software-properties-common
     state: present
 
-- name: add ms gpg key
-  apt_key:
+- name: download ms gpg key
+  get_url:
     url: https://packages.microsoft.com/keys/microsoft.asc
-    state: present
+    dest: /tmp/packages.microsoft.asc
+    mode: '0644'
+
+- name: convert ms gpg key
+  command: "gpg --dearmor /tmp/packages.microsoft.asc"
+
+- name: move to keyrings
+  copy:
+    src: /tmp/packages.microsoft.asc.gpg
+    dest: /etc/apt/keyrings/packages.microsoft.gpg
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: add vs code repo
-  apt_repository:
-    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+  lineinfile:
+    path: /etc/apt/sources.list.d/vscode.list
+    line: 'deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main'
+    create: yes
     state: present
+
+- name: clean tmp asc
+  file:
+    path: /tmp/packages.microsoft.asc
+    state: absent
+
+- name: clean tmp gpg
+  file:
+    path: /tmp/packages.microsoft.asc.gpg
+    state: absent
+
+- name: upgrade apt packages
+  become: true
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    upgrade: yes
 
 - name: install vs code
   apt:

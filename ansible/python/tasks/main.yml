@@ -46,3 +46,8 @@
   command: "$HOME/miniforge3/bin/conda update -n base -c defaults conda"
   environment:
     PATH: "$HOME/miniforge3/bin:$PATH"
+
+- name: configure conda settings
+  command: "$HOME/miniforge3/bin/conda config --set changeps1 False"
+  environment:
+    PATH: "$HOME/miniforge3/bin:$PATH"

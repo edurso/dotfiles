@@ -24,5 +24,4 @@ fi
 
 # cmake config fixes
 export CMAKE_IGNORE_PREFIX_PATH="$HOME/miniforge3"
-
-
+export TBB_DIR="/usr/lib/x86_64-linux-gnu/cmake/TBB"

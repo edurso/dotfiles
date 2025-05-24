@@ -7,15 +7,23 @@
       - software-properties-common
     state: latest
 
+- name: ensure keyrings directory exists
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
 - name: add docker gpg key
-  apt_key:
+  get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
+    dest: /etc/apt/keyrings/docker.asc
+    mode: '0644'
 
 - name: add docker repository
   apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu {{ ubuntu_release }} stable
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ubuntu_release }} stable"
     state: present
+    filename: docker
 
 - name: update apt and install docker-ce
   apt:

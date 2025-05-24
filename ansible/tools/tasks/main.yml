@@ -1,12 +1,29 @@
-- name: add signal gpg key
-  apt_key:
+- name: download signal signing key
+  get_url:
     url: https://updates.signal.org/desktop/apt/keys.asc
-    state: present
+    dest: /tmp/signal-keys.asc
+
+- name: convert signal signing key
+  command: "gpg --dearmor -o /tmp/signal-desktop-keyring.gpg /tmp/signal-keys.asc"
+
+- name: move gpg key to keyrings directory
+  copy:
+    src: /tmp/signal-desktop-keyring.gpg
+    dest: /usr/share/keyrings/signal-desktop-keyring.gpg
+    remote_src: yes
 
 - name: add signal repo
-  apt_repository:
-    repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
-    state: present
+  copy:
+    dest: /etc/apt/sources.list.d/signal-xenial.list
+    content: |
+      deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main
+
+- name: upgrade apt packages
+  become: true
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    upgrade: yes
 
 - name: install tools
   apt:

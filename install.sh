@@ -44,7 +44,7 @@ if ! command -v ansible-playbook &> /dev/null; then
 		display -r "ansible is not installed - install or run as 'sudo'"
 		exit 1
 	fi
-	ansible_installed=false
+	sudo apt install ansible
 fi
 
 # check if git is installed
@@ -54,37 +54,12 @@ if ! command -v git &> /dev/null; then
 		display -r "git is not installed - install or run as 'sudo'"
 		exit 1
 	fi
-	git_installed=false
-fi
-
-# install ppas
-if [ "${vars[is_sudo]}" = true ]; then
-	if [ "$ansible_installed" = false ] || [ "$git_installed" = false ]; then
-		PPAS=(
-			ansible/ansible
-			git-core/ppa
-		)
-		NEED_APT_UPDATE=false
-		for PPA in "${PPAS[@]}"; do
-			if ! grep -q "^deb .*${PPA}" /etc/apt/sources.list /etc/apt/sources.list.d/*;
-			then
-				display -b "adding ppa: ${PPA}"
-				sudo apt-add-repository ppa:"${PPA}" -y
-				NEED_APT_UPDATE=true
-			fi
-		done
-		if [ "$NEED_APT_UPDATE" = true ]; then
-			sudo apt update
-		fi
-		# install ansible and git
-		sudo apt install -y ansible git
-		ansible_installed=true
-		git_installed=true
-	fi
+	sudo apt install git
 fi
 
 # exit if dependencies are not installed
 if [ "$ansible_installed" = false ] || [ "$git_installed" = false ]; then
+	display -r "please ensure both ansible and git are installed before proceeding"
 	exit 1
 fi
 
@@ -103,7 +78,7 @@ ansible-playbook -i "localhost," -c local "$REPO_DIR/ansible/initial.yml" -e "$a
 
 while true; do
 	display -b "install development tools? (y/n): "
-    read -p "" choice
+    read -rp "" choice
     choice=$(echo "$choice" | tr '[:upper:]' '[:lower:]')
     if [[ "$choice" == "y" ]]; then
         display -g "installing development tools..."
@@ -119,7 +94,7 @@ done
 
 while true; do
 	display -b "install desktop tools? (y/n): "
-    read -p "" choice
+    read -rp "" choice
     choice=$(echo "$choice" | tr '[:upper:]' '[:lower:]')
     if [[ "$choice" == "y" ]]; then
         display -g "installing desktop tools..."
@@ -169,7 +144,7 @@ display -g "configuration finished successfully"
 display -g "please reboot now to complete installation"
 while true; do
 	display -b "reboot now? (y/n): "
-    read -p "" choice
+    read -rp "" choice
     choice=$(echo "$choice" | tr '[:upper:]' '[:lower:]')
     if [[ "$choice" == "y" ]]; then
         display -g "rebooting now..."

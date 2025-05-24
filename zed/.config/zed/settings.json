@@ -1067,7 +1067,12 @@
         //           "args": ["--login"]
         //         }
         //     }
-        "shell": "system",
+        "shell": {
+            "with_arguments": {
+                "program": "/bin/zsh",
+                "args": []
+            }
+        },
         // Where to dock terminals panel. Can be `left`, `right`, `bottom`.
         "dock": "bottom",
         // Default width when the terminal is docked to the left or right.
