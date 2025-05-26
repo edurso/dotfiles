@@ -8,7 +8,6 @@ export EDITOR='nvim'
 # zsh history
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
-SAVEHIST=10000000
 
 # starship
 export STARSHIP_CONFIG=~/.zsh/starship.toml
@@ -16,9 +15,6 @@ eval "$(starship init zsh)"
 
 # initialize mamba
 source ~/.zsh/mamba.zsh
-
-# mrover configurations
-# source ~/.zsh/mrover.zsh
 
 # source zsh plugins/extensions
 source ~/.zsh/plugins.zsh
