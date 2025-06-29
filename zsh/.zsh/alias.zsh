@@ -49,6 +49,8 @@ alias jb='jetbrains-toolbox'
 alias jl='jupyter lab&'
 alias rm='rm -rf'
 alias fin='encfs ~/dropbox/personal/Dropbox/finance ~/finance'
+alias da='direnv allow'
+alias po='poetry'
 
 # open lazygit
 lg() {

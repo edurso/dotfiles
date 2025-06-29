@@ -18,7 +18,7 @@
       - curl
       - build-essential
 
-- name: clone Neovim source code into /usr/local/src
+- name: clone neovim source code into /usr/local/src
   when: nvim_exists is failed
   become: True
   tags: install

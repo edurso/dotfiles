@@ -79,7 +79,7 @@ def check_git_installed() -> None:
     try:
         run(["git", "--version"])
     except subprocess.CalledProcessError:
-        print(f'git is not installed, please install and rerun this script')
+        print('git is not installed, please install and rerun this script')
         sys.exit(1)
 
 
@@ -145,7 +145,7 @@ def get_ssh_key(config: GitConfig) -> GitConfig:
     :param config: User configuration with valid email
     :return: User configuration with SSH key
     """
-    if not yes_no(f'would you like to create an ssh key?'):
+    if not yes_no('would you like to create an ssh key?'):
         return config
 
     ssh_dir = Path(Path.home(), '.ssh')
@@ -289,14 +289,14 @@ def get_gpg_key(config: GitConfig) -> GitConfig:
     :param config: Valid git config with valid name and email
     :return: Valid git config with gpg settings
     """
-    if not yes_no(f'would you like to create a gpg key?'):
+    if not yes_no('would you like to create a gpg key?'):
         return config
 
     init_keys = get_gpg_key_ids()
     key_id = None
 
     if len(init_keys) > 1:
-        print(f'the following gpg keys already exist:')
+        print('the following gpg keys already exist:')
         for i, key in enumerate(init_keys):
             print(f'\t{i+1}) {key}')
         registered = yes_no('has one of these keys already been registered on https://github.com/settings/keys?')
@@ -329,7 +329,7 @@ def get_gpg_key(config: GitConfig) -> GitConfig:
                               'do you want to use it?')
         if use_existing:
             key_id = init_keys[0]
-            registered = yes_no(f'is it registered on https://github.com/settings/keys?')
+            registered = yes_no('is it registered on https://github.com/settings/keys?')
             if not registered:
                 gpg_key_add_to_account(key_id)
 

@@ -6,5 +6,5 @@ if not is_ok then
     return
 end
 
-vim.o.background = "dark" 
+vim.o.background = "dark"
 vim.cmd('highlight Normal guibg=NONE ctermbg=NONE')

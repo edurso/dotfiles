@@ -28,6 +28,7 @@ require('mason-lspconfig').setup({
         'clangd',
         'lua_ls',
         'gradle_ls',
+        'pylsp',
         'markdown_oxide',
         'ruff',
         'svls',
@@ -35,15 +36,6 @@ require('mason-lspconfig').setup({
     handlers = {
         function(server_name)
             require('lspconfig')[server_name].setup({})
-        end,
-        ['ruff'] = function()
-            require('lspconfig').ruff.setup({
-                init_options = {
-                    settings = {
-                        lineLength = 120,
-                    },
-                },
-            })
         end,
     }
 })

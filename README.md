@@ -6,9 +6,9 @@
 
 ## Organization
 
-Dotfile "packages" are listed in the root directory of the project and are managed with [GNU Stow](https://www.gnu.org/software/stow/). 
+Dotfile "packages" are listed in the root directory of the project and are managed with [GNU Stow](https://www.gnu.org/software/stow/).
 The installation script (`install.sh`) is merely a wrapper around the playbooks provided in `ansible/`. Together, these tools
-perform all the necessary input parsing and setup as defined by the user. Ansible handles the installation of several packages 
+perform all the necessary input parsing and setup as defined by the user. Ansible handles the installation of several packages
 and applications defined by the installation script that do not necessary have dotfiles.
 
 ## Installation
@@ -18,7 +18,7 @@ and applications defined by the installation script that do not necessary have d
 3. Configure git (`./git.py` helps with this)
 4. Run `sudo ./install.sh`
     - Note that the configuration steps of the installer are interactive, and will install ansible if ran as `sudo`
-    - There are 3 installation phases: the base components, the development components (i.e. ides, etc.), and the desktop components (i.e.) general applications. 
+    - There are 3 installation phases: the base components, the development components (i.e. ides, etc.), and the desktop components (i.e.) general applications.
 5. Reboot when prompted
 
 ## Additional Configuration

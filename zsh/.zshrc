@@ -8,6 +8,8 @@ export EDITOR='nvim'
 # zsh history
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
+SAVEHIST=1000
+setopt appendhistory
 
 # starship
 export STARSHIP_CONFIG=~/.zsh/starship.toml
