@@ -144,4 +144,9 @@ require("lazy").setup({
             },
         },
     },
+    {
+        "danymat/neogen",
+        config = true,
+    },
+    {'stevanmilic/nvim-lspimport'},
 })

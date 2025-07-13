@@ -29,6 +29,9 @@ vim.g.VM_maps = {
 vim.api.nvim_set_keymap('n', '<A-S-Up>', '<Plug>(VM-Add-Cursor-Up)', {})
 vim.api.nvim_set_keymap('n', '<A-S-Down>', '<Plug>(VM-Add-Cursor-Down)', {})
 
+-- auto-import
+vim.keymap.set("n", "<leader>a", require("lspimport").import, { noremap = true })
+
 -- telescope.nvim
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', 'ff', builtin.find_files, {})

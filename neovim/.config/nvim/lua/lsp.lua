@@ -6,7 +6,8 @@ local lsp_attach = function(client, bufnr)
     vim.keymap.set('n', '<F1>', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
     vim.keymap.set('n', '<F12>', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
     vim.keymap.set('n', '<F10>', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-    vim.keymap.set('n', '<F11>', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+    -- vim.keymap.set('n', '<F11>', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+    vim.keymap.set('n', '<F11>', '<C-T>', opts)
     vim.keymap.set('n', '<F9>', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
     vim.keymap.set('n', '<F8>', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
     vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
@@ -24,11 +25,20 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {
         -- full list: github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+        'asm_lsp',
+        'neocmake',
+        'yamlls',
+        'bashls',
+        'jsonls',
+        'veryl_ls',
+        'matlab_ls',
+        'just',
+        'html',
         'rust_analyzer',
         'clangd',
         'lua_ls',
         'gradle_ls',
-        'pylsp',
+        'pyright',
         'markdown_oxide',
         'ruff',
         'svls',
