@@ -16,11 +16,18 @@ fi
 alias ezrc='nvim ~/.zshrc'
 
 # std functions
+alias ls='lsd'
 alias ll='ls -alF'
 alias la='ls -a -l'
 alias l='ls -l'
 alias cls='clear'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# other simple things
+alias bat='batcat'
+alias cat='batcat'
+alias ps='procs'
+alias top='btm'
 
 # neovim entrypoints
 alias v='nvim'

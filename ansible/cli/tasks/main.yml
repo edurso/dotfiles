@@ -7,3 +7,14 @@
   loop:
     - just
     - typst-cli
+    - procs
+    - bottom
+
+- name: install clis
+  become: true
+  apt:
+    cache_valid_time: 604800
+    state: latest
+    name:
+      - lsd
+      - bat
