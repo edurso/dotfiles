@@ -33,6 +33,10 @@ source ~/.zsh/fpga.zsh
 # use aliases configuration
 source ~/.zsh/alias.zsh
 
+# keybinds
+bindkey '^H' backward-kill-word
+bindkey '^[[3;5~' kill-word
+
 # hook direnv to shell to recognize .envrc files
 eval "$(direnv hook zsh)"
 
