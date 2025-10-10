@@ -27,6 +27,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$HOME/miniforge3/bin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 export DIRENV_WARN_TIMEOUT=100s
+export PATH="/usr/bin:$PATH"
 
 # configs/licenses for fpga devel
 source ~/.zsh/fpga.zsh
