@@ -12,14 +12,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    {'joshdick/onedark.vim'},
-	{'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'},
-	{'neovim/nvim-lspconfig'},
-	{'hrsh7th/cmp-nvim-lsp'},
-	{'hrsh7th/nvim-cmp'},
-	{'hrsh7th/cmp-buffer'},
-	{'williamboman/mason.nvim'},
-	{'williamboman/mason-lspconfig.nvim'},
+    { 'joshdick/onedark.vim' },
+    { 'neovim/nvim-lspconfig' },
+    { 'williamboman/mason.nvim', build = ":MasonUpdate" },
+    { 'williamboman/mason-lspconfig.nvim' },
+    { 'hrsh7th/nvim-cmp' },
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/cmp-buffer' },
+    { 'hrsh7th/cmp-path' },
+    { 'L3MON4D3/LuaSnip' },
+    { 'saadparwaiz1/cmp_luasnip' },
 	{
 		'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
@@ -38,8 +40,8 @@ require("lazy").setup({
 		branch = '0.1.x',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
-	{'lewis6991/gitsigns.nvim'},
-	{'tpope/vim-fugitive'},
+	{ 'lewis6991/gitsigns.nvim' },
+	{ 'tpope/vim-fugitive' },
 	{
 		'windwp/nvim-autopairs',
 		event = 'InsertEnter',
@@ -51,9 +53,9 @@ require("lazy").setup({
 			cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 		end,
 	},
-	{'vim-airline/vim-airline'},
-	{'vim-airline/vim-airline-themes'},
-	{'mfussenegger/nvim-dap'},
+	{ 'vim-airline/vim-airline' },
+	{ 'vim-airline/vim-airline-themes' },
+	{ 'mfussenegger/nvim-dap' },
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = {
@@ -61,14 +63,14 @@ require("lazy").setup({
 			"nvim-neotest/nvim-nio"
 		}
 	},
-    {'kyazdani42/nvim-web-devicons'},
+    { 'kyazdani42/nvim-web-devicons' },
 	{
         'kyazdani42/nvim-tree.lua',
         after = 'nvim-web-devicons',
         requires = 'kyazdani42/nvim-web-devicons',
     },
-    {'mg979/vim-visual-multi'},
-    {'NoahTheDuke/vim-just'},
+    { 'mg979/vim-visual-multi' },
+    { 'NoahTheDuke/vim-just' },
     {
         'pocco81/auto-save.nvim',
         config = function ()
@@ -148,5 +150,5 @@ require("lazy").setup({
         "danymat/neogen",
         config = true,
     },
-    {'stevanmilic/nvim-lspimport'},
+    { 'stevanmilic/nvim-lspimport' },
 })
