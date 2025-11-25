@@ -64,7 +64,7 @@
     // The default font size for text in the UI
     "ui_font_size": 12,
     // The default font size for text in the agent panel
-    "agent_ui_font_size": 16,
+    "agent_font_size": 16,
     // How much to fade out unused code.
     "unnecessary_code_fade": 0.3,
     // Active pane styling settings.
@@ -405,7 +405,7 @@
     // Scroll sensitivity multiplier. This multiplier is applied
     // to both the horizontal and vertical delta values while scrolling.
     "scroll_sensitivity": 1.0,
-    "relative_line_numbers": "disabled",
+    "relative_line_numbers": false,
     // If 'search_wrap' is disabled, search result do not wrap around the end of the file.
     "search_wrap": true,
     // Search options to enable by default when opening new project and buffer searches.
@@ -635,6 +635,7 @@
     },
     "agent": {
         // Version of this setting.
+        "version": "2",
         // Whether the agent is enabled.
         "enabled": false,
         /// What completion mode to start new threads in, if available. Can be 'normal' or 'max'.
@@ -1496,6 +1497,7 @@
     // Different settings for specific language models.
     "language_models": {
         "anthropic": {
+            "version": "1",
             "api_url": "https://api.anthropic.com"
         },
         "google": {
@@ -1505,6 +1507,7 @@
             "api_url": "http://localhost:11434"
         },
         "openai": {
+            "version": "1",
             "api_url": "https://api.openai.com/v1"
         },
         "lmstudio": {

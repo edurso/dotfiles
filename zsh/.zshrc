@@ -15,9 +15,6 @@ setopt appendhistory
 export STARSHIP_CONFIG=~/.zsh/starship.toml
 eval "$(starship init zsh)"
 
-# initialize mamba
-source ~/.zsh/mamba.zsh
-
 # source zsh plugins/extensions
 source ~/.zsh/plugins.zsh
 
@@ -34,6 +31,9 @@ source ~/.zsh/fpga.zsh
 
 # use aliases configuration
 source ~/.zsh/alias.zsh
+
+# initialize mamba
+source ~/.zsh/mamba.zsh
 
 # keybinds
 bindkey '^H' backward-kill-word
