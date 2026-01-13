@@ -48,20 +48,12 @@
       - ccache
       - ninja-build
       - shellcheck
-      - clang-18
-      - clangd-18
-      - clang-tidy-18
-      - clang-format-18
-      - lld-18
-      - lldb-18
-      - clang-20
-      - clangd-20
-      - clang-tidy-20
-      - clang-format-20
-      - lld-20
-      - lldb-20
-      - gcc-13
-      - g++-13
+      - clang-21
+      - clangd-21
+      - clang-tidy-21
+      - clang-format-21
+      - lld-21
+      - lldb-21
       - gcc-14
       - g++-14
       - gcc-15
@@ -77,58 +69,58 @@
       - libopencv-dev
       - openocd
 
-- name: g++14 default
+- name: g++15 default
   become: True
   alternatives:
     name: g++
-    path: /usr/bin/g++-14
+    path: /usr/bin/g++-15
     link: /usr/bin/g++
     priority: 130
 
-- name: gcc-14 default
+- name: gcc-15 default
   become: True
   alternatives:
     name: gcc
-    path: /usr/bin/gcc-14
+    path: /usr/bin/gcc-15
     link: /usr/bin/gcc
     priority: 130
 
-- name: clang++20 default
+- name: clang++21 default
   become: True
   alternatives:
     name: clang++
-    path: /usr/bin/clang++-20
+    path: /usr/bin/clang++-21
     link: /usr/bin/clang++
     priority: 180
 
-- name: clang-20 default
+- name: clang-21 default
   become: True
   alternatives:
     name: clang
-    path: /usr/bin/clang-20
+    path: /usr/bin/clang-21
     link: /usr/bin/clang
     priority: 180
 
-- name: clangd 20 default
+- name: clangd 21 default
   become: True
   alternatives:
     name: clangd
-    path: /usr/bin/clangd-20
+    path: /usr/bin/clangd-21
     link: /usr/bin/clangd
     priority: 180
 
-- name: LLD 20 default
+- name: LLD 21 default
   become: True
   alternatives:
     name: lld
-    path: /usr/bin/lld-20
+    path: /usr/bin/lld-21
     link: /usr/bin/lld
     priority: 180
 
-- name: clang-tidy 20 default
+- name: clang-tidy 21 default
   become: True
   alternatives:
     name: clang-tidy
-    path: /usr/bin/clang-tidy-20
+    path: /usr/bin/clang-tidy-21
     link: /usr/bin/clang-tidy
     priority: 180
