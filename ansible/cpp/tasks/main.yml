@@ -124,3 +124,11 @@
     path: /usr/bin/clang-tidy-21
     link: /usr/bin/clang-tidy
     priority: 180
+
+- name: clang-format 21 default
+  become: True
+  alternatives:
+    name: clang-tidy
+    path: /usr/bin/clang-format-21
+    link: /usr/bin/clang-format
+    priority: 180
