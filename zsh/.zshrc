@@ -35,10 +35,16 @@ source ~/.zsh/alias.zsh
 # initialize mamba
 source ~/.zsh/mamba.zsh
 
-# keybinds
-bindkey '^H' backward-kill-word
-bindkey '^[[3;5~' kill-word
-
 # hook direnv to shell to recognize .envrc files
 eval "$(direnv hook zsh)"
+
+caen() {
+    local port=5951
+    local host="login-course.engin.umich.edu"
+    local user="edurso"
+
+    ssh -f -L ${port}:localhost:${port} "${user}@${host}" "sleep 30" || return 1
+    sleep 1
+    vncviewer "localhost:${port}"
+}
 

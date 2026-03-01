@@ -50,7 +50,7 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 # aliases to common functions
-alias nf='neofetch'
+alias ff='fastfetch'
 alias tool='jetbrains-toolbox'
 alias jb='jetbrains-toolbox'
 alias jl='jupyter lab&'
@@ -58,6 +58,7 @@ alias rm='rm -rf'
 alias fin='encfs ~/dropbox/personal/Dropbox/finance ~/finance'
 alias da='direnv allow'
 alias po='poetry'
+alias code='codium'
 
 # open lazygit
 lg() {
