@@ -25,7 +25,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # other simple things
 alias bat='batcat'
-alias cat='batcat'
+# alias cat='batcat'
 alias ps='procs'
 alias top='btm'
 

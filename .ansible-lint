@@ -1,0 +1,6 @@
+---
+# This repo intentionally uses lowercase task names, `state: latest` apt upgrades,
+# and short module names (see CLAUDE.md conventions) rather than the "production"
+# profile's stylistic rules. `min` still catches real problems: syntax errors,
+# unresolvable modules/collections, unsafe constructs, etc.
+profile: min

@@ -26,8 +26,8 @@ return {
         -- 'config' is used to define keymaps, options, and run setup functions
         config = function()
             -- Auto-import Keymap
-            -- Mapped to <leader>a in Normal mode (n) to execute the import function.
-            vim.keymap.set("n", "<leader>a", require("lspimport").import, { noremap = true, silent = true })
+            -- Mapped to <leader>i in Normal mode (n) to execute the import function.
+            vim.keymap.set("n", "<leader>i", require("lspimport").import, { noremap = true, silent = true })
         end,
     },
     -- "gc" to comment visual regions/lines

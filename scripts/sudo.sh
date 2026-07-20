@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC2034 # consumed by install.sh after sourcing
 IS_SUDO=true
 
 # determine if user is actively sudo

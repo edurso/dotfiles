@@ -58,7 +58,7 @@ display() {
 function select_continue {
 	while true; do
 		display -y "do you wish to continue? (y/n)"
-		read -p "" yn
+		read -rp "" yn
 		case $yn in
 			[Yy]* ) break;;
 			[Nn]* ) exit 1;;

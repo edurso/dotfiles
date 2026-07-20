@@ -1,22 +1,21 @@
 return {
-    -- "folke/which-key.nvim",
-    -- event = "VimEnter", -- Sets the loading event to 'VimEnter'
-    -- config = function() -- This is the function that runs, AFTER loading
-    --     require("which-key").setup()
+    "folke/which-key.nvim",
+    event = "VimEnter",
+    config = function()
+        require("which-key").setup()
 
-    --     -- Document existing key chains
-    --     require("which-key").register({
-    --         ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-    --         ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-    --         ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-    --         ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-    --         ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
-    --         ["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-    --         ["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
-    --     })
-    --     -- visual mode
-    --     require("which-key").register({
-    --         ["<leader>h"] = { "Git [H]unk" },
-    --     }, { mode = "v" })
-    -- end,
+        require("which-key").add({
+            { "<leader>a", group = "AI (Claude)" },
+            { "<leader>b", group = "Buffer" },
+            { "<leader>c", group = "Code" },
+            { "<leader>d", group = "Document" },
+            { "<leader>g", group = "Git (float/browse)" },
+            { "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
+            { "<leader>i", group = "Import" },
+            { "<leader>r", group = "Rename" },
+            { "<leader>s", group = "Search" },
+            { "<leader>t", group = "Toggle" },
+            { "<leader>w", group = "Workspace" },
+        })
+    end,
 }

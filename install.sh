@@ -5,12 +5,15 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPTS_DIR="$ROOT/scripts"
 
 # include necessary fail conditions and headers
+# shellcheck source=scripts/init.sh
 source "$SCRIPTS_DIR/init.sh"
 
 # set IS_SUDO
+# shellcheck source=scripts/sudo.sh
 source "$SCRIPTS_DIR/sudo.sh"
 
 # enforce SSH key configuration
+# shellcheck source=scripts/ssh.sh
 source "$SCRIPTS_DIR/ssh.sh"
 
 # vars to pass to ansible?

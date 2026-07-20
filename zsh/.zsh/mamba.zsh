@@ -13,5 +13,8 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 
-mamba activate
+# mamba is opt-in: use `mamba activate <env>` (or the `ma`/`m`/`me` aliases)
+# explicitly rather than auto-activating base in every shell. uv is the default
+# python tool.
+# mamba activate
 

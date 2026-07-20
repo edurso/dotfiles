@@ -21,7 +21,6 @@ source ~/.zsh/plugins.zsh
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 . "$HOME/.cargo/env"
-export PATH="$HOME/miniforge3/bin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 export DIRENV_WARN_TIMEOUT=100s
 export PATH="/usr/bin:$PATH"
@@ -48,3 +47,8 @@ caen() {
     vncviewer "localhost:${port}"
 }
 
+
+export QSYS_ROOTDIR="/home/edurso/quartus/25.1std/quartus/sopc_builder/bin"
+
+# Added by Quartus Prime software
+export SALT_LICENSE_FILE="$SALT_LICENSE_FILE;/home/edurso/.altera.quartus/questa_lic.dat"

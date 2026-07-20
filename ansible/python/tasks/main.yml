@@ -25,23 +25,6 @@
     state: absent
   ignore_errors: true
 
-- name: set shell configuration file to .zshrc if using zsh
-  set_fact:
-    shell_config_file: "{{ ansible_env.HOME }}/.zshrc"
-  when: is_zsh | default(false)
-
-- name: set shell configuration file to .bashrc if using bash
-  set_fact:
-    shell_config_file: "{{ ansible_env.HOME }}/.bashrc"
-  when: not is_zsh | default(false)
-
-- name: add miniforge3 to path
-  lineinfile:
-    path: "{{ shell_config_file }}"
-    line: 'export PATH="$HOME/miniforge3/bin:$PATH"'
-    insertafter: EOF
-  when: shell_config_file is defined
-
 - name: update conda
   command: "$HOME/miniforge3/bin/conda update -n base -c defaults conda"
   environment:
@@ -51,3 +34,14 @@
   command: "$HOME/miniforge3/bin/conda config --set changeps1 False"
   environment:
     PATH: "$HOME/miniforge3/bin:$PATH"
+
+- name: download uv install script
+  get_url:
+    url: https://astral.sh/uv/install.sh
+    dest: /tmp/uv_install.sh
+    mode: '0755'
+
+- name: run uv install script
+  shell: /tmp/uv_install.sh
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/uv"
