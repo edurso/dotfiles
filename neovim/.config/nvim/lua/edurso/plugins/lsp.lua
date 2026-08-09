@@ -162,12 +162,40 @@ return { -- LSP Configuration & Plugins
         --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
         --  - settings (table): Override the default settings passed when initializing the server.
         --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+        -- mrover/ (this monorepo's ROS2 workspace) builds inside the
+        -- mrover-ros container -- its headers (e.g. rclcpp) only exist
+        -- in-container, so Mason's host clangd can never resolve them even
+        -- though it can see mrover/compile_commands.json. Excluded here so
+        -- root_dir falls through to nil and the mrover_clangd server below
+        -- (routed via docker exec) picks it up instead.
+        local ROVER_ROOT = os.getenv("ROVER_ROOT")
+        local MROVER_ROOT = ROVER_ROOT and (ROVER_ROOT .. "/mrover")
+
+        local function under_mrover(fname)
+            return MROVER_ROOT ~= nil and fname:sub(1, #MROVER_ROOT) == MROVER_ROOT
+        end
+
         local servers = {
             clangd = {
                 cmd = {
                     "clangd",
                     "--query-driver=**",
-                }
+                },
+                -- Native vim.lsp.config root_dir is async: function(bufnr, on_dir).
+                -- Not calling on_dir at all (rather than returning nil) is
+                -- how you skip attaching this config to a buffer -- see
+                -- :help lsp-root_dir(). Used here to exclude mrover/, which
+                -- mrover_clangd (docker-exec'd) handles below instead.
+                root_dir = function(bufnr, on_dir)
+                    local fname = vim.api.nvim_buf_get_name(bufnr)
+                    if under_mrover(fname) then
+                        return
+                    end
+                    local dir = vim.fs.root(bufnr, { ".clangd", "compile_commands.json", "compile_flags.txt", ".git" })
+                    if dir then
+                        on_dir(dir)
+                    end
+                end,
             },
             ruff = {},
             ty = {},
@@ -221,17 +249,60 @@ return { -- LSP Configuration & Plugins
         })
         require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-        require("mason-lspconfig").setup({
-            handlers = {
-                function(server_name)
-                    local server = servers[server_name] or {}
-                    -- This handles overriding only values explicitly passed
-                    -- by the server configuration above. Useful when disabling
-                    -- certain features of an LSP (for example, turning off formatting for tsserver)
-                    server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-                    require("lspconfig")[server_name].setup(server)
-                end,
-            },
-        })
+        -- Apply each server's overrides via the native config API, which is
+        -- what mason-lspconfig's automatic_enable actually resolves against.
+        -- The old `handlers` option (below, mason-lspconfig.setup{handlers=...})
+        -- was removed in mason-lspconfig v2.0.0 and is silently ignored --
+        -- cmd/root_dir/settings overrides were never taking effect through it.
+        for server_name, server in pairs(servers) do
+            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+            vim.lsp.config(server_name, server)
+        end
+
+        require("mason-lspconfig").setup()
+
+        -- mrover/ servers: not Mason-installed (Mason only knows how to
+        -- install servers that run locally). These instead shell out via
+        -- docker/host/bin/mrover-{clangd,pyright}, which docker-exec into
+        -- the mrover-ros container where the ROS2 toolchain/headers
+        -- actually live. See docker/host/README.md. Requires:
+        --   - ROVER_ROOT exported and docker/host/bin on $PATH (this repo's
+        --     .envrc/direnv sets both up when your shell cd's into it)
+        --   - `just up` run at least once (container must be running)
+        --   - `just build` run at least once (compile_commands.json must exist)
+        if MROVER_ROOT then
+            local lspconfig = require("lspconfig")
+            local configs = require("lspconfig.configs")
+
+            local function mrover_root(fname)
+                if not under_mrover(fname) then
+                    return nil
+                end
+                return require("lspconfig.util").root_pattern(".git")(fname) or MROVER_ROOT
+            end
+
+            local function define_mrover(name, cfg)
+                if not configs[name] then
+                    configs[name] = { default_config = cfg }
+                end
+                cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
+                lspconfig[name].setup({})
+            end
+
+            define_mrover("mrover_clangd", {
+                cmd = { "mrover-clangd" },
+                filetypes = { "c", "cpp" },
+                root_dir = mrover_root,
+            })
+
+            define_mrover("mrover_pyright", {
+                cmd = { "mrover-pyright" },
+                filetypes = { "python" },
+                root_dir = mrover_root,
+                settings = {
+                    python = { pythonPath = MROVER_ROOT .. "/venv/bin/python" },
+                },
+            })
+        end
     end,
 }
